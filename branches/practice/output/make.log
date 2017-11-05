@@ -1,0 +1,61 @@
+
+ make.py started: 2017-11-05 17:12:55 C:\Users\Samuele\Documents\GitHub\teen_obesity\branches\practice\code 
+
+
+
+
+Execute:  "C:\Stata12_WinX86_x64\StataSE-64.exe" /e do "./analysis.do"
+
+  ___  ____  ____  ____  ____ (R)
+ /__    /   ____/   /   ____/
+___/   /   /___/   /   /___/   12.0   Copyright 1985-2011 StataCorp LP
+  Statistics/Data Analysis            StataCorp
+                                      4905 Lakeway Drive
+     Special Edition                  College Station, Texas 77845 USA
+                                      800-STATA-PC        http://www.stata.c
+> om
+                                      979-696-4600        stata@stata.com
+                                      979-696-4601 (fax)
+
+Single-user Stata network perpetual license:
+       Serial number:  93611859953
+         Licensed to:  STATAforAll
+                       STATA
+
+Notes:
+      1.  (/v# option or -set maxvar-) 5000 maximum variables
+      2.  Stata running in batch mode
+
+. do ./analysis.do 
+
+. set more off
+
+. adopath + ../../../lib/stata/gslab_misc/ado
+  [1]  (UPDATES)   "C:\Stata12_WinX86_x64\ado\updates/"
+  [2]  (BASE)      "C:\Stata12_WinX86_x64\ado\base/"
+  [3]  (SITE)      "C:\Stata12_WinX86_x64\ado\site/"
+  [4]              "."
+  [5]  (PERSONAL)  "c:\ado\personal/"
+  [6]  (PLUS)      "c:\ado\plus/"
+  [7]  (OLDPLACE)  "c:\ado/"
+  [8]              "../../../lib/stata/gslab_misc/ado"
+
+. adopath + ../../../lib/third_party/stata_tools
+  [1]  (UPDATES)   "C:\Stata12_WinX86_x64\ado\updates/"
+  [2]  (BASE)      "C:\Stata12_WinX86_x64\ado\base/"
+  [3]  (SITE)      "C:\Stata12_WinX86_x64\ado\site/"
+  [4]              "."
+  [5]  (PERSONAL)  "c:\ado\personal/"
+  [6]  (PLUS)      "c:\ado\plus/"
+  [7]  (OLDPLACE)  "c:\ado/"
+  [8]              "../../../lib/stata/gslab_misc/ado"
+  [9]              "../../../lib/third_party/stata_tools"
+
+. 
+. di "Welcome to the obesity project!"
+Welcome to the obesity project!
+
+. 
+end of do-file
+
+ make.py ended: 2017-11-05 17:12:56
