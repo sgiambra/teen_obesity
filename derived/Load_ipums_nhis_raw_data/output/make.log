@@ -1,10 +1,10 @@
 
- make.py started: 2017-11-05 18:25:31 C:\Users\Samuele\Documents\GitHub\teen_obesity\derived\Load_ipums_nhis_raw_data\code 
+ make.py started: 2017-11-06 11:16:31 C:\Users\Samuele\Documents\GitHub\teen_obesity\derived\Load_ipums_nhis_raw_data\code 
 
 
 
 
-Execute:  "C:\Stata12_WinX86_x64\StataSE-64.exe" /e do "./preclean.do"
+Execute:  C:\Stata12_WinX86_x64\StataSE-64.exe /e do "./preclean.do"
 
   ___  ____  ____  ____  ____ (R)
  /__    /   ____/   /   ____/
@@ -12,8 +12,7 @@ ___/   /   /___/   /   /___/   12.0   Copyright 1985-2011 StataCorp LP
   Statistics/Data Analysis            StataCorp
                                       4905 Lakeway Drive
      Special Edition                  College Station, Texas 77845 USA
-                                      800-STATA-PC        http://www.stata.c
-> om
+                                      800-STATA-PC        http://www.stata.com
                                       979-696-4600        stata@stata.com
                                       979-696-4601 (fax)
 
@@ -28,9 +27,6 @@ Notes:
 
 . do ./preclean.do 
 
-. * NOTE: You need to set the Stata working directory to the path
-. * where the data file is located.
-. 
 . set more off
 
 . adopath + ../../../lib/stata/gslab_misc/ado
@@ -54,14 +50,13 @@ Notes:
   [8]              "../../../lib/stata/gslab_misc/ado"
   [9]              "../../../lib/third_party/stata_tools"
 
-. preliminaries, loadglob("../../../lib/python/obesity/input_params.txt")
+. preliminaries, loadglob("../../../lib/python/obesity/inpu
+> t_params.txt")
 
 . 
-. local google_drive_dir $GoogleDrive
+. local raw_data_dir = "${GoogleDrive}/raw_data/nhis/ipums"
 
-. local raw_data_dir = "`google_drive_dir'" + "/raw_data/nhis/ipums"
-
-. local derived_dir = "`google_drive_dir'" + "/derived/nhis/ipums"
+. local derived_dir  = "${GoogleDrive}/derived/nhis/ipums"
 
 . 
 . clear
@@ -97,7 +92,7 @@ Notes:
 >   double  bmi         132-135  ///
 >   int     bmikid      136-139  ///
 >   int     sldayr      140-142  ///
->   using `"`raw_data_dir'/nhis_00001.dat"'
+>   using "`raw_data_dir'/nhis_00001.dat"
 
 . 
 . replace bmicalc    = bmicalc    / 10
@@ -961,10 +956,9 @@ Key: nhispid year
 
 
 
-(note: file C:/Users/Samuele/Google Drive/research projects/obesity/derived/nhis/ipums/ipums_nhis.dta not found)
 file C:/Users/Samuele/Google Drive/research projects/obesity/derived/nhis/ipums/ipums_nhis.dta saved
 
 . 
 end of do-file
 
- make.py ended: 2017-11-05 18:27:07
+ make.py ended: 2017-11-06 11:18:03

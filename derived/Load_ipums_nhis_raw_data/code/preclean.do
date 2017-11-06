@@ -1,14 +1,10 @@
-* NOTE: You need to set the Stata working directory to the path
-* where the data file is located.
-
 set more off
 adopath + ../../../lib/stata/gslab_misc/ado
 adopath + ../../../lib/third_party/stata_tools
 preliminaries, loadglob("../../../lib/python/obesity/input_params.txt")
 
-local google_drive_dir $GoogleDrive
-local raw_data_dir = "`google_drive_dir'" + "/raw_data/nhis/ipums"
-local derived_dir = "`google_drive_dir'" + "/derived/nhis/ipums"
+local raw_data_dir = "${GoogleDrive}/raw_data/nhis/ipums"
+local derived_dir  = "${GoogleDrive}/derived/nhis/ipums"
 
 clear
 quietly infix                  ///
@@ -42,7 +38,7 @@ quietly infix                  ///
   double  bmi         132-135  ///
   int     bmikid      136-139  ///
   int     sldayr      140-142  ///
-  using `"`raw_data_dir'/nhis_00001.dat"'
+  using "`raw_data_dir'/nhis_00001.dat"
 
 replace bmicalc    = bmicalc    / 10
 replace bmi        = bmi        / 100
