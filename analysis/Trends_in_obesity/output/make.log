@@ -1,0 +1,400 @@
+
+ make.py started: 2017-11-06 16:12:56 C:\Users\Samuele\Documents\GitHub\teen_obesity\analysis\Trends_in_obesity\code 
+
+
+
+
+Execute:  C:\Stata12_WinX86_x64\StataSE-64.exe /e do "./preclean.do"
+
+  ___  ____  ____  ____  ____ (R)
+ /__    /   ____/   /   ____/
+___/   /   /___/   /   /___/   12.0   Copyright 1985-2011 StataCorp LP
+  Statistics/Data Analysis            StataCorp
+                                      4905 Lakeway Drive
+     Special Edition                  College Station, Texas 77845 USA
+                                      800-STATA-PC        http://www.stata.com
+                                      979-696-4600        stata@stata.com
+                                      979-696-4601 (fax)
+
+Single-user Stata network perpetual license:
+       Serial number:  93611859953
+         Licensed to:  STATAforAll
+                       STATA
+
+Notes:
+      1.  (/v# option or -set maxvar-) 5000 maximum variables
+      2.  Stata running in batch mode
+
+. do ./preclean.do 
+
+. set more off
+
+. adopath + ../../../lib/stata/gslab_misc/ado
+  [1]  (UPDATES)   "C:\Stata12_WinX86_x64\ado\updates/"
+  [2]  (BASE)      "C:\Stata12_WinX86_x64\ado\base/"
+  [3]  (SITE)      "C:\Stata12_WinX86_x64\ado\site/"
+  [4]              "."
+  [5]  (PERSONAL)  "c:\ado\personal/"
+  [6]  (PLUS)      "c:\ado\plus/"
+  [7]  (OLDPLACE)  "c:\ado/"
+  [8]              "../../../lib/stata/gslab_misc/ado"
+
+. adopath + ../../../lib/third_party/stata_tools
+  [1]  (UPDATES)   "C:\Stata12_WinX86_x64\ado\updates/"
+  [2]  (BASE)      "C:\Stata12_WinX86_x64\ado\base/"
+  [3]  (SITE)      "C:\Stata12_WinX86_x64\ado\site/"
+  [4]              "."
+  [5]  (PERSONAL)  "c:\ado\personal/"
+  [6]  (PLUS)      "c:\ado\plus/"
+  [7]  (OLDPLACE)  "c:\ado/"
+  [8]              "../../../lib/stata/gslab_misc/ado"
+  [9]              "../../../lib/third_party/stata_tools"
+
+. preliminaries, loadglob("../../../lib/python/obesity/inpu
+> t_params.txt")
+
+. 
+. program main
+  1.     local derived_dir  = "${GoogleDrive}/derived/nhis/ipums"
+  2. 
+.     use "`derived_dir'/ipums_nhis.dta", clear
+  3.     label var year "Year"
+  4.     gen south = region == 3
+  5. 
+.     preserve
+  6.     build_obesity_panel_young_adults
+  7.     save_data "../temp/obesity_panel_young_adults", key(nhispid year) nopreserve replace
+  8.     restore
+  9.     build_obesity_panel_children
+ 10.     save_data "../temp/obesity_panel_children", key(nhispid year) nopreserve replace
+ 11. end
+
+. 
+. program build_obesity_panel_young_adults
+  1.     keep if bmicalc != . & bmicalc != 0
+  2.     replace bmicalc = bmi if bmicalc == 996 & bmi != 0 & bmi != . & bmi != 99.99
+  3.     drop if bmicalc == 996 | bmicalc == 99.9
+  4.     keep if age >= 18 & age <= 25
+  5.     
+.     compute_obesity bmicalc
+  6. end
+
+. 
+. program build_obesity_panel_children
+  1.     drop if bmikid == . | bmikid == 0 | bmikid == 9999
+  2.     replace bmikid = bmikid / 100
+  3.     
+.     compute_obesity bmikid
+  4. end
+
+. 
+. program compute_obesity
+  1.     syntax varlist(min=1 max=1)
+  2. 
+.     gen overweight = `varlist' >= 25 & `varlist' < 30
+  3.     gen obese = `varlist' >= 30
+  4. end
+
+. 
+. * Execute
+. main
+(3665066 observations deleted)
+(36673 real changes made)
+(59859 observations deleted)
+(1787459 observations deleted)
+(data already sorted by nhispid year)
+bmikid was int now byte
+south was float now byte
+overweight was float now byte
+obese was float now byte
+==================================================================================================
+File: ../temp/obesity_panel_young_adults
+Key: nhispid year
+==================================================================================================
+  326807:33(109717):1896996810:1153837389
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+     nhispid |         0
+        year |    326807    1990.062    10.33186       1976       2016
+      serial |    326807    21599.71    13209.73          1      60331
+      strata |    326807    3316.999     1395.18       2001       7151
+         psu |    326807    59.20647    94.56225          1        298
+-------------+--------------------------------------------------------
+     nhishid |         0
+    hhweight |    326807      2062.5    958.7817         49      35775
+      region |    326807    2.576729    1.027813          1          4
+       metro |    256230    18.23276    8.559776         10         32
+     msasize |    156416    19.73767    11.78045          0         33
+-------------+--------------------------------------------------------
+         hhx |         0
+         fmx |         0
+          px |         0
+   perweight |    326807    2570.708    1306.678         53      46830
+  sampweight |    262492    3993.929    6019.065          0     236830
+-------------+--------------------------------------------------------
+     fweight |     70577    3125.775    1851.062         53      46830
+    astatflg |     70577           1           0          1          1
+    cstatflg |     70577           0           0          0          0
+      pernum |    326807    2.230733    1.199373          1         19
+     supp2wt |    134873    2353.138    4124.381          0      86192
+-------------+--------------------------------------------------------
+     sub77wt |      3037    26043.14    4885.204       1729      96976
+         age |    326807    21.59494    2.297467         18         25
+         sex |    326807    1.525729    .4993383          1          2
+     birthmo |    257392    7.360543    10.79064          0         99
+     birthyr |     70577    2314.958    1594.378       1971       9999
+-------------+--------------------------------------------------------
+       racea |    326807    141.4483    110.0431        100        990
+     bmicalc |    326807    23.59469    4.570468        7.9       97.6
+         bmi |    117535    18.11777     12.5608          0      99.99
+      bmikid |     30953           0           0          0          0
+      sldayr |     99027    995.9498    7.065799          0        996
+-------------+--------------------------------------------------------
+       south |    326807    .3379579    .4730148          0          1
+  overweight |    326807    .2088664    .4064994          0          1
+       obese |    326807    .0872778    .2822422          0          1
+
+
+
+
+(note: file ../temp/obesity_panel_young_adults.dta not found)
+file ../temp/obesity_panel_young_adults.dta saved
+(5803417 observations deleted)
+bmikid was int now float
+(35774 real changes made)
+(data already sorted by nhispid year)
+hhweight was long now int
+perweight was long now int
+fweight was long now int
+sub77wt was long now byte
+south was float now byte
+overweight was float now byte
+obese was float now byte
+bmicalc was double now byte
+bmi was double now byte
+==================================================================================================
+File: ../temp/obesity_panel_children
+Key: nhispid year
+==================================================================================================
+  35774:33(109717):3451603804:3554755444
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+     nhispid |         0
+        year |     35774    2012.154    2.477911       2008       2016
+      serial |     35774    25256.37    15482.21          2      60321
+      strata |     35774    6258.646    307.3891       6001       7151
+         psu |     35774    4.884022    14.72003          1        155
+-------------+--------------------------------------------------------
+     nhishid |         0
+    hhweight |     35774    2559.305    1522.919         51      22926
+      region |     35774    2.756303    1.032221          1          4
+       metro |         0
+     msasize |         0
+-------------+--------------------------------------------------------
+         hhx |         0
+         fmx |         0
+          px |         0
+   perweight |     35774    2997.887    1822.786         56      32436
+  sampweight |     35774     5844.22    4948.623         63      78640
+-------------+--------------------------------------------------------
+     fweight |     35774    2846.864    1711.902         53      28716
+    astatflg |     35774           0           0          0          0
+    cstatflg |     35774           1           0          1          1
+      pernum |     35774     3.27766    .9982934          1         14
+     supp2wt |     25216    2857.089     3758.61          0      46182
+-------------+--------------------------------------------------------
+     sub77wt |         0
+         age |     35774    14.63499    1.698122         12         17
+         sex |     35774    1.480405    .4996229          1          2
+     birthmo |     27913     12.6689    22.95253          1         99
+     birthyr |     35774    2437.135    1824.129       1990       9999
+-------------+--------------------------------------------------------
+       racea |     35774    146.5699    98.41045        100        600
+     bmicalc |     35774           0           0          0          0
+         bmi |     35774           0           0          0          0
+      bmikid |     35774     22.5282    5.043899        .81      69.45
+      sldayr |     35774    13.82197    100.6155          0        999
+-------------+--------------------------------------------------------
+       south |     35774    .3554257    .4786488          0          1
+  overweight |     35774    .1554481    .3623364          0          1
+       obese |     35774    .0845586    .2782276          0          1
+
+
+
+
+(note: file ../temp/obesity_panel_children.dta not found)
+file ../temp/obesity_panel_children.dta saved
+
+. 
+end of do-file
+
+
+Execute:  C:\Stata12_WinX86_x64\StataSE-64.exe /e do "./analysis.do"
+
+  ___  ____  ____  ____  ____ (R)
+ /__    /   ____/   /   ____/
+___/   /   /___/   /   /___/   12.0   Copyright 1985-2011 StataCorp LP
+  Statistics/Data Analysis            StataCorp
+                                      4905 Lakeway Drive
+     Special Edition                  College Station, Texas 77845 USA
+                                      800-STATA-PC        http://www.stata.com
+                                      979-696-4600        stata@stata.com
+                                      979-696-4601 (fax)
+
+Single-user Stata network perpetual license:
+       Serial number:  93611859953
+         Licensed to:  STATAforAll
+                       STATA
+
+Notes:
+      1.  (/v# option or -set maxvar-) 5000 maximum variables
+      2.  Stata running in batch mode
+
+. do ./analysis.do 
+
+. set scheme s2mono
+
+. set more off
+
+. adopath + ../../../lib/stata/gslab_misc/ado
+  [1]  (UPDATES)   "C:\Stata12_WinX86_x64\ado\updates/"
+  [2]  (BASE)      "C:\Stata12_WinX86_x64\ado\base/"
+  [3]  (SITE)      "C:\Stata12_WinX86_x64\ado\site/"
+  [4]              "."
+  [5]  (PERSONAL)  "c:\ado\personal/"
+  [6]  (PLUS)      "c:\ado\plus/"
+  [7]  (OLDPLACE)  "c:\ado/"
+  [8]              "../../../lib/stata/gslab_misc/ado"
+
+. adopath + ../../../lib/third_party/stata_tools
+  [1]  (UPDATES)   "C:\Stata12_WinX86_x64\ado\updates/"
+  [2]  (BASE)      "C:\Stata12_WinX86_x64\ado\base/"
+  [3]  (SITE)      "C:\Stata12_WinX86_x64\ado\site/"
+  [4]              "."
+  [5]  (PERSONAL)  "c:\ado\personal/"
+  [6]  (PLUS)      "c:\ado\plus/"
+  [7]  (OLDPLACE)  "c:\ado/"
+  [8]              "../../../lib/stata/gslab_misc/ado"
+  [9]              "../../../lib/third_party/stata_tools"
+
+. preliminaries
+
+. 
+. program main
+  1.     local plot_opts = "graphregion(fcolor(white)) ylab(, nogrid)"
+  2.     
+.     use "../temp/obesity_panel_young_adults", clear
+  3.     keep if year >= 1979
+  4.     trends_and_stats, bmi_var(bmicalc) stub(youngs) `plot_opts'
+  5. 
+.     use "../temp/obesity_panel_children", clear
+  6.     trends_and_stats, bmi_var(bmikid) stub(kids) `plot_opts'
+  7. end
+
+. 
+. program trends_and_stats
+  1.     syntax, bmi_var(str) stub(str) [*]
+  2. 
+.     if "`stub'" == "youngs" {
+  3.         local step 6
+  4.     }
+  5.     else {
+  6.         local step 2
+  7.     }
+  8. 
+.     hist `bmi_var' if `bmi_var' <= 60, `options'
+  9.     graph export ../output/hist_`stub'.png, as(png) replace
+ 10. 
+.     preserve
+ 11.     collapse_to_level, bmi_var(`bmi_var') levels("year sex")
+ 12. 
+.     qui sum year
+ 13.     local xlabel = "xlabel(`r(min)'(`step')`r(max)')"
+ 14. 
+.     foreach depvar in `bmi_var' overweight obese {
+ 15.         twoway (line `depvar' year if sex == 1) (line `depvar' year if sex == 2), ///
+>             legend(label(1 "Males") label(2 "Females")) `xlabel' `options'
+ 16.         graph export ../output/trend_`depvar'_by_sex_`stub'.png, as(png) replace
+ 17.     }
+ 18. 
+.     restore, preserve
+ 19.     collapse_to_level, bmi_var(`bmi_var') levels("year race")
+ 20.     foreach depvar in `bmi_var' overweight obese {
+ 21.         twoway (line `depvar' year if race == 100) (line `depvar' year if race == 200), ///
+>             legend(label(1 "White") label(2 "African-American")) `xlabel' `options'
+ 22.         graph export ../output/trend_`depvar'_by_race_`stub'.png, as(png) replace
+ 23.     }
+ 24. 
+.     restore, preserve
+ 25.     collapse_to_level, bmi_var(`bmi_var') levels("year south")
+ 26.     foreach depvar in `bmi_var' overweight obese {
+ 27.         twoway (line `depvar' year if south == 1) (line `depvar' year if south == 0), ///
+>             legend(label(1 "South") label(2 "Other regions")) `xlabel' `options'
+ 28.         graph export ../output/trend_`depvar'_by_region_`stub'.png, as(png) replace
+ 29.     }
+ 30. end
+
+. 
+. program collapse_to_level
+  1.     syntax, bmi_var(str) levels(str)
+  2. 
+.     collapse (mean) overweight obese `bmi_var' [pweight=perweight], by(`levels')
+  3. 
+.     label var `bmi_var'     "Body Mass Index"
+  4.     label var obese         "Obesity rate"
+  5.     label var overweight    "Overweight rate"    
+  6. end
+
+. 
+. * Execute
+. main
+(33364 observations deleted)
+(bin=54, start=7.9, width=.96333333)
+(note: file ../output/hist_youngs.png not found)
+(file ../output/hist_youngs.png written in PNG format)
+(note: file ../output/trend_bmicalc_by_sex_youngs.png not found)
+(file ../output/trend_bmicalc_by_sex_youngs.png written in PNG format)
+(note: file ../output/trend_overweight_by_sex_youngs.png not found)
+(file ../output/trend_overweight_by_sex_youngs.png written in PNG format)
+(note: file ../output/trend_obese_by_sex_youngs.png not found)
+(file ../output/trend_obese_by_sex_youngs.png written in PNG format)
+(note: file ../output/trend_bmicalc_by_race_youngs.png not found)
+(file ../output/trend_bmicalc_by_race_youngs.png written in PNG format)
+(note: file ../output/trend_overweight_by_race_youngs.png not found)
+(file ../output/trend_overweight_by_race_youngs.png written in PNG format)
+(note: file ../output/trend_obese_by_race_youngs.png not found)
+(file ../output/trend_obese_by_race_youngs.png written in PNG format)
+(note: file ../output/trend_bmicalc_by_region_youngs.png not found)
+(file ../output/trend_bmicalc_by_region_youngs.png written in PNG format)
+(note: file ../output/trend_overweight_by_region_youngs.png not found)
+(file ../output/trend_overweight_by_region_youngs.png written in PNG format)
+(note: file ../output/trend_obese_by_region_youngs.png not found)
+(file ../output/trend_obese_by_region_youngs.png written in PNG format)
+(bin=45, start=.81, width=1.3044444)
+(note: file ../output/hist_kids.png not found)
+(file ../output/hist_kids.png written in PNG format)
+(note: file ../output/trend_bmikid_by_sex_kids.png not found)
+(file ../output/trend_bmikid_by_sex_kids.png written in PNG format)
+(note: file ../output/trend_overweight_by_sex_kids.png not found)
+(file ../output/trend_overweight_by_sex_kids.png written in PNG format)
+(note: file ../output/trend_obese_by_sex_kids.png not found)
+(file ../output/trend_obese_by_sex_kids.png written in PNG format)
+(note: file ../output/trend_bmikid_by_race_kids.png not found)
+(file ../output/trend_bmikid_by_race_kids.png written in PNG format)
+(note: file ../output/trend_overweight_by_race_kids.png not found)
+(file ../output/trend_overweight_by_race_kids.png written in PNG format)
+(note: file ../output/trend_obese_by_race_kids.png not found)
+(file ../output/trend_obese_by_race_kids.png written in PNG format)
+(note: file ../output/trend_bmikid_by_region_kids.png not found)
+(file ../output/trend_bmikid_by_region_kids.png written in PNG format)
+(note: file ../output/trend_overweight_by_region_kids.png not found)
+(file ../output/trend_overweight_by_region_kids.png written in PNG format)
+(note: file ../output/trend_obese_by_region_kids.png not found)
+(file ../output/trend_obese_by_region_kids.png written in PNG format)
+
+. 
+end of do-file
+
+ make.py ended: 2017-11-06 16:13:20
