@@ -1,0 +1,233 @@
+
+ make.py started: 2017-11-06 18:56:34 C:\Users\Samuele\Documents\GitHub\teen_obesity\analysis\Cohort_plots_nhis\code 
+
+
+
+
+Execute:  C:\Stata12_WinX86_x64\StataSE-64.exe /e do "./preclean.do"
+
+  ___  ____  ____  ____  ____ (R)
+ /__    /   ____/   /   ____/
+___/   /   /___/   /   /___/   12.0   Copyright 1985-2011 StataCorp LP
+  Statistics/Data Analysis            StataCorp
+                                      4905 Lakeway Drive
+     Special Edition                  College Station, Texas 77845 USA
+                                      800-STATA-PC        http://www.stata.com
+                                      979-696-4600        stata@stata.com
+                                      979-696-4601 (fax)
+
+Single-user Stata network perpetual license:
+       Serial number:  93611859953
+         Licensed to:  STATAforAll
+                       STATA
+
+Notes:
+      1.  (/v# option or -set maxvar-) 5000 maximum variables
+      2.  Stata running in batch mode
+
+. do ./preclean.do 
+
+. set more off
+
+. adopath + ../../../lib/stata/gslab_misc/ado
+  [1]  (UPDATES)   "C:\Stata12_WinX86_x64\ado\updates/"
+  [2]  (BASE)      "C:\Stata12_WinX86_x64\ado\base/"
+  [3]  (SITE)      "C:\Stata12_WinX86_x64\ado\site/"
+  [4]              "."
+  [5]  (PERSONAL)  "c:\ado\personal/"
+  [6]  (PLUS)      "c:\ado\plus/"
+  [7]  (OLDPLACE)  "c:\ado/"
+  [8]              "../../../lib/stata/gslab_misc/ado"
+
+. adopath + ../../../lib/third_party/stata_tools
+  [1]  (UPDATES)   "C:\Stata12_WinX86_x64\ado\updates/"
+  [2]  (BASE)      "C:\Stata12_WinX86_x64\ado\base/"
+  [3]  (SITE)      "C:\Stata12_WinX86_x64\ado\site/"
+  [4]              "."
+  [5]  (PERSONAL)  "c:\ado\personal/"
+  [6]  (PLUS)      "c:\ado\plus/"
+  [7]  (OLDPLACE)  "c:\ado/"
+  [8]              "../../../lib/stata/gslab_misc/ado"
+  [9]              "../../../lib/third_party/stata_tools"
+
+. preliminaries, loadglob("../../../lib/python/obesity/inpu
+> t_params.txt")
+
+. 
+. program main
+  1.     local derived_dir  = "${GoogleDrive}/derived/nhis/ipums"
+  2. 
+.     use "`derived_dir'/ipums_nhis.dta", clear
+  3.     build_obesity_panel_children
+  4.     save_data "../temp/obesity_panel_children", key(nhispid year) nopreserve replace
+  5. end
+
+. 
+. program build_obesity_panel_children
+  1.     keep if year >= 2002
+  2.     keep if age <= 21
+  3.     replace bmi = bmikid / 100 if (bmikid != . & bmikid != 0 & bmikid != 9999) & age <= 17
+  4.     drop if bmi == 0 | bmi == 99.99
+  5.     
+.     gen overweight = bmi >= 25 & bmi < 30
+  6.     gen obese = bmi >= 30
+  7.     
+.     gen age_at_reform = age - year + $HHFKA
+  8.     gen years_hs_after_reform = 17 - age_at_reform
+  9.     
+.     label var years_hs_after_reform "Number of years between HHFKA and high school graduation"
+ 10. end
+
+. 
+. * Execute
+. main
+(4428873 observations deleted)
+(964282 observations deleted)
+(35774 real changes made)
+(387389 observations deleted)
+(data already sorted by nhispid year)
+sub77wt was long now byte
+overweight was float now byte
+obese was float now byte
+age_at_reform was float now byte
+years_hs_after_reform was float now byte
+==================================================================================================
+File: ../temp/obesity_panel_children
+Key: nhispid year
+==================================================================================================
+  58647:34(77772):4095807225:3422596631
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+     nhispid |         0
+        year |     58647    2010.937    3.716867       2002       2016
+      serial |     58647    24508.11    15111.47          1      60331
+      strata |     58647    6135.461    452.5964       5001       7151
+         psu |     58647    4.601634      14.269          1        164
+-------------+--------------------------------------------------------
+     nhishid |         0
+    hhweight |     58647    2597.511     1563.32         51      35497
+      region |     58647    2.741334    1.021476          1          4
+       metro |         0
+     msasize |         0
+-------------+--------------------------------------------------------
+         hhx |         0
+         fmx |         0
+          px |         0
+   perweight |     58647    3213.077    1968.211         53      46830
+  sampweight |     58647    7605.307    7096.022         63     236830
+-------------+--------------------------------------------------------
+     fweight |     58647    3003.179    1848.095         53      46830
+    astatflg |     58647    .3900114    .4877567          0          1
+    cstatflg |     58647    .6099886    .4877567          0          1
+      pernum |     58647    2.835132    1.216025          1         18
+     supp2wt |     34975    2981.711    3943.903          0      58163
+-------------+--------------------------------------------------------
+     sub77wt |         0
+         age |     58647     16.5756    2.850139         12         21
+         sex |     58647    1.497246    .4999967          1          2
+     birthmo |     47659    11.93898    21.67629          1         99
+     birthyr |     58647     2385.11    1725.834       1980       9999
+-------------+--------------------------------------------------------
+       racea |     58647    145.4598     97.0142        100        600
+     bmicalc |     58647    36.88249     163.238          0        996
+         bmi |     58647    23.46737    5.336656        .81      96.66
+      bmikid |     49413    1630.995    1094.714          0       6945
+      sldayr |     58647    396.8826    485.4661          0        999
+-------------+--------------------------------------------------------
+  overweight |     58647     .189933    .3922513          0          1
+       obese |     58647    .1103893     .313377          0          1
+age_at_ref~m |     58647     16.6386    5.418485          7         30
+years_hs_a~m |     58647    .3613996    5.418485        -13         10
+
+
+
+
+(note: file ../temp/obesity_panel_children.dta not found)
+file ../temp/obesity_panel_children.dta saved
+
+. 
+end of do-file
+
+
+Execute:  C:\Stata12_WinX86_x64\StataSE-64.exe /e do "./analysis.do"
+
+  ___  ____  ____  ____  ____ (R)
+ /__    /   ____/   /   ____/
+___/   /   /___/   /   /___/   12.0   Copyright 1985-2011 StataCorp LP
+  Statistics/Data Analysis            StataCorp
+                                      4905 Lakeway Drive
+     Special Edition                  College Station, Texas 77845 USA
+                                      800-STATA-PC        http://www.stata.com
+                                      979-696-4600        stata@stata.com
+                                      979-696-4601 (fax)
+
+Single-user Stata network perpetual license:
+       Serial number:  93611859953
+         Licensed to:  STATAforAll
+                       STATA
+
+Notes:
+      1.  (/v# option or -set maxvar-) 5000 maximum variables
+      2.  Stata running in batch mode
+
+. do ./analysis.do 
+
+. set scheme s2mono
+
+. set more off
+
+. adopath + ../../../lib/stata/gslab_misc/ado
+  [1]  (UPDATES)   "C:\Stata12_WinX86_x64\ado\updates/"
+  [2]  (BASE)      "C:\Stata12_WinX86_x64\ado\base/"
+  [3]  (SITE)      "C:\Stata12_WinX86_x64\ado\site/"
+  [4]              "."
+  [5]  (PERSONAL)  "c:\ado\personal/"
+  [6]  (PLUS)      "c:\ado\plus/"
+  [7]  (OLDPLACE)  "c:\ado/"
+  [8]              "../../../lib/stata/gslab_misc/ado"
+
+. adopath + ../../../lib/third_party/stata_tools
+  [1]  (UPDATES)   "C:\Stata12_WinX86_x64\ado\updates/"
+  [2]  (BASE)      "C:\Stata12_WinX86_x64\ado\base/"
+  [3]  (SITE)      "C:\Stata12_WinX86_x64\ado\site/"
+  [4]              "."
+  [5]  (PERSONAL)  "c:\ado\personal/"
+  [6]  (PLUS)      "c:\ado\plus/"
+  [7]  (OLDPLACE)  "c:\ado/"
+  [8]              "../../../lib/stata/gslab_misc/ado"
+  [9]              "../../../lib/third_party/stata_tools"
+
+. preliminaries
+
+. 
+. program main
+  1.     local plot_opts = "graphregion(fcolor(white)) ylab(, nogrid) xlabel(-10 0 10)"
+  2. 
+.     use "../temp/obesity_panel_children", clear
+  3.     collapse (mean) overweight obese bmi [pweight=perweight], by(years_hs_after_reform)
+  4. 
+.     label var bmi           "Body Mass Index"
+  5.     label var obese         "Obesity rate"
+  6.     label var overweight    "Overweight rate"
+  7. 
+.     foreach depvar in bmi overweight obese {
+  8.         twoway line `depvar' years_hs_after_reform if years_hs_after_reform >= -10, `plot_opts'
+  9.         graph export ../output/cohort_treatment_`depvar'.png, as(png) replace
+ 10.     }
+ 11. end
+
+. 
+. * Execute
+. main
+(note: file ../output/cohort_treatment_bmi.png not found)
+(file ../output/cohort_treatment_bmi.png written in PNG format)
+(note: file ../output/cohort_treatment_overweight.png not found)
+(file ../output/cohort_treatment_overweight.png written in PNG format)
+(note: file ../output/cohort_treatment_obese.png not found)
+(file ../output/cohort_treatment_obese.png written in PNG format)
+
+. 
+end of do-file
+
+ make.py ended: 2017-11-06 18:56:40
