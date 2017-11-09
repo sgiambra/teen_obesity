@@ -1,5 +1,5 @@
 
- make.py started: 2017-11-06 18:56:34 C:\Users\Samuele\Documents\GitHub\teen_obesity\analysis\Cohort_plots_nhis\code 
+ make.py started: 2017-11-09 18:11:38 C:\Users\Samuele\Documents\GitHub\teen_obesity\analysis\Cohort_plots_nhis\code 
 
 
 
@@ -56,27 +56,53 @@ Notes:
 . 
 . program main
   1.     local derived_dir  = "${GoogleDrive}/derived/nhis/ipums"
-  2. 
-.     use "`derived_dir'/ipums_nhis.dta", clear
-  3.     build_obesity_panel_children
-  4.     save_data "../temp/obesity_panel_children", key(nhispid year) nopreserve replace
-  5. end
+  2.     local cohorts_list "1970 1980 1990 2000 2003"
+  3.     use "`derived_dir'/ipums_nhis.dta", clear
+  4.     
+.     preserve
+  5.     build_obesity_panel_children
+  6.     save_data "../temp/obesity_panel_children", key(nhispid year) nopreserve replace
+  7.     
+.     restore
+  8.     build_cohort_panel, cohorts(`cohorts_list')
+  9.     save_data "../temp/obesity_panel_cohorts", key(nhispid year) nopreserve replace
+ 10. end
 
 . 
 . program build_obesity_panel_children
   1.     keep if year >= 2002
   2.     keep if age <= 21
-  3.     replace bmi = bmikid / 100 if (bmikid != . & bmikid != 0 & bmikid != 9999) & age <= 17
-  4.     drop if bmi == 0 | bmi == 99.99
-  5.     
+  3.     compute_obesity_rates
+  4.     
+.     gen dist_survey_act = year - $HHFKA
+  5.     label var dist_survey_act "Number of years between HHFKA and survey year"
+  6. end
+
+. 
+. program build_cohort_panel
+  1.     syntax, cohorts(str)
+  2.     
+.     local nbr_cohorts: word count `cohorts'
+  3.     local nbr_cohorts_no_last = `nbr_cohorts' - 1
+  4.     forval i = 1/`nbr_cohorts_no_last' {
+  5.         local cohort: word `i' of `cohorts'
+  6.         local cohort_cond = "`cohort_cond'" + "birthyr == `cohort' | " 
+  7.     }
+  8.     local last_cohort: word `nbr_cohorts' of `cohorts'
+  9.     local cohort_cond = "`cohort_cond'" + "birthyr == `last_cohort'"
+ 10.     
+.     keep if `cohort_cond'
+ 11.     compute_obesity_rates
+ 12. end
+
+. 
+. program compute_obesity_rates
+  1.     replace bmi = bmikid / 100 if (bmikid != . & bmikid != 0 & bmikid != 9999) & age <= 17
+  2.     drop if bmi == 0 | bmi == 99.99
+  3.     
 .     gen overweight = bmi >= 25 & bmi < 30
-  6.     gen obese = bmi >= 30
-  7.     
-.     gen age_at_reform = age - year + $HHFKA
-  8.     gen years_hs_after_reform = 17 - age_at_reform
-  9.     
-.     label var years_hs_after_reform "Number of years between HHFKA and high school graduation"
- 10. end
+  4.     gen obese = bmi >= 30
+  5. end
 
 . 
 . * Execute
@@ -89,13 +115,12 @@ Notes:
 sub77wt was long now byte
 overweight was float now byte
 obese was float now byte
-age_at_reform was float now byte
-years_hs_after_reform was float now byte
+dist_survey_act was float now byte
 ==================================================================================================
 File: ../temp/obesity_panel_children
 Key: nhispid year
 ==================================================================================================
-  58647:34(77772):4095807225:3422596631
+  58647:33(49110):1632058513:2471401842
 
     Variable |       Obs        Mean    Std. Dev.       Min        Max
 -------------+--------------------------------------------------------
@@ -137,14 +162,72 @@ Key: nhispid year
 -------------+--------------------------------------------------------
   overweight |     58647     .189933    .3922513          0          1
        obese |     58647    .1103893     .313377          0          1
-age_at_ref~m |     58647     16.6386    5.418485          7         30
-years_hs_a~m |     58647    .3613996    5.418485        -13         10
+dist_surve~t |     58647   -.0630041    3.716867         -9          5
 
 
 
 
 (note: file ../temp/obesity_panel_children.dta not found)
 file ../temp/obesity_panel_children.dta saved
+(5726065 observations deleted)
+(3906 real changes made)
+(85553 observations deleted)
+(data already sorted by nhispid year)
+sub77wt was long now byte
+overweight was float now byte
+obese was float now byte
+==================================================================================================
+File: ../temp/obesity_panel_cohorts
+Key: nhispid year
+==================================================================================================
+  27573:32(104915):399765407:1331067536
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+     nhispid |         0
+        year |     27573     2008.68     5.81952       1997       2016
+      serial |     27573    24122.88    14965.51          3      60310
+      strata |     27573    5930.444    604.1742       5001       7151
+         psu |     27573    4.677293    14.32036          1        155
+-------------+--------------------------------------------------------
+     nhishid |         0
+    hhweight |     27573    2566.914    1513.333         57      35775
+      region |     27573    2.727523     1.01125          1          4
+       metro |         0
+     msasize |      4642     21.5489    12.22991          0         33
+-------------+--------------------------------------------------------
+         hhx |         0
+         fmx |         0
+          px |         0
+   perweight |     27573    3223.401    1891.082         66      39936
+  sampweight |     27573    7554.971    6114.365         70     121989
+-------------+--------------------------------------------------------
+     fweight |     27573    3016.848    1793.958         66      36744
+    astatflg |     27573    .8583397    .3487077          0          1
+    cstatflg |     27573    .1416603    .3487077          0          1
+      pernum |     27573    1.801618     1.08407          1         18
+     supp2wt |     13369    3048.771    4038.606          0      44592
+-------------+--------------------------------------------------------
+     sub77wt |         0
+         age |     27573    27.98578    8.982002         12         46
+         sex |     27573    1.533711    .4988714          1          2
+     birthmo |     22451    7.640773    10.61768          1         99
+     birthyr |     27573    1980.215    10.53029       1970       2003
+-------------+--------------------------------------------------------
+       racea |     27573    146.0668    102.1805        100        990
+     bmicalc |     27573     76.7984    223.5047          0        996
+         bmi |     27573    26.25187    6.301043        .81      87.84
+      bmikid |     17083    505.5289    958.7005          0       4993
+      sldayr |     27573    856.6714     344.837          0        999
+-------------+--------------------------------------------------------
+  overweight |     27573    .2914083    .4544194          0          1
+       obese |     27573    .2194901    .4139087          0          1
+
+
+
+
+(note: file ../temp/obesity_panel_cohorts.dta not found)
+file ../temp/obesity_panel_cohorts.dta saved
 
 . 
 end of do-file
@@ -202,32 +285,60 @@ Notes:
 
 . 
 . program main
-  1.     local plot_opts = "graphregion(fcolor(white)) ylab(, nogrid) xlabel(-10 0 10)"
+  1.     local plot_opts = "graphregion(fcolor(white)) ylab(, nogrid)"
   2. 
 .     use "../temp/obesity_panel_children", clear
-  3.     collapse (mean) overweight obese bmi [pweight=perweight], by(years_hs_after_reform)
-  4. 
-.     label var bmi           "Body Mass Index"
-  5.     label var obese         "Obesity rate"
-  6.     label var overweight    "Overweight rate"
-  7. 
+  3.     collapse (mean) overweight obese bmi [pweight=perweight], by(dist_survey_act age)
+  4.     label_vars
+  5. 
+.     forval age = 12/15 {
+  6.         twoway line bmi dist_survey_act if dist_survey_act >= -3 ///
+>             & age == `age', xlabel(-3 0 5) `plot_opts'
+  7.         graph export ../output/treatment_`age'.png, as(png) replace
+  8.     }
+  9.     
+.     use "../temp/obesity_panel_cohorts", clear
+ 10.     collapse (mean) overweight obese bmi [pweight=perweight], by(age birthyr)
+ 11.     label_vars
+ 12.     label var age "Age"
+ 13.     
 .     foreach depvar in bmi overweight obese {
-  8.         twoway line `depvar' years_hs_after_reform if years_hs_after_reform >= -10, `plot_opts'
-  9.         graph export ../output/cohort_treatment_`depvar'.png, as(png) replace
- 10.     }
- 11. end
+ 14.         twoway (line `depvar' age if birthyr == 1970) ///
+>             (line `depvar' age if birthyr == 1980)    ///
+>             (line `depvar' age if birthyr == 1990)    ///
+>             (line `depvar' age if birthyr == 2000),   ///
+>             legend(label(1 "Cohort 1970") label(2 "Cohort 1980") label(3 "Cohort 1990") ///
+>                 label(4 "Cohort 2000")) `plot_opts'
+ 15.         graph export ../output/cohort_trend_`depvar'.png, as(png) replace
+ 16.     }
+ 17. end
+
+. 
+. program label_vars
+  1.     label var bmi           "Body Mass Index"
+  2.     label var obese         "Obesity rate"
+  3.     label var overweight    "Overweight rate"
+  4. end
 
 . 
 . * Execute
 . main
-(note: file ../output/cohort_treatment_bmi.png not found)
-(file ../output/cohort_treatment_bmi.png written in PNG format)
-(note: file ../output/cohort_treatment_overweight.png not found)
-(file ../output/cohort_treatment_overweight.png written in PNG format)
-(note: file ../output/cohort_treatment_obese.png not found)
-(file ../output/cohort_treatment_obese.png written in PNG format)
+(note: file ../output/treatment_12.png not found)
+(file ../output/treatment_12.png written in PNG format)
+(note: file ../output/treatment_13.png not found)
+(file ../output/treatment_13.png written in PNG format)
+(note: file ../output/treatment_14.png not found)
+(file ../output/treatment_14.png written in PNG format)
+(note: file ../output/treatment_15.png not found)
+(file ../output/treatment_15.png written in PNG format)
+(note: file ../output/cohort_trend_bmi.png not found)
+(file ../output/cohort_trend_bmi.png written in PNG format)
+(note: file ../output/cohort_trend_overweight.png not found)
+(file ../output/cohort_trend_overweight.png written in PNG format)
+(note: file ../output/cohort_trend_obese.png not found)
+(file ../output/cohort_trend_obese.png written in PNG format)
 
 . 
 end of do-file
 
- make.py ended: 2017-11-06 18:56:40
+ make.py ended: 2017-11-09 18:11:52
