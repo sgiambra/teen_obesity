@@ -1,5 +1,5 @@
 
- make.py started: 2017-11-09 19:33:56 C:\Users\Samuele\Documents\GitHub\teen_obesity\derived\Load_bridging_the_gap_data\code 
+ make.py started: 2017-11-10 10:55:45 C:\Users\Samuele\Documents\GitHub\teen_obesity\derived\Load_bridging_the_gap_data\code 
 
 
 
@@ -50,8 +50,8 @@ Notes:
   [8]              "../../../lib/stata/gslab_misc/ado"
   [9]              "../../../lib/third_party/stata_tools"
 
-. preliminaries, loadglob("../../../lib/python/obesity/inpu
-> t_params.txt")
+. preliminaries, loadglob("../../../lib/python/obesity/input
+> _params.txt")
 
 . 
 . local raw_data_dir = "${GoogleDrive}/raw_data/bridging_the_gap/state/data"
@@ -2685,7 +2685,6 @@ gradelevel~c |      1224           2    .8168303          1          3
 
 
 
-(note: file C:/Users/Samuele/Google Drive/research projects/obesity/derived/bridging_the_gap/state/btg_state.dta not found)
 file C:/Users/Samuele/Google Drive/research projects/obesity/derived/bridging_the_gap/state/btg_state.dta saved
 
 . 
@@ -2738,8 +2737,8 @@ Notes:
   [8]              "../../../lib/stata/gslab_misc/ado"
   [9]              "../../../lib/third_party/stata_tools"
 
-. preliminaries, loadglob("../../../lib/python/obesity/inpu
-> t_params.txt")
+. preliminaries, loadglob("../../../lib/python/obesity/input
+> _params.txt")
 
 . 
 . local raw_data_dir = "${GoogleDrive}/raw_data/bridging_the_gap/school_district/data"
@@ -6669,10 +6668,9 @@ free_redl~66 |     14775    .1843655    .3877951          0          1
 
 
 
-(note: file C:/Users/Samuele/Google Drive/research projects/obesity/derived/bridging_the_gap/school_district/btg_school_district.dta not found)
 file C:/Users/Samuele/Google Drive/research projects/obesity/derived/bridging_the_gap/school_district/btg_school_district.dta saved
 
 . 
 end of do-file
 
- make.py ended: 2017-11-09 19:34:06
+ make.py ended: 2017-11-10 10:55:54

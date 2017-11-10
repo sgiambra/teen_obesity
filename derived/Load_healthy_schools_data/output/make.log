@@ -1,0 +1,81 @@
+
+ make.py started: 2017-11-10 10:56:20 C:\Users\Samuele\Documents\GitHub\teen_obesity\derived\Load_healthy_schools_data\code 
+
+
+
+
+Execute:  C:\Stata12_WinX86_x64\StataSE-64.exe /e do "./preclean.do"
+
+  ___  ____  ____  ____  ____ (R)
+ /__    /   ____/   /   ____/
+___/   /   /___/   /   /___/   12.0   Copyright 1985-2011 StataCorp LP
+  Statistics/Data Analysis            StataCorp
+                                      4905 Lakeway Drive
+     Special Edition                  College Station, Texas 77845 USA
+                                      800-STATA-PC        http://www.stata.com
+                                      979-696-4600        stata@stata.com
+                                      979-696-4601 (fax)
+
+Single-user Stata network perpetual license:
+       Serial number:  93611859953
+         Licensed to:  STATAforAll
+                       STATA
+
+Notes:
+      1.  (/v# option or -set maxvar-) 5000 maximum variables
+      2.  Stata running in batch mode
+
+. do ./preclean.do 
+
+. set more off
+
+. adopath + ../../../lib/stata/gslab_misc/ado
+  [1]  (UPDATES)   "C:\Stata12_WinX86_x64\ado\updates/"
+  [2]  (BASE)      "C:\Stata12_WinX86_x64\ado\base/"
+  [3]  (SITE)      "C:\Stata12_WinX86_x64\ado\site/"
+  [4]              "."
+  [5]  (PERSONAL)  "c:\ado\personal/"
+  [6]  (PLUS)      "c:\ado\plus/"
+  [7]  (OLDPLACE)  "c:\ado/"
+  [8]              "../../../lib/stata/gslab_misc/ado"
+
+. adopath + ../../../lib/third_party/stata_tools
+  [1]  (UPDATES)   "C:\Stata12_WinX86_x64\ado\updates/"
+  [2]  (BASE)      "C:\Stata12_WinX86_x64\ado\base/"
+  [3]  (SITE)      "C:\Stata12_WinX86_x64\ado\site/"
+  [4]              "."
+  [5]  (PERSONAL)  "c:\ado\personal/"
+  [6]  (PLUS)      "c:\ado\plus/"
+  [7]  (OLDPLACE)  "c:\ado/"
+  [8]              "../../../lib/stata/gslab_misc/ado"
+  [9]              "../../../lib/third_party/stata_tools"
+
+. preliminaries, loadglob("../../../lib/python/obesity/input
+> _params.txt")
+
+. 
+. program main
+  1.     local raw_data_dir = "${GoogleDrive}/raw_data/healthy_schools/ds1/DS0001"
+  2.     local derived_dir  = "${GoogleDrive}/derived/healthy_schools/ds1"
+  3. 
+.     usespss "`raw_data_dir'/33541-0001-Data.sav", clear
+  4.     save_data "`derived_dir'/partic_inventory.dta", key( ICPSR_SchoolID) replace nopreserve
+  5. end
+
+. 
+. * Execute
+. main
+ 
+usespss is converting file C:/Users/Samuele/Google Drive/research projects/obesity/raw_data/healthy_schools/ds1/DS0001/33541-0001-Data.sav
+ 
+request ignored because of batch mode
+file C:\Users\Samuele\AppData\Local\Temp\ST_01000004.tmp not found
+                 stata():  3598  Stata returned error
+       usespss_convert():     -  function returned error
+                 <istmt>:     -  function returned error
+r(3598);
+
+end of do-file
+r(3598);
+
+ make.py ended: 2017-11-10 10:56:20
