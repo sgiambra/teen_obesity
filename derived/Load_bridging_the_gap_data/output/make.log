@@ -1,14 +1,14 @@
 
- make.py started: 2017-11-26 22:38:31 C:\Users\Samuele\Documents\GitHub\teen_obesity\derived\Load_bridging_the_gap_data\code 
+ make.py started: 2017-11-27 12:19:15 C:\Users\sgiambra\Documents\GitHub\teen_obesity\derived\Load_bridging_the_gap_data\code 
 
 
 
 
-Execute:  C:\Stata12_WinX86_x64\StataSE-64.exe /e do "./preclean_state.do"
+Execute:  "C:\Program Files (x86)\Stata14\StataSE-64.exe" /e do "./preclean_state.do"
 
   ___  ____  ____  ____  ____ (R)
  /__    /   ____/   /   ____/
-___/   /   /___/   /   /___/   12.0   Copyright 1985-2011 StataCorp LP
+___/   /   /___/   /   /___/   14.2   Copyright 1985-2015 StataCorp LLC
   Statistics/Data Analysis            StataCorp
                                       4905 Lakeway Drive
      Special Edition                  College Station, Texas 77845 USA
@@ -16,42 +16,40 @@ ___/   /   /___/   /   /___/   12.0   Copyright 1985-2011 StataCorp LP
                                       979-696-4600        stata@stata.com
                                       979-696-4601 (fax)
 
-Single-user Stata network perpetual license:
-       Serial number:  93611859953
-         Licensed to:  STATAforAll
-                       STATA
+110-user Stata network perpetual license:
+       Serial number:  401406206058
+         Licensed to:  CIS Department
+                       Brown University
 
 Notes:
-      1.  (/v# option or -set maxvar-) 5000 maximum variables
-      2.  Stata running in batch mode
+      1.  Stata is running in batch mode.
+      2.  Unicode is supported; see help unicode_advice.
+      3.  Maximum number of variables is set to 5000; see help set_maxvar.
 
 . do ./preclean_state.do 
 
 . set more off
 
 . adopath + ../../../lib/stata/gslab_misc/ado
-  [1]  (UPDATES)   "C:\Stata12_WinX86_x64\ado\updates/"
-  [2]  (BASE)      "C:\Stata12_WinX86_x64\ado\base/"
-  [3]  (SITE)      "C:\Stata12_WinX86_x64\ado\site/"
-  [4]              "."
-  [5]  (PERSONAL)  "c:\ado\personal/"
-  [6]  (PLUS)      "c:\ado\plus/"
-  [7]  (OLDPLACE)  "c:\ado/"
-  [8]              "../../../lib/stata/gslab_misc/ado"
+  [1]  (BASE)      "C:\Program Files (x86)\Stata14\ado\base/"
+  [2]  (SITE)      "C:\Program Files (x86)\Stata14\ado\site/"
+  [3]              "."
+  [4]  (PERSONAL)  "c:\ado\personal/"
+  [5]  (PLUS)      "c:\ado\plus/"
+  [6]  (OLDPLACE)  "c:\ado/"
+  [7]              "../../../lib/stata/gslab_misc/ado"
 
 . adopath + ../../../lib/third_party/stata_tools
-  [1]  (UPDATES)   "C:\Stata12_WinX86_x64\ado\updates/"
-  [2]  (BASE)      "C:\Stata12_WinX86_x64\ado\base/"
-  [3]  (SITE)      "C:\Stata12_WinX86_x64\ado\site/"
-  [4]              "."
-  [5]  (PERSONAL)  "c:\ado\personal/"
-  [6]  (PLUS)      "c:\ado\plus/"
-  [7]  (OLDPLACE)  "c:\ado/"
-  [8]              "../../../lib/stata/gslab_misc/ado"
-  [9]              "../../../lib/third_party/stata_tools"
+  [1]  (BASE)      "C:\Program Files (x86)\Stata14\ado\base/"
+  [2]  (SITE)      "C:\Program Files (x86)\Stata14\ado\site/"
+  [3]              "."
+  [4]  (PERSONAL)  "c:\ado\personal/"
+  [5]  (PLUS)      "c:\ado\plus/"
+  [6]  (OLDPLACE)  "c:\ado/"
+  [7]              "../../../lib/stata/gslab_misc/ado"
+  [8]              "../../../lib/third_party/stata_tools"
 
-. preliminaries, loadglob("../../../lib/python/obesity/input
-> _params.txt")
+. preliminaries, loadglob("../../../lib/python/obesity/input_params.txt")
 
 . 
 . local raw_data_dir = "${GoogleDrive}/raw_data/bridging_the_gap/state/data"
@@ -361,7 +359,7 @@ _column(542)   int   pacific  :pacific  %1f    "Division 9: Pacific"
 _column(543)   int   division :division %1f    "Census Division"
 }
 
-(1224 observations read)
+(1,224 observations read)
 
 . 
 . #delimit ;
@@ -2073,629 +2071,630 @@ delimiter now cr
 . 
 . save_data "`derived_dir'/btg_state.dta", key(fipstnum gradelevel year) replace nopreserve
 (data now sorted by fipstnum gradelevel year)
-fipstnum was int now byte
-year was int now byte
-gradelevelnumeric was int now byte
-es was int now byte
-ms was int now byte
-hs was int now byte
-ne1s was int now byte
-ne2s was int now byte
-ne3s was int now byte
-ne4s was int now byte
-ne5s was int now byte
-ne6s was int now byte
-ne7s was int now byte
-us1s was int now byte
-us2s was int now byte
-us3s was int now byte
-us4s was int now byte
-us5s was int now byte
-us5as was int now byte
-us6s was int now byte
-us7s was int now byte
-us8s was int now byte
-us9s was int now byte
-us10s was int now byte
-us11s was int now byte
-us12s was int now byte
-us13s was int now byte
-us14s was int now byte
-us15s was int now byte
-ng1s was int now byte
-ng2s was int now byte
-ng2sds was int now byte
-ng3s was int now byte
-ng3sds was int now byte
-ng4s was int now byte
-ng4sds was int now byte
-ng5s was int now byte
-ng5sds was int now byte
-ng6s was int now byte
-ng7s was int now byte
-ng8s was int now byte
-ng9s was int now byte
-ng10s was int now byte
-ng10sds was int now byte
-ng16vms was int now byte
-ng16vmsds was int now byte
-ng17vms was int now byte
-ng17vmsds was int now byte
-ng18vms was int now byte
-ng18vmsds was int now byte
-ng19vms was int now byte
-ng19vmsds was int now byte
-ng20vms was int now byte
-ng20vmsds was int now byte
-ng21vms was int now byte
-ng21vmsds was int now byte
-ng22vms was int now byte
-ng22vmsds was int now byte
-ng23vms was int now byte
-ng23vmsds was int now byte
-ng24vms was int now byte
-ng24vmsds was int now byte
-ng25vms was int now byte
-ng25vmsds was int now byte
-ng26vms was int now byte
-ng26vmsds was int now byte
-ng27vms was int now byte
-ng27vmsds was int now byte
-ng28vms was int now byte
-ng28vmsds was int now byte
-ng29vms was int now byte
-ng30vms was int now byte
-ng30vmsds was int now byte
-ng29vmsds was int now byte
-ng11s was int now byte
-ng11sds was int now byte
-ng16sss was int now byte
-ng16sssds was int now byte
-ng17sss was int now byte
-ng17sssds was int now byte
-ng18sss was int now byte
-ng18sssds was int now byte
-ng19sss was int now byte
-ng19sssds was int now byte
-ng20sss was int now byte
-ng20sssds was int now byte
-ng21sss was int now byte
-ng21sssds was int now byte
-ng22sss was int now byte
-ng22sssds was int now byte
-ng23sss was int now byte
-ng23sssds was int now byte
-ng24sss was int now byte
-ng24sssds was int now byte
-ng25sss was int now byte
-ng25sssds was int now byte
-ng26sss was int now byte
-ng26sssds was int now byte
-ng27sss was int now byte
-ng27sssds was int now byte
-ng28sss was int now byte
-ng28sssds was int now byte
-ng29sss was int now byte
-ng29sssds was int now byte
-ng30sss was int now byte
-ng30ssds was int now byte
-ng12s was int now byte
-ng16als was int now byte
-ng17als was int now byte
-ng18als was int now byte
-ng19als was int now byte
-ng20als was int now byte
-ng21als was int now byte
-ng22als was int now byte
-ng23als was int now byte
-ng24als was int now byte
-ng25als was int now byte
-ng26als was int now byte
-ng27als was int now byte
-ng28als was int now byte
-ng29als was int now byte
-ng30als was int now byte
-ng13s was int now byte
-ng16cps was int now byte
-ng17cps was int now byte
-ng18cps was int now byte
-ng19cps was int now byte
-ng20cps was int now byte
-ng21cps was int now byte
-ng22cps was int now byte
-ng23cps was int now byte
-ng24cps was int now byte
-ng25cps was int now byte
-ng26cps was int now byte
-ng27cps was int now byte
-ng28cps was int now byte
-ng29cps was int now byte
-ng14s was int now byte
-ng16evs was int now byte
-ng17evs was int now byte
-ng18evs was int now byte
-ng19evs was int now byte
-ng20evs was int now byte
-ng21evs was int now byte
-ng22evs was int now byte
-ng23evs was int now byte
-ng24evs was int now byte
-ng25evs was int now byte
-ng26evs was int now byte
-ng27evs was int now byte
-ng28evs was int now byte
-ng29evs was int now byte
-ng15s was int now byte
-ng15s_old was int now byte
-ng15sds was int now byte
-ng16frs was int now byte
-ng16frsds was int now byte
-ng17frs was int now byte
-ng17frsds was int now byte
-ng18frs was int now byte
-ng18frsds was int now byte
-ng19frs was int now byte
-ng19frsds was int now byte
-ng20frs was int now byte
-ng20frsds was int now byte
-ng21frs was int now byte
-ng21frsds was int now byte
-ng22frs was int now byte
-ng22frsds was int now byte
-ng23frs was int now byte
-ng23frsds was int now byte
-ng24frs was int now byte
-ng24frsds was int now byte
-ng25frs was int now byte
-ng25frsds was int now byte
-ng26frs was int now byte
-ng26frsds was int now byte
-ng27frs was int now byte
-ng27frsds was int now byte
-ng28frs was int now byte
-ng28frsds was int now byte
-ng29frs was int now byte
-ng29frsds was int now byte
-pe1s was int now byte
-pe2s was int now byte
-pe3s was int now byte
-pe4s was int now byte
-pe5s was int now byte
-pe6s was int now byte
-pe7s was int now byte
-pe8s was int now byte
-pe9s was int now byte
-pe9as was int now byte
-pe10s was int now byte
-pe11s was int now byte
-pe12s was int now byte
-pe13s was int now byte
-pe14s was int now byte
-pe15s was int now byte
-pe16s was int now byte
-pe17s was int now byte
-pa1s was int now byte
-pa2s was int now byte
-pa3s was int now byte
-pa3bs was int now byte
-pa3cs was int now byte
-pa4s was int now byte
-pa5s was int now byte
-pa6s was int now byte
-pa7s was int now byte
-pa8s was int now byte
-pa9s was int now byte
-pa10s was int now byte
-pa11s was int now byte
-st1s was int now byte
-st2s was int now byte
-st3s was int now byte
-cp1s was int now byte
-cp2s was int now byte
-cp3s was int now byte
-cp4s was int now byte
-cp5s was int now byte
-mp1s was int now byte
-mp2s was int now byte
-mp3s was int now byte
-e1s was int now byte
-e2s was int now byte
-e3s was int now byte
-e4s_new was int now byte
-e5s was int now byte
-e6s was int now byte
-e7s was int now byte
-e8s was int now byte
-e12s was int now byte
-e13s was int now byte
-e14s was int now byte
-e15s was int now byte
-e16s was int now byte
-e17s was int now byte
-r1s was int now byte
-r2s was int now byte
-r3s was int now byte
-r3ss was int now byte
-r4s was int now byte
-r5s was int now byte
-r6s was int now byte
-r7s was int now byte
-r8s was int now byte
-r9s was int now byte
-r10s was int now byte
-r11s was int now byte
-r12s was int now byte
-r13s was int now byte
-r14s was int now byte
-r15s was int now byte
-r16s was int now byte
-northeast was int now byte
-midwest was int now byte
-south was int now byte
-west was int now byte
-region was int now byte
-newengland was int now byte
-midatlantic was int now byte
-eastnorcen was int now byte
-wesnorcen was int now byte
-southatl was int now byte
-eastsocen was int now byte
-westsocen was int now byte
-mountain was int now byte
-pacific was int now byte
-division was int now byte
+  variable fipstnum was int now byte
+  variable year was int now byte
+  variable gradelevelnumeric was int now byte
+  variable es was int now byte
+  variable ms was int now byte
+  variable hs was int now byte
+  variable ne1s was int now byte
+  variable ne2s was int now byte
+  variable ne3s was int now byte
+  variable ne4s was int now byte
+  variable ne5s was int now byte
+  variable ne6s was int now byte
+  variable ne7s was int now byte
+  variable us1s was int now byte
+  variable us2s was int now byte
+  variable us3s was int now byte
+  variable us4s was int now byte
+  variable us5s was int now byte
+  variable us5as was int now byte
+  variable us6s was int now byte
+  variable us7s was int now byte
+  variable us8s was int now byte
+  variable us9s was int now byte
+  variable us10s was int now byte
+  variable us11s was int now byte
+  variable us12s was int now byte
+  variable us13s was int now byte
+  variable us14s was int now byte
+  variable us15s was int now byte
+  variable ng1s was int now byte
+  variable ng2s was int now byte
+  variable ng2sds was int now byte
+  variable ng3s was int now byte
+  variable ng3sds was int now byte
+  variable ng4s was int now byte
+  variable ng4sds was int now byte
+  variable ng5s was int now byte
+  variable ng5sds was int now byte
+  variable ng6s was int now byte
+  variable ng7s was int now byte
+  variable ng8s was int now byte
+  variable ng9s was int now byte
+  variable ng10s was int now byte
+  variable ng10sds was int now byte
+  variable ng16vms was int now byte
+  variable ng16vmsds was int now byte
+  variable ng17vms was int now byte
+  variable ng17vmsds was int now byte
+  variable ng18vms was int now byte
+  variable ng18vmsds was int now byte
+  variable ng19vms was int now byte
+  variable ng19vmsds was int now byte
+  variable ng20vms was int now byte
+  variable ng20vmsds was int now byte
+  variable ng21vms was int now byte
+  variable ng21vmsds was int now byte
+  variable ng22vms was int now byte
+  variable ng22vmsds was int now byte
+  variable ng23vms was int now byte
+  variable ng23vmsds was int now byte
+  variable ng24vms was int now byte
+  variable ng24vmsds was int now byte
+  variable ng25vms was int now byte
+  variable ng25vmsds was int now byte
+  variable ng26vms was int now byte
+  variable ng26vmsds was int now byte
+  variable ng27vms was int now byte
+  variable ng27vmsds was int now byte
+  variable ng28vms was int now byte
+  variable ng28vmsds was int now byte
+  variable ng29vms was int now byte
+  variable ng30vms was int now byte
+  variable ng30vmsds was int now byte
+  variable ng29vmsds was int now byte
+  variable ng11s was int now byte
+  variable ng11sds was int now byte
+  variable ng16sss was int now byte
+  variable ng16sssds was int now byte
+  variable ng17sss was int now byte
+  variable ng17sssds was int now byte
+  variable ng18sss was int now byte
+  variable ng18sssds was int now byte
+  variable ng19sss was int now byte
+  variable ng19sssds was int now byte
+  variable ng20sss was int now byte
+  variable ng20sssds was int now byte
+  variable ng21sss was int now byte
+  variable ng21sssds was int now byte
+  variable ng22sss was int now byte
+  variable ng22sssds was int now byte
+  variable ng23sss was int now byte
+  variable ng23sssds was int now byte
+  variable ng24sss was int now byte
+  variable ng24sssds was int now byte
+  variable ng25sss was int now byte
+  variable ng25sssds was int now byte
+  variable ng26sss was int now byte
+  variable ng26sssds was int now byte
+  variable ng27sss was int now byte
+  variable ng27sssds was int now byte
+  variable ng28sss was int now byte
+  variable ng28sssds was int now byte
+  variable ng29sss was int now byte
+  variable ng29sssds was int now byte
+  variable ng30sss was int now byte
+  variable ng30ssds was int now byte
+  variable ng12s was int now byte
+  variable ng16als was int now byte
+  variable ng17als was int now byte
+  variable ng18als was int now byte
+  variable ng19als was int now byte
+  variable ng20als was int now byte
+  variable ng21als was int now byte
+  variable ng22als was int now byte
+  variable ng23als was int now byte
+  variable ng24als was int now byte
+  variable ng25als was int now byte
+  variable ng26als was int now byte
+  variable ng27als was int now byte
+  variable ng28als was int now byte
+  variable ng29als was int now byte
+  variable ng30als was int now byte
+  variable ng13s was int now byte
+  variable ng16cps was int now byte
+  variable ng17cps was int now byte
+  variable ng18cps was int now byte
+  variable ng19cps was int now byte
+  variable ng20cps was int now byte
+  variable ng21cps was int now byte
+  variable ng22cps was int now byte
+  variable ng23cps was int now byte
+  variable ng24cps was int now byte
+  variable ng25cps was int now byte
+  variable ng26cps was int now byte
+  variable ng27cps was int now byte
+  variable ng28cps was int now byte
+  variable ng29cps was int now byte
+  variable ng14s was int now byte
+  variable ng16evs was int now byte
+  variable ng17evs was int now byte
+  variable ng18evs was int now byte
+  variable ng19evs was int now byte
+  variable ng20evs was int now byte
+  variable ng21evs was int now byte
+  variable ng22evs was int now byte
+  variable ng23evs was int now byte
+  variable ng24evs was int now byte
+  variable ng25evs was int now byte
+  variable ng26evs was int now byte
+  variable ng27evs was int now byte
+  variable ng28evs was int now byte
+  variable ng29evs was int now byte
+  variable ng15s was int now byte
+  variable ng15s_old was int now byte
+  variable ng15sds was int now byte
+  variable ng16frs was int now byte
+  variable ng16frsds was int now byte
+  variable ng17frs was int now byte
+  variable ng17frsds was int now byte
+  variable ng18frs was int now byte
+  variable ng18frsds was int now byte
+  variable ng19frs was int now byte
+  variable ng19frsds was int now byte
+  variable ng20frs was int now byte
+  variable ng20frsds was int now byte
+  variable ng21frs was int now byte
+  variable ng21frsds was int now byte
+  variable ng22frs was int now byte
+  variable ng22frsds was int now byte
+  variable ng23frs was int now byte
+  variable ng23frsds was int now byte
+  variable ng24frs was int now byte
+  variable ng24frsds was int now byte
+  variable ng25frs was int now byte
+  variable ng25frsds was int now byte
+  variable ng26frs was int now byte
+  variable ng26frsds was int now byte
+  variable ng27frs was int now byte
+  variable ng27frsds was int now byte
+  variable ng28frs was int now byte
+  variable ng28frsds was int now byte
+  variable ng29frs was int now byte
+  variable ng29frsds was int now byte
+  variable pe1s was int now byte
+  variable pe2s was int now byte
+  variable pe3s was int now byte
+  variable pe4s was int now byte
+  variable pe5s was int now byte
+  variable pe6s was int now byte
+  variable pe7s was int now byte
+  variable pe8s was int now byte
+  variable pe9s was int now byte
+  variable pe9as was int now byte
+  variable pe10s was int now byte
+  variable pe11s was int now byte
+  variable pe12s was int now byte
+  variable pe13s was int now byte
+  variable pe14s was int now byte
+  variable pe15s was int now byte
+  variable pe16s was int now byte
+  variable pe17s was int now byte
+  variable pa1s was int now byte
+  variable pa2s was int now byte
+  variable pa3s was int now byte
+  variable pa3bs was int now byte
+  variable pa3cs was int now byte
+  variable pa4s was int now byte
+  variable pa5s was int now byte
+  variable pa6s was int now byte
+  variable pa7s was int now byte
+  variable pa8s was int now byte
+  variable pa9s was int now byte
+  variable pa10s was int now byte
+  variable pa11s was int now byte
+  variable st1s was int now byte
+  variable st2s was int now byte
+  variable st3s was int now byte
+  variable cp1s was int now byte
+  variable cp2s was int now byte
+  variable cp3s was int now byte
+  variable cp4s was int now byte
+  variable cp5s was int now byte
+  variable mp1s was int now byte
+  variable mp2s was int now byte
+  variable mp3s was int now byte
+  variable e1s was int now byte
+  variable e2s was int now byte
+  variable e3s was int now byte
+  variable e4s_new was int now byte
+  variable e5s was int now byte
+  variable e6s was int now byte
+  variable e7s was int now byte
+  variable e8s was int now byte
+  variable e12s was int now byte
+  variable e13s was int now byte
+  variable e14s was int now byte
+  variable e15s was int now byte
+  variable e16s was int now byte
+  variable e17s was int now byte
+  variable r1s was int now byte
+  variable r2s was int now byte
+  variable r3s was int now byte
+  variable r3ss was int now byte
+  variable r4s was int now byte
+  variable r5s was int now byte
+  variable r6s was int now byte
+  variable r7s was int now byte
+  variable r8s was int now byte
+  variable r9s was int now byte
+  variable r10s was int now byte
+  variable r11s was int now byte
+  variable r12s was int now byte
+  variable r13s was int now byte
+  variable r14s was int now byte
+  variable r15s was int now byte
+  variable r16s was int now byte
+  variable northeast was int now byte
+  variable midwest was int now byte
+  variable south was int now byte
+  variable west was int now byte
+  variable region was int now byte
+  variable newengland was int now byte
+  variable midatlantic was int now byte
+  variable eastnorcen was int now byte
+  variable wesnorcen was int now byte
+  variable southatl was int now byte
+  variable eastsocen was int now byte
+  variable westsocen was int now byte
+  variable mountain was int now byte
+  variable pacific was int now byte
+  variable division was int now byte
+  (331,704 bytes saved)
 ==================================================================================================
-File: C:\Users\Samuele/Google Drive/research projects/obesity/derived/bridging_the_gap/state/btg_state.dta
+File: C:\Users\sgiambra/Google Drive/research projects/obesity/derived/bridging_the_gap/state/btg_state.dta
 Key: fipstnum gradelevel year
 ==================================================================================================
   1224:275(55219):1427932164:1202683710
 
-    Variable |       Obs        Mean    Std. Dev.       Min        Max
--------------+--------------------------------------------------------
-    fipstnum |      1224    28.96078    15.68324          1         56
-  gradelevel |         0
-        year |      1224         4.5    2.292224          1          8
-       fipst |         0
-      stname |         0
--------------+--------------------------------------------------------
-    stabbrev |         0
-gradelevel~c |      1224           2    .8168303          1          3
-          es |      1224    .3333333    .4715972          0          1
-          ms |      1224    .3333333    .4715972          0          1
-          hs |      1224    .3333333    .4715972          0          1
--------------+--------------------------------------------------------
-        ne1s |      1224    1.681373    .7141459          0          2
-        ne2s |      1224    1.251634    .8666138          0          2
-        ne3s |       918    .1437908    .3779928          0          2
-        ne4s |      1224    .2303922    .5342171          0          2
-        ne5s |      1224    .1985294    .5262973          0          2
--------------+--------------------------------------------------------
-        ne6s |      1224     1.34232    .9004259          0          2
-        ne7s |      1224    .3210784    .4670817          0          1
-        us1s |      1224    1.042484    .9995055          0          2
-        us2s |      1224    1.077614    .8949877          0          2
-        us3s |      1224     .499183    .8178303          0          2
--------------+--------------------------------------------------------
-        us4s |      1224     .125817    .3864256          0          2
-        us5s |      1224     .252451    .5477917          0          2
-       us5as |      1224    .0522876     .275244          0          2
-        us6s |       306    .0849673    .2792898          0          1
-        us7s |      1224    .3978758    .6515812          0          2
--------------+--------------------------------------------------------
-        us8s |      1224    .2671569     .509629          0          2
-        us9s |      1224    .0522876    .2868808          0          2
-       us10s |      1224     .370098    .4980301          0          2
-       us11s |       765    .5647059    .8832702          0          2
-       us12s |       765    .4745098     .849047          0          2
--------------+--------------------------------------------------------
-       us13s |       765    .2496732    .6585249          0          2
-       us14s |       459    .0915033    .3857643          0          2
-       us15s |       306    .1372549    .5064673          0          2
-        ng1s |      1224    .9738562     .845924          0          2
-        ng2s |      1224    .0612745    .2893651          0          2
--------------+--------------------------------------------------------
-      ng2sds |      1224    .0098039    .0985685          0          1
-        ng3s |      1224    .3218954    .6845887          0          2
-      ng3sds |      1224    .0571895    .2322993          0          1
-        ng4s |      1224    .0196078    .1387051          0          1
-      ng4sds |       918           0           0          0          0
--------------+--------------------------------------------------------
-        ng5s |       918           0           0          0          0
-      ng5sds |       918           0           0          0          0
-        ng6s |      1224    .3995098    .5497637          0          2
-        ng7s |      1224    .0800654    .3550288          0          2
-        ng8s |      1224    .0947712    .3761127          0          2
--------------+--------------------------------------------------------
-        ng9s |      1224     .127451    .4467724          0          2
-       ng10s |      1224    .8218954    .9217873          0          4
-     ng10sds |      1224    .3831699    .4863579          0          1
-     ng16vms |       918    .9052288    1.232403          0          4
-   ng16vmsds |       918    .3148148    .4646953          0          1
--------------+--------------------------------------------------------
-     ng17vms |       918    .4684096    .9494209          0          4
-   ng17vmsds |       918    .1666667    .3728811          0          1
-     ng18vms |       918    .9466231     1.20901          0          4
-   ng18vmsds |       918    .3474946     .476434          0          1
-     ng19vms |       918    .7178649    1.227603          0          4
--------------+--------------------------------------------------------
-   ng19vmsds |       918    .2135076    .4100064          0          1
-     ng20vms |       918     .503268     1.07995          0          4
-   ng20vmsds |       918    .1481481    .3554404          0          1
-     ng21vms |       918    .7189542     1.26848          0          4
-   ng21vmsds |       918    .1971678    .3980769          0          1
--------------+--------------------------------------------------------
-     ng22vms |       918    .7440087    1.180929          0          4
-   ng22vmsds |       918    .2636166    .4408339          0          1
-     ng23vms |       918    .3616558    .8798795          0          4
-   ng23vmsds |       918    .1601307    .3669272          0          1
-     ng24vms |       918    1.122004    1.239277          0          4
--------------+--------------------------------------------------------
-   ng24vmsds |       918    .3671024    .4822775          0          1
-     ng25vms |       918     .664488    1.194618          0          4
-   ng25vmsds |       918    .1960784     .397245          0          1
-     ng26vms |       918    .5174292    1.022762          0          4
-   ng26vmsds |       918    .1546841    .3618004          0          1
--------------+--------------------------------------------------------
-     ng27vms |       918    .7625272    1.267938          0          4
-   ng27vmsds |       918    .2265795    .4188464          0          1
-     ng28vms |       918    .6154684    .9634885          0          4
-   ng28vmsds |       918     .288671    .4533917          0          1
-     ng29vms |       918     .795207    1.326477          0          4
--------------+--------------------------------------------------------
-     ng30vms |       459     .832244    1.193215          0          4
-   ng30vmsds |       459    .3115468     .463631          0          1
-   ng29vmsds |       918    .1960784     .397245          0          1
-       ng11s |      1224    .7312092    .8843917          0          4
-     ng11sds |      1224    .3619281    .4807546          0          1
--------------+--------------------------------------------------------
-     ng16sss |       918    .7810458    1.147274          0          4
-   ng16sssds |       918    .3191721      .46641          0          1
-     ng17sss |       918    .3769063    .8072669          0          4
-   ng17sssds |       918    .1557734    .3628381          0          1
-     ng18sss |       918    .8224401    1.126685          0          4
--------------+--------------------------------------------------------
-   ng18sssds |       918    .3551198    .4788105          0          1
-     ng19sss |       918    .5642702     1.09709          0          4
-   ng19sssds |       918     .208061     .406142          0          1
-     ng20sss |       918    .3986928    .9456774          0          4
-   ng20sssds |       918    .1459695    .3532681          0          1
--------------+--------------------------------------------------------
-     ng21sss |       918    .5751634    1.167683          0          4
-   ng21sssds |       918    .1819172    .3859866          0          1
-     ng22sss |       918    .6525054    1.111136          0          4
-   ng22sssds |       918    .2668845    .4425726          0          1
-     ng23sss |       918    .3093682    .8156989          0          4
--------------+--------------------------------------------------------
-   ng23sssds |       918    .1492375    .3565166          0          1
-     ng24sss |       918    .9814815    1.201002          0          4
-   ng24sssds |       918    .3485839    .4767817          0          1
-     ng25sss |       918    .5664488    1.119592          0          4
-   ng25sssds |       918    .1938998    .3955668          0          1
--------------+--------------------------------------------------------
-     ng26sss |       918    .4651416    .9697634          0          4
-   ng26sssds |       918    .1525054    .3597061          0          1
-     ng27sss |       918    .7102397    1.246554          0          4
-   ng27sssds |       918    .2309368    .4216618          0          1
-     ng28sss |       918    .5566449    .9131025          0          4
--------------+--------------------------------------------------------
-   ng28sssds |       918    .2930283    .4553994          0          1
-     ng29sss |       918    .6906318    1.254931          0          4
-   ng29sssds |       918    .2004357    .4005446          0          1
-     ng30sss |       459    .7407407    1.131282          0          4
-    ng30ssds |       459    .3267974    .4695543          0          1
--------------+--------------------------------------------------------
-       ng12s |      1224    .8839869     .870863          0          4
-     ng16als |       918    .7244009    1.088892          0          4
-     ng17als |       918    .4934641    .7409658          0          4
-     ng18als |       918    .7984749    1.097095          0          4
-     ng19als |       918    .6230937     1.10298          0          4
--------------+--------------------------------------------------------
-     ng20als |       918    .3420479    .8345046          0          4
-     ng21als |       918    .4956427    1.058529          0          4
-     ng22als |       918    .7124183    1.136333          0          4
-     ng23als |       918    .3017429    .7641199          0          4
-     ng24als |       918    1.354031    1.179588          0          4
--------------+--------------------------------------------------------
-     ng25als |       918    .6263617    1.149103          0          4
-     ng26als |       918    .4586057    .9339863          0          4
-     ng27als |       918    .7440087    1.248267          0          4
-     ng28als |       918    .5642702    .8957114          0          4
-     ng29als |       918    .7668845    1.290056          0          4
--------------+--------------------------------------------------------
-     ng30als |       459    .8300654    1.166064          0          4
-       ng13s |      1224    .1993464    .4515436          0          2
-     ng16cps |       918    .2091503    .6384987          0          3
-     ng17cps |       918    .0784314    .3340916          0          2
-     ng18cps |       918    .1797386    .5214516          0          2
--------------+--------------------------------------------------------
-     ng19cps |       918    .1339869    .5411321          0          3
-     ng20cps |       918    .1078431    .4834485          0          3
-     ng21cps |       918    .1045752    .5200042          0          3
-     ng22cps |       918    .1176471     .449517          0          3
-     ng23cps |       918           0           0          0          0
--------------+--------------------------------------------------------
-     ng24cps |       918    .2026144    .6037991          0          3
-     ng25cps |       918    .0915033    .4258723          0          3
-     ng26cps |       918    .0588235    .3077046          0          2
-     ng27cps |       918    .1503268    .5150461          0          3
-     ng28cps |       918    .1143791    .3662272          0          3
--------------+--------------------------------------------------------
-     ng29cps |       918    .2091503    .7066001          0          3
-       ng14s |       765    .0117647    .1078959          0          1
-     ng16evs |       459           0           0          0          0
-     ng17evs |       459           0           0          0          0
-     ng18evs |       459           0           0          0          0
--------------+--------------------------------------------------------
-     ng19evs |       459           0           0          0          0
-     ng20evs |       459           0           0          0          0
-     ng21evs |       459           0           0          0          0
-     ng22evs |       459           0           0          0          0
-     ng23evs |       459           0           0          0          0
--------------+--------------------------------------------------------
-     ng24evs |       459           0           0          0          0
-     ng25evs |       459           0           0          0          0
-     ng26evs |       459           0           0          0          0
-     ng27evs |       459           0           0          0          0
-     ng28evs |       459           0           0          0          0
--------------+--------------------------------------------------------
-     ng29evs |       459           0           0          0          0
-       ng15s |       918    .5130719     .833685          0          4
-   ng15s_old |       306    .3006536    .5002946          0          2
-     ng15sds |      1224    .3031046    .4597879          0          1
-     ng16frs |       918    .5686275    1.059401          0          4
--------------+--------------------------------------------------------
-   ng16frsds |       918    .2418301    .4284253          0          1
-     ng17frs |       918    .2135076    .7114521          0          4
-   ng17frsds |       918    .1034858    .3047584          0          1
-     ng18frs |       918    .5610022    .9984087          0          4
-   ng18frsds |       918     .254902    .4360437          0          1
--------------+--------------------------------------------------------
-     ng19frs |       918    .4281046      .94837          0          4
-   ng19frsds |       918    .1862745    .3895403          0          1
-     ng20frs |       918    .3267974    .8774161          0          4
-   ng20frsds |       918    .1176471    .3223654          0          1
-     ng21frs |       918    .4215686    1.014536          0          4
--------------+--------------------------------------------------------
-   ng21frsds |       918    .1470588    .3543576          0          1
-     ng22frs |       918    .4945534      .97486          0          4
-   ng22frsds |       918     .254902    .4360437          0          1
-     ng23frs |       918    .1339869    .5589752          0          4
-   ng23frsds |       918    .0751634    .2637985          0          1
--------------+--------------------------------------------------------
-     ng24frs |       918    .6535948    1.104093          0          4
-   ng24frsds |       918    .2810458    .4497548          0          1
-     ng25frs |       918    .4389978    .9729627          0          4
-   ng25frsds |       918    .2124183    .4092422          0          1
-     ng26frs |       918     .288671    .7845997          0          4
--------------+--------------------------------------------------------
-   ng26frsds |       918    .1296296    .3360786          0          1
-     ng27frs |       918    .4803922    1.017377          0          4
-   ng27frsds |       918    .2124183    .4092422          0          1
-     ng28frs |       918    .3932462    .7891288          0          4
-   ng28frsds |       918    .2363834    .4250919          0          1
--------------+--------------------------------------------------------
-     ng29frs |       918    .6013072    1.171303          0          4
-   ng29frsds |       918    .2309368    .4216618          0          1
-        pe1s |      1224    .9689542    .1735123          0          1
-        pe2s |      1224    1.469771    .6538655          0          2
-        pe3s |       408    .5588235    .6734491          0          2
--------------+--------------------------------------------------------
-        pe4s |       408     .379902    .5341304          0          2
-        pe5s |       408    .1446078    .4219649          0          2
-        pe6s |      1224    1.465686    .8359066          0          2
-        pe7s |      1224    1.405229    .8753023          0          2
-        pe8s |       408    1.637255     .725651          0          2
--------------+--------------------------------------------------------
-        pe9s |      1224    .1151961    .4436868          0          2
-       pe9as |       918    .0196078     .138724          0          1
-       pe10s |      1224    .2900327    .6186251          0          2
-       pe11s |       918    .3169935    .5312019          0          2
-       pe12s |      1224    .1895425    .3920991          0          1
--------------+--------------------------------------------------------
-       pe13s |      1224    .5318627    .8320823          0          2
-       pe14s |      1224    .1013072    .3997525          0          2
-       pe15s |      1224    .1503268    .4972038          0          2
-       pe16s |      1224    .4370915    .5156235          0          2
-       pe17s |       459    .0588235    .3078726          0          2
--------------+--------------------------------------------------------
-        pa1s |      1224    .6952614    .9515373          0          2
-        pa2s |      1224     .376634     .693016          0          2
-        pa3s |       918     .251634    .6079019          0          2
-       pa3bs |        84    .9642857    .1866915          0          1
-       pa3cs |        36    .8333333    .3779645          0          1
--------------+--------------------------------------------------------
-        pa4s |      1224    .1527778     .410841          0          2
-        pa5s |      1224    .1960784    .4809887          0          2
-        pa6s |      1224    .0334967    .1800033          0          1
-        pa7s |      1224    .0784314    .3689398          0          2
-        pa8s |       408    .3039216    .6197283          0          2
--------------+--------------------------------------------------------
-        pa9s |       306    .0457516    .2092882          0          1
-       pa10s |       459    .1568627    .4145442          0          2
-       pa11s |       459    .7647059    .4246453          0          1
-        st1s |      1224    .0343137    .1821082          0          1
-        st2s |      1224    .0563725    .2875309          0          2
--------------+--------------------------------------------------------
-        st3s |      1224    .0931373    .3914273          0          2
-        cp1s |      1224    .1838235    .5316167          0          2
-        cp2s |      1224    .2638889    .5927912          0          2
-        cp3s |      1224    .2843137     .670033          0          2
-        cp4s |       459    .0980392    .3576617          0          2
--------------+--------------------------------------------------------
-        cp5s |       459    .0784314    .3342739          0          2
-        mp1s |      1224    .3954248    .7404968          0          2
-        mp2s |      1224    .0596405    .2630817          0          2
-        mp3s |      1224    .1143791    .4592886          0          2
-         e1s |      1224    .3129085    .7045907          0          2
--------------+--------------------------------------------------------
-         e2s |      1224     .250817    .6432232          0          2
-         e3s |      1224    .5955882    .8409084          0          2
-     e4s_new |      1224    .5245098    .8104311          0          4
-         e5s |      1224    .1748366    .4772716          0          2
-         e6s |      1224    .1911765    .5882918          0          2
--------------+--------------------------------------------------------
-         e7s |      1224    .0514706    .2968317          0          2
-         e8s |      1224    .1568627    .5193574          0          2
-        e12s |      1224    .6821895    .9183207          0          2
-        e13s |      1224    .4125817    .7612048          0          2
-        e14s |      1224    .4321895    .7853793          0          2
--------------+--------------------------------------------------------
-        e15s |      1224    .1544118    .4934702          0          2
-        e16s |      1224    .0637255    .3514128          0          2
-        e17s |      1224    .4191176    .8047247          0          2
-         r1s |       612     .127451     .468411          0          2
-         r2s |       612    .0931373    .4039315          0          2
--------------+--------------------------------------------------------
-         r3s |       612    .1764706    .5501691          0          2
-        r3ss |       612    .1078431    .4520952          0          2
-         r4s |       612    .4509804    .7943431          0          2
-         r5s |       612    .2565359    .6607092          0          2
-         r6s |       612    .5898693    .8677314          0          2
--------------+--------------------------------------------------------
-         r7s |       612           0           0          0          0
-         r8s |       612    .0490196    .3095041          0          2
-         r9s |       612    .2156863    .5966757          0          2
-        r10s |       612    .1029412    .4252942          0          2
-        r11s |       612    .0686275    .3643653          0          2
--------------+--------------------------------------------------------
-        r12s |       612    .1862745    .5732223          0          2
-        r13s |       612    .2696078    .6274082          0          2
-        r14s |       612    .1568627    .5195698          0          2
-        r15s |       612    .2728758    .6640521          0          2
-        r16s |       612    .1323529    .4722745          0          2
--------------+--------------------------------------------------------
-   northeast |      1224    .1764706    .3813759          0          1
-     midwest |      1224    .2352941    .4243559          0          1
-       south |      1224    .3333333    .4715972          0          1
-        west |      1224     .254902    .4359842          0          1
-      region |      1224    2.431373    1.053063          1          4
--------------+--------------------------------------------------------
-  newengland |      1224    .1176471    .3223214          0          1
- midatlantic |      1224    .0588235    .2353903          0          1
-  eastnorcen |      1224    .0980392    .2974892          0          1
-   wesnorcen |      1224    .1372549    .3442569          0          1
-    southatl |      1224    .1764706    .3813759          0          1
--------------+--------------------------------------------------------
-   eastsocen |      1224    .0784314    .2689591          0          1
-   westsocen |      1224    .0784314    .2689591          0          1
-    mountain |      1224    .1568627      .36382          0          1
-     pacific |      1224    .0980392    .2974892          0          1
-    division |      1224    5.117647    2.510983          1          9
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+    fipstnum |      1,224    28.96078    15.68324          1         56
+  gradelevel |          0
+        year |      1,224         4.5    2.292224          1          8
+       fipst |          0
+      stname |          0
+-------------+---------------------------------------------------------
+    stabbrev |          0
+gradelevel~c |      1,224           2    .8168303          1          3
+          es |      1,224    .3333333    .4715972          0          1
+          ms |      1,224    .3333333    .4715972          0          1
+          hs |      1,224    .3333333    .4715972          0          1
+-------------+---------------------------------------------------------
+        ne1s |      1,224    1.681373    .7141459          0          2
+        ne2s |      1,224    1.251634    .8666138          0          2
+        ne3s |        918    .1437908    .3779928          0          2
+        ne4s |      1,224    .2303922    .5342171          0          2
+        ne5s |      1,224    .1985294    .5262973          0          2
+-------------+---------------------------------------------------------
+        ne6s |      1,224     1.34232    .9004259          0          2
+        ne7s |      1,224    .3210784    .4670817          0          1
+        us1s |      1,224    1.042484    .9995055          0          2
+        us2s |      1,224    1.077614    .8949877          0          2
+        us3s |      1,224     .499183    .8178303          0          2
+-------------+---------------------------------------------------------
+        us4s |      1,224     .125817    .3864256          0          2
+        us5s |      1,224     .252451    .5477917          0          2
+       us5as |      1,224    .0522876     .275244          0          2
+        us6s |        306    .0849673    .2792898          0          1
+        us7s |      1,224    .3978758    .6515812          0          2
+-------------+---------------------------------------------------------
+        us8s |      1,224    .2671569     .509629          0          2
+        us9s |      1,224    .0522876    .2868808          0          2
+       us10s |      1,224     .370098    .4980301          0          2
+       us11s |        765    .5647059    .8832702          0          2
+       us12s |        765    .4745098     .849047          0          2
+-------------+---------------------------------------------------------
+       us13s |        765    .2496732    .6585249          0          2
+       us14s |        459    .0915033    .3857643          0          2
+       us15s |        306    .1372549    .5064673          0          2
+        ng1s |      1,224    .9738562     .845924          0          2
+        ng2s |      1,224    .0612745    .2893651          0          2
+-------------+---------------------------------------------------------
+      ng2sds |      1,224    .0098039    .0985685          0          1
+        ng3s |      1,224    .3218954    .6845887          0          2
+      ng3sds |      1,224    .0571895    .2322993          0          1
+        ng4s |      1,224    .0196078    .1387051          0          1
+      ng4sds |        918           0           0          0          0
+-------------+---------------------------------------------------------
+        ng5s |        918           0           0          0          0
+      ng5sds |        918           0           0          0          0
+        ng6s |      1,224    .3995098    .5497637          0          2
+        ng7s |      1,224    .0800654    .3550288          0          2
+        ng8s |      1,224    .0947712    .3761127          0          2
+-------------+---------------------------------------------------------
+        ng9s |      1,224     .127451    .4467724          0          2
+       ng10s |      1,224    .8218954    .9217873          0          4
+     ng10sds |      1,224    .3831699    .4863579          0          1
+     ng16vms |        918    .9052288    1.232403          0          4
+   ng16vmsds |        918    .3148148    .4646953          0          1
+-------------+---------------------------------------------------------
+     ng17vms |        918    .4684096    .9494209          0          4
+   ng17vmsds |        918    .1666667    .3728811          0          1
+     ng18vms |        918    .9466231     1.20901          0          4
+   ng18vmsds |        918    .3474946     .476434          0          1
+     ng19vms |        918    .7178649    1.227603          0          4
+-------------+---------------------------------------------------------
+   ng19vmsds |        918    .2135076    .4100064          0          1
+     ng20vms |        918     .503268     1.07995          0          4
+   ng20vmsds |        918    .1481481    .3554404          0          1
+     ng21vms |        918    .7189542     1.26848          0          4
+   ng21vmsds |        918    .1971678    .3980769          0          1
+-------------+---------------------------------------------------------
+     ng22vms |        918    .7440087    1.180929          0          4
+   ng22vmsds |        918    .2636166    .4408339          0          1
+     ng23vms |        918    .3616558    .8798795          0          4
+   ng23vmsds |        918    .1601307    .3669272          0          1
+     ng24vms |        918    1.122004    1.239277          0          4
+-------------+---------------------------------------------------------
+   ng24vmsds |        918    .3671024    .4822775          0          1
+     ng25vms |        918     .664488    1.194618          0          4
+   ng25vmsds |        918    .1960784     .397245          0          1
+     ng26vms |        918    .5174292    1.022762          0          4
+   ng26vmsds |        918    .1546841    .3618004          0          1
+-------------+---------------------------------------------------------
+     ng27vms |        918    .7625272    1.267938          0          4
+   ng27vmsds |        918    .2265795    .4188464          0          1
+     ng28vms |        918    .6154684    .9634885          0          4
+   ng28vmsds |        918     .288671    .4533917          0          1
+     ng29vms |        918     .795207    1.326477          0          4
+-------------+---------------------------------------------------------
+     ng30vms |        459     .832244    1.193215          0          4
+   ng30vmsds |        459    .3115468     .463631          0          1
+   ng29vmsds |        918    .1960784     .397245          0          1
+       ng11s |      1,224    .7312092    .8843917          0          4
+     ng11sds |      1,224    .3619281    .4807546          0          1
+-------------+---------------------------------------------------------
+     ng16sss |        918    .7810458    1.147274          0          4
+   ng16sssds |        918    .3191721      .46641          0          1
+     ng17sss |        918    .3769063    .8072669          0          4
+   ng17sssds |        918    .1557734    .3628381          0          1
+     ng18sss |        918    .8224401    1.126685          0          4
+-------------+---------------------------------------------------------
+   ng18sssds |        918    .3551198    .4788105          0          1
+     ng19sss |        918    .5642702     1.09709          0          4
+   ng19sssds |        918     .208061     .406142          0          1
+     ng20sss |        918    .3986928    .9456774          0          4
+   ng20sssds |        918    .1459695    .3532681          0          1
+-------------+---------------------------------------------------------
+     ng21sss |        918    .5751634    1.167683          0          4
+   ng21sssds |        918    .1819172    .3859866          0          1
+     ng22sss |        918    .6525054    1.111136          0          4
+   ng22sssds |        918    .2668845    .4425726          0          1
+     ng23sss |        918    .3093682    .8156989          0          4
+-------------+---------------------------------------------------------
+   ng23sssds |        918    .1492375    .3565166          0          1
+     ng24sss |        918    .9814815    1.201002          0          4
+   ng24sssds |        918    .3485839    .4767817          0          1
+     ng25sss |        918    .5664488    1.119592          0          4
+   ng25sssds |        918    .1938998    .3955668          0          1
+-------------+---------------------------------------------------------
+     ng26sss |        918    .4651416    .9697634          0          4
+   ng26sssds |        918    .1525054    .3597061          0          1
+     ng27sss |        918    .7102397    1.246554          0          4
+   ng27sssds |        918    .2309368    .4216618          0          1
+     ng28sss |        918    .5566449    .9131025          0          4
+-------------+---------------------------------------------------------
+   ng28sssds |        918    .2930283    .4553994          0          1
+     ng29sss |        918    .6906318    1.254931          0          4
+   ng29sssds |        918    .2004357    .4005446          0          1
+     ng30sss |        459    .7407407    1.131282          0          4
+    ng30ssds |        459    .3267974    .4695543          0          1
+-------------+---------------------------------------------------------
+       ng12s |      1,224    .8839869     .870863          0          4
+     ng16als |        918    .7244009    1.088892          0          4
+     ng17als |        918    .4934641    .7409658          0          4
+     ng18als |        918    .7984749    1.097095          0          4
+     ng19als |        918    .6230937     1.10298          0          4
+-------------+---------------------------------------------------------
+     ng20als |        918    .3420479    .8345046          0          4
+     ng21als |        918    .4956427    1.058529          0          4
+     ng22als |        918    .7124183    1.136333          0          4
+     ng23als |        918    .3017429    .7641199          0          4
+     ng24als |        918    1.354031    1.179588          0          4
+-------------+---------------------------------------------------------
+     ng25als |        918    .6263617    1.149103          0          4
+     ng26als |        918    .4586057    .9339863          0          4
+     ng27als |        918    .7440087    1.248267          0          4
+     ng28als |        918    .5642702    .8957114          0          4
+     ng29als |        918    .7668845    1.290056          0          4
+-------------+---------------------------------------------------------
+     ng30als |        459    .8300654    1.166064          0          4
+       ng13s |      1,224    .1993464    .4515436          0          2
+     ng16cps |        918    .2091503    .6384987          0          3
+     ng17cps |        918    .0784314    .3340916          0          2
+     ng18cps |        918    .1797386    .5214516          0          2
+-------------+---------------------------------------------------------
+     ng19cps |        918    .1339869    .5411321          0          3
+     ng20cps |        918    .1078431    .4834485          0          3
+     ng21cps |        918    .1045752    .5200042          0          3
+     ng22cps |        918    .1176471     .449517          0          3
+     ng23cps |        918           0           0          0          0
+-------------+---------------------------------------------------------
+     ng24cps |        918    .2026144    .6037991          0          3
+     ng25cps |        918    .0915033    .4258723          0          3
+     ng26cps |        918    .0588235    .3077046          0          2
+     ng27cps |        918    .1503268    .5150461          0          3
+     ng28cps |        918    .1143791    .3662272          0          3
+-------------+---------------------------------------------------------
+     ng29cps |        918    .2091503    .7066001          0          3
+       ng14s |        765    .0117647    .1078959          0          1
+     ng16evs |        459           0           0          0          0
+     ng17evs |        459           0           0          0          0
+     ng18evs |        459           0           0          0          0
+-------------+---------------------------------------------------------
+     ng19evs |        459           0           0          0          0
+     ng20evs |        459           0           0          0          0
+     ng21evs |        459           0           0          0          0
+     ng22evs |        459           0           0          0          0
+     ng23evs |        459           0           0          0          0
+-------------+---------------------------------------------------------
+     ng24evs |        459           0           0          0          0
+     ng25evs |        459           0           0          0          0
+     ng26evs |        459           0           0          0          0
+     ng27evs |        459           0           0          0          0
+     ng28evs |        459           0           0          0          0
+-------------+---------------------------------------------------------
+     ng29evs |        459           0           0          0          0
+       ng15s |        918    .5130719     .833685          0          4
+   ng15s_old |        306    .3006536    .5002946          0          2
+     ng15sds |      1,224    .3031046    .4597879          0          1
+     ng16frs |        918    .5686275    1.059401          0          4
+-------------+---------------------------------------------------------
+   ng16frsds |        918    .2418301    .4284253          0          1
+     ng17frs |        918    .2135076    .7114521          0          4
+   ng17frsds |        918    .1034858    .3047584          0          1
+     ng18frs |        918    .5610022    .9984087          0          4
+   ng18frsds |        918     .254902    .4360437          0          1
+-------------+---------------------------------------------------------
+     ng19frs |        918    .4281046      .94837          0          4
+   ng19frsds |        918    .1862745    .3895403          0          1
+     ng20frs |        918    .3267974    .8774161          0          4
+   ng20frsds |        918    .1176471    .3223654          0          1
+     ng21frs |        918    .4215686    1.014536          0          4
+-------------+---------------------------------------------------------
+   ng21frsds |        918    .1470588    .3543576          0          1
+     ng22frs |        918    .4945534      .97486          0          4
+   ng22frsds |        918     .254902    .4360437          0          1
+     ng23frs |        918    .1339869    .5589752          0          4
+   ng23frsds |        918    .0751634    .2637985          0          1
+-------------+---------------------------------------------------------
+     ng24frs |        918    .6535948    1.104093          0          4
+   ng24frsds |        918    .2810458    .4497548          0          1
+     ng25frs |        918    .4389978    .9729627          0          4
+   ng25frsds |        918    .2124183    .4092422          0          1
+     ng26frs |        918     .288671    .7845997          0          4
+-------------+---------------------------------------------------------
+   ng26frsds |        918    .1296296    .3360786          0          1
+     ng27frs |        918    .4803922    1.017377          0          4
+   ng27frsds |        918    .2124183    .4092422          0          1
+     ng28frs |        918    .3932462    .7891288          0          4
+   ng28frsds |        918    .2363834    .4250919          0          1
+-------------+---------------------------------------------------------
+     ng29frs |        918    .6013072    1.171303          0          4
+   ng29frsds |        918    .2309368    .4216618          0          1
+        pe1s |      1,224    .9689542    .1735123          0          1
+        pe2s |      1,224    1.469771    .6538655          0          2
+        pe3s |        408    .5588235    .6734491          0          2
+-------------+---------------------------------------------------------
+        pe4s |        408     .379902    .5341304          0          2
+        pe5s |        408    .1446078    .4219649          0          2
+        pe6s |      1,224    1.465686    .8359066          0          2
+        pe7s |      1,224    1.405229    .8753023          0          2
+        pe8s |        408    1.637255     .725651          0          2
+-------------+---------------------------------------------------------
+        pe9s |      1,224    .1151961    .4436868          0          2
+       pe9as |        918    .0196078     .138724          0          1
+       pe10s |      1,224    .2900327    .6186251          0          2
+       pe11s |        918    .3169935    .5312019          0          2
+       pe12s |      1,224    .1895425    .3920991          0          1
+-------------+---------------------------------------------------------
+       pe13s |      1,224    .5318627    .8320823          0          2
+       pe14s |      1,224    .1013072    .3997525          0          2
+       pe15s |      1,224    .1503268    .4972038          0          2
+       pe16s |      1,224    .4370915    .5156235          0          2
+       pe17s |        459    .0588235    .3078726          0          2
+-------------+---------------------------------------------------------
+        pa1s |      1,224    .6952614    .9515373          0          2
+        pa2s |      1,224     .376634     .693016          0          2
+        pa3s |        918     .251634    .6079019          0          2
+       pa3bs |         84    .9642857    .1866915          0          1
+       pa3cs |         36    .8333333    .3779645          0          1
+-------------+---------------------------------------------------------
+        pa4s |      1,224    .1527778     .410841          0          2
+        pa5s |      1,224    .1960784    .4809887          0          2
+        pa6s |      1,224    .0334967    .1800033          0          1
+        pa7s |      1,224    .0784314    .3689398          0          2
+        pa8s |        408    .3039216    .6197283          0          2
+-------------+---------------------------------------------------------
+        pa9s |        306    .0457516    .2092882          0          1
+       pa10s |        459    .1568627    .4145442          0          2
+       pa11s |        459    .7647059    .4246453          0          1
+        st1s |      1,224    .0343137    .1821082          0          1
+        st2s |      1,224    .0563725    .2875309          0          2
+-------------+---------------------------------------------------------
+        st3s |      1,224    .0931373    .3914273          0          2
+        cp1s |      1,224    .1838235    .5316167          0          2
+        cp2s |      1,224    .2638889    .5927912          0          2
+        cp3s |      1,224    .2843137     .670033          0          2
+        cp4s |        459    .0980392    .3576617          0          2
+-------------+---------------------------------------------------------
+        cp5s |        459    .0784314    .3342739          0          2
+        mp1s |      1,224    .3954248    .7404968          0          2
+        mp2s |      1,224    .0596405    .2630817          0          2
+        mp3s |      1,224    .1143791    .4592886          0          2
+         e1s |      1,224    .3129085    .7045907          0          2
+-------------+---------------------------------------------------------
+         e2s |      1,224     .250817    .6432232          0          2
+         e3s |      1,224    .5955882    .8409084          0          2
+     e4s_new |      1,224    .5245098    .8104311          0          4
+         e5s |      1,224    .1748366    .4772716          0          2
+         e6s |      1,224    .1911765    .5882918          0          2
+-------------+---------------------------------------------------------
+         e7s |      1,224    .0514706    .2968317          0          2
+         e8s |      1,224    .1568627    .5193574          0          2
+        e12s |      1,224    .6821895    .9183207          0          2
+        e13s |      1,224    .4125817    .7612048          0          2
+        e14s |      1,224    .4321895    .7853793          0          2
+-------------+---------------------------------------------------------
+        e15s |      1,224    .1544118    .4934702          0          2
+        e16s |      1,224    .0637255    .3514128          0          2
+        e17s |      1,224    .4191176    .8047247          0          2
+         r1s |        612     .127451     .468411          0          2
+         r2s |        612    .0931373    .4039315          0          2
+-------------+---------------------------------------------------------
+         r3s |        612    .1764706    .5501691          0          2
+        r3ss |        612    .1078431    .4520952          0          2
+         r4s |        612    .4509804    .7943431          0          2
+         r5s |        612    .2565359    .6607092          0          2
+         r6s |        612    .5898693    .8677314          0          2
+-------------+---------------------------------------------------------
+         r7s |        612           0           0          0          0
+         r8s |        612    .0490196    .3095041          0          2
+         r9s |        612    .2156863    .5966757          0          2
+        r10s |        612    .1029412    .4252942          0          2
+        r11s |        612    .0686275    .3643653          0          2
+-------------+---------------------------------------------------------
+        r12s |        612    .1862745    .5732223          0          2
+        r13s |        612    .2696078    .6274082          0          2
+        r14s |        612    .1568627    .5195698          0          2
+        r15s |        612    .2728758    .6640521          0          2
+        r16s |        612    .1323529    .4722745          0          2
+-------------+---------------------------------------------------------
+   northeast |      1,224    .1764706    .3813759          0          1
+     midwest |      1,224    .2352941    .4243559          0          1
+       south |      1,224    .3333333    .4715972          0          1
+        west |      1,224     .254902    .4359842          0          1
+      region |      1,224    2.431373    1.053063          1          4
+-------------+---------------------------------------------------------
+  newengland |      1,224    .1176471    .3223214          0          1
+ midatlantic |      1,224    .0588235    .2353903          0          1
+  eastnorcen |      1,224    .0980392    .2974892          0          1
+   wesnorcen |      1,224    .1372549    .3442569          0          1
+    southatl |      1,224    .1764706    .3813759          0          1
+-------------+---------------------------------------------------------
+   eastsocen |      1,224    .0784314    .2689591          0          1
+   westsocen |      1,224    .0784314    .2689591          0          1
+    mountain |      1,224    .1568627      .36382          0          1
+     pacific |      1,224    .0980392    .2974892          0          1
+    division |      1,224    5.117647    2.510983          1          9
 
 
 
 
-file C:\Users\Samuele/Google Drive/research projects/obesity/derived/bridging_the_gap/state/btg_state.dta saved
+file C:\Users\sgiambra/Google Drive/research projects/obesity/derived/bridging_the_gap/state/btg_state.dta saved
 
 . 
 end of do-file
 
 
-Execute:  C:\Stata12_WinX86_x64\StataSE-64.exe /e do "./preclean_school_district.do"
+Execute:  "C:\Program Files (x86)\Stata14\StataSE-64.exe" /e do "./preclean_school_district.do"
 
   ___  ____  ____  ____  ____ (R)
  /__    /   ____/   /   ____/
-___/   /   /___/   /   /___/   12.0   Copyright 1985-2011 StataCorp LP
+___/   /   /___/   /   /___/   14.2   Copyright 1985-2015 StataCorp LLC
   Statistics/Data Analysis            StataCorp
                                       4905 Lakeway Drive
      Special Edition                  College Station, Texas 77845 USA
@@ -2703,42 +2702,40 @@ ___/   /   /___/   /   /___/   12.0   Copyright 1985-2011 StataCorp LP
                                       979-696-4600        stata@stata.com
                                       979-696-4601 (fax)
 
-Single-user Stata network perpetual license:
-       Serial number:  93611859953
-         Licensed to:  STATAforAll
-                       STATA
+110-user Stata network perpetual license:
+       Serial number:  401406206058
+         Licensed to:  CIS Department
+                       Brown University
 
 Notes:
-      1.  (/v# option or -set maxvar-) 5000 maximum variables
-      2.  Stata running in batch mode
+      1.  Stata is running in batch mode.
+      2.  Unicode is supported; see help unicode_advice.
+      3.  Maximum number of variables is set to 5000; see help set_maxvar.
 
 . do ./preclean_school_district.do 
 
 . set more off
 
 . adopath + ../../../lib/stata/gslab_misc/ado
-  [1]  (UPDATES)   "C:\Stata12_WinX86_x64\ado\updates/"
-  [2]  (BASE)      "C:\Stata12_WinX86_x64\ado\base/"
-  [3]  (SITE)      "C:\Stata12_WinX86_x64\ado\site/"
-  [4]              "."
-  [5]  (PERSONAL)  "c:\ado\personal/"
-  [6]  (PLUS)      "c:\ado\plus/"
-  [7]  (OLDPLACE)  "c:\ado/"
-  [8]              "../../../lib/stata/gslab_misc/ado"
+  [1]  (BASE)      "C:\Program Files (x86)\Stata14\ado\base/"
+  [2]  (SITE)      "C:\Program Files (x86)\Stata14\ado\site/"
+  [3]              "."
+  [4]  (PERSONAL)  "c:\ado\personal/"
+  [5]  (PLUS)      "c:\ado\plus/"
+  [6]  (OLDPLACE)  "c:\ado/"
+  [7]              "../../../lib/stata/gslab_misc/ado"
 
 . adopath + ../../../lib/third_party/stata_tools
-  [1]  (UPDATES)   "C:\Stata12_WinX86_x64\ado\updates/"
-  [2]  (BASE)      "C:\Stata12_WinX86_x64\ado\base/"
-  [3]  (SITE)      "C:\Stata12_WinX86_x64\ado\site/"
-  [4]              "."
-  [5]  (PERSONAL)  "c:\ado\personal/"
-  [6]  (PLUS)      "c:\ado\plus/"
-  [7]  (OLDPLACE)  "c:\ado/"
-  [8]              "../../../lib/stata/gslab_misc/ado"
-  [9]              "../../../lib/third_party/stata_tools"
+  [1]  (BASE)      "C:\Program Files (x86)\Stata14\ado\base/"
+  [2]  (SITE)      "C:\Program Files (x86)\Stata14\ado\site/"
+  [3]              "."
+  [4]  (PERSONAL)  "c:\ado\personal/"
+  [5]  (PLUS)      "c:\ado\plus/"
+  [6]  (OLDPLACE)  "c:\ado/"
+  [7]              "../../../lib/stata/gslab_misc/ado"
+  [8]              "../../../lib/third_party/stata_tools"
 
-. preliminaries, loadglob("../../../lib/python/obesity/input
-> _params.txt")
+. preliminaries, loadglob("../../../lib/python/obesity/input_params.txt")
 
 . 
 . local raw_data_dir = "${GoogleDrive}/raw_data/bridging_the_gap/school_district/data"
@@ -3036,7 +3033,7 @@ infile dictionary {
   _column(561)       byte           free_redlch_elig_pr_gt66   %1f  "Flag: >66% of students eligible for free/reduced-price lunch"
 }
 
-(15327 observations read)
+(15,327 observations read)
 
 . 
 . #delimit ;
@@ -6336,341 +6333,342 @@ delimiter now cr
 . 
 . save_data "`derived_dir'/btg_school_district.dta", key(id gradelevel year) replace nopreserve
 (data now sorted by id gradelevel year)
+  (0 bytes saved)
 ==================================================================================================
-File: C:\Users\Samuele/Google Drive/research projects/obesity/derived/bridging_the_gap/school_district/btg_school_district.dta
+File: C:\Users\sgiambra/Google Drive/research projects/obesity/derived/bridging_the_gap/school_district/btg_school_district.dta
 Key: id gradelevel year
 ==================================================================================================
   15327:267(40703):904881352:3510707951
 
-    Variable |       Obs        Mean    Std. Dev.       Min        Max
--------------+--------------------------------------------------------
-          id |     15327    4.98e+08    2.89e+08     630550   9.99e+08
-  gradelevel |         0
-        year |     15327    4.727735    2.295631          1          8
-gradelevel~c |     15327           2    .8165232          1          3
-         yr1 |     15327    .3051478     .460485          0          1
--------------+--------------------------------------------------------
-         yr2 |     15327    .3266784    .4690138          0          1
-         yr3 |     15327    .3047563    .4603192          0          1
-         yr4 |     15327    .2759836    .4470231          0          1
-         yr5 |     15327    .3133686    .4638779          0          1
-         yr6 |     15327    .3924447    .4883108          0          1
--------------+--------------------------------------------------------
-         yr7 |     15327    .3945978    .4887801          0          1
-         yr8 |     15327    .3358779    .4723118          0          1
-          es |     15327    .3333333    .4714199          0          1
-          ms |     15327    .3333333    .4714199          0          1
-          hs |     15327    .3333333    .4714199          0          1
--------------+--------------------------------------------------------
-      dist_3 |     15327    .9530241    .2115942          0          1
-      dist_8 |     15327     .939127     .239105          0          1
-     dist_10 |     15327    .8623997    .3444912          0          1
-     dist_12 |     15327    .8537874    .3533307          0          1
- distnrwgt_d |     15327    20.30723    25.10149   .1221354   656.4536
--------------+--------------------------------------------------------
-     stratum |     15321     113.999    104.0961          1        335
-    psu_deid |     15321    4.95e+08    2.83e+08    1991682   9.99e+08
-       d_fpc |     15321    .0501748    .1262546          0          1
-        ne1r |     14277    1.838061    .5230467          0          2
-        ne2r |     14277    1.159417    .7612593          0          2
--------------+--------------------------------------------------------
-        ne3r |     11025    .1345125     .362612          0          2
-        ne4r |     14277    .4774112    .6628245          0          2
-        ne5r |     14277    .8136163    .8809427          0          2
-        ne6r |     14277    1.307137     .824983          0          2
-        ne7r |     14277    .0617777    .2752406          0          2
--------------+--------------------------------------------------------
-        us1r |     14277    1.734608    .6664849          0          2
-        us2r |     14277    1.193598     .891057          0          2
-        us3r |     14277    .9841003     .848886          0          2
-        us4r |     14277    .2955103    .5696294          0          2
-        us5r |     14277    .6661063    .7249762          0          2
--------------+--------------------------------------------------------
-       us5ar |     11025    .0572336    .2817124          0          2
-        us6r |      3814     .260881    .4915823          0          2
-        us7r |     14278    .7135453    .6629299          0          2
-        us8r |     14278    .4364057    .6428336          0          2
-        us9r |     14278    .3471074    .6895154          0          2
--------------+--------------------------------------------------------
-       us10r |     14278     .086987    .3202185          0          2
-       us11r |      9422    .9073445    .9605371          0          2
-       us12r |      9422    .8364466     .977779          0          2
-       us13r |      9422     .175865    .5536297          0          2
-       us14r |      5860    .2665529    .6658526          0          2
--------------+--------------------------------------------------------
-       us15r |      4006     .040689    .2810573          0          2
-        ng1r |     14278    1.506373    .6529506          0          2
-        ng2r |     14278    .0718588     .294503          0          2
-      ng2rsd |     14278    .0342485    .1818732          0          1
-        ng3r |     14278    .4421488    .7911269          0          2
--------------+--------------------------------------------------------
-      ng3rsd |     14278     .042513    .2017634          0          1
-        ng4r |     11026     .004172    .0672141          0          2
-      ng4rsd |     11026    .0001814    .0134675          0          1
-        ng5r |     11026    .0102485    .1173563          0          2
-      ng5rsd |     11026    .0003628    .0190442          0          1
--------------+--------------------------------------------------------
-        ng6r |     14278    .6474996    .6172139          0          2
-        ng7r |     14278    .4681328    .6760391          0          2
-        ng8r |     14278    .1430172    .4796013          0          2
-        ng9r |     14278    .2373582    .6294467          0          2
-       ng10r |     14278     1.20339    .9379187          0          4
--------------+--------------------------------------------------------
-     ng10rsd |     14278    .5040622     .500001          0          1
-     ng16rvm |     11026    1.280972    1.365847          0          4
-   ng16rvmsd |     11026     .432251    .4954113          0          1
-     ng17rvm |     11026    .7749864    1.216692          0          4
-   ng17rvmsd |     11026    .2799746    .4490068          0          1
--------------+--------------------------------------------------------
-     ng18rvm |     11026    1.459278    1.290756          0          4
-   ng18rvmsd |     11026    .4853981    .4998094          0          1
-     ng19rvm |     11026    .9207328    1.330975          0          4
-   ng19rvmsd |     11026    .3235988    .4678701          0          1
-     ng20rvm |     11026    .7891348    1.230627          0          4
--------------+--------------------------------------------------------
-   ng20rvmsd |     11026    .2238346    .4168314          0          1
-     ng21rvm |     11026    .8746599    1.385142          0          4
-   ng21rvmsd |     11026    .2479594    .4318477          0          1
-     ng22rvm |     11026    .9970978    1.214945          0          4
-   ng22rvmsd |     11026    .4424995    .4967052          0          1
--------------+--------------------------------------------------------
-     ng23rvm |     11026      .46998    1.078698          0          4
-   ng23rvmsd |     11026    .1750408    .3800192          0          1
-     ng24rvm |     11026    1.413296    1.263247          0          4
-   ng24rvmsd |     11026    .5094323    .4999337          0          1
-     ng25rvm |     11026    .8011065    1.277498          0          4
--------------+--------------------------------------------------------
-   ng25rvmsd |     11026    .3012879    .4588383          0          1
-     ng26rvm |     11026    .6653365    1.192763          0          4
-   ng26rvmsd |     11026    .2301832    .4209691          0          1
-     ng27rvm |     11026    .7836931    1.238941          0          4
-   ng27rvmsd |     11026    .2923091    .4548442          0          1
--------------+--------------------------------------------------------
-     ng28rvm |     11026    .7601125    1.121729          0          4
-   ng28rvmsd |     11026    .3329403    .4712868          0          1
-     ng29rvm |     11026    .9995465    1.406851          0          4
-     ng30rvm |      5860    .9967577    1.205533          0          4
-   ng30rvmsd |      5860    .4554608    .4980548          0          1
--------------+--------------------------------------------------------
-   ng29rvmsd |     11026    .3255034    .4685839          0          1
-       ng11r |     14278    1.024373    .9135619          0          4
-     ng11rsd |     14278     .470444    .4991432          0          1
-     ng16rss |     11026    1.085616    1.272531          0          4
-   ng16rsssd |     11026    .4177399    .4932092          0          1
--------------+--------------------------------------------------------
-     ng17rss |     11026    .5998549    1.035889          0          4
-   ng17rsssd |     11026    .2593869    .4383181          0          1
-     ng18rss |     11026    1.253673    1.220961          0          4
-   ng18rsssd |     11026    .4755124    .4994226          0          1
-     ng19rss |     11026    .7380736    1.183697          0          4
--------------+--------------------------------------------------------
-   ng19rsssd |     11026    .3086341    .4619507          0          1
-     ng20rss |     11026    .6159985     1.06019          0          4
-   ng20rsssd |     11026    .2105931    .4077484          0          1
-     ng21rss |     11026    .6753129    1.238301          0          4
-   ng21rsssd |     11026    .2206603    .4147106          0          1
--------------+--------------------------------------------------------
-     ng22rss |     11026    .8205151       1.105          0          4
-   ng22rsssd |     11026     .424542    .4942957          0          1
-     ng23rss |     11026    .3633231    .9277055          0          4
-   ng23rsssd |     11026    .1642481    .3705174          0          1
-     ng24rss |     11026    1.188464     1.22374          0          4
--------------+--------------------------------------------------------
-   ng24rsssd |     11026    .4658988    .4988584          0          1
-     ng25rss |     11026      .63577    1.140842          0          4
-   ng25rsssd |     11026    .2794304    .4487397          0          1
-     ng26rss |     11026    .5427172    1.067873          0          4
-   ng26rsssd |     11026    .2154907    .4111809          0          1
--------------+--------------------------------------------------------
-     ng27rss |     11026    .6372211    1.121421          0          4
-   ng27rsssd |     11026     .273626    .4458395          0          1
-     ng28rss |     11026    .6208961    .9961079          0          4
-   ng28rsssd |     11023    .3163386    .4650678          0          1
-     ng29rss |     11026    .8328496    1.299885          0          4
--------------+--------------------------------------------------------
-   ng29rsssd |     11026    .3091783    .4621758          0          1
-     ng30rss |      5860    .8109215    1.092614          0          4
-   ng30rsssd |      5860    .4414676    .4966045          0          1
-       ng12r |     14278    1.119975    .7647356          0          4
-     ng16ral |     11025    1.056961    1.185461          0          4
--------------+--------------------------------------------------------
-     ng17ral |     11026    .7827861    .8938577          0          4
-     ng18ral |     11026     1.28723    1.136863          0          4
-     ng19ral |     11026    .7410666    1.097337          0          4
-     ng20ral |     11026     .568021    .9385416          0          4
-     ng21ral |     11026    .6169962    1.143237          0          4
--------------+--------------------------------------------------------
-     ng22ral |     11026    .8241429    1.016954          0          4
-     ng23ral |     11026    .2901324    .7561009          0          4
-     ng24ral |     11026      1.4922    1.094775          0          4
-     ng25ral |     11026    .6329585    1.059567          0          4
-     ng26ral |     11026    .5409033    .9809086          0          4
--------------+--------------------------------------------------------
-     ng27ral |     11026    .6261564    1.055512          0          4
-     ng28ral |     11026    .6010339    .8761878          0          4
-     ng29ral |     11026    .9149284     1.30202          0          4
-     ng30ral |      5860    .8179181    1.013707          0          4
-       ng13r |     14279    .6520064    .5142472          0          4
--------------+--------------------------------------------------------
-     ng16rcp |     11026    .2231997    .5495581          0          4
-     ng17rcp |     11026    .1507346    .4163854          0          4
-     ng18rcp |     11026    .3196082     .583033          0          4
-     ng19rcp |     11026    .1353165    .4459043          0          4
-     ng20rcp |     11026    .2500453    .4941036          0          4
--------------+--------------------------------------------------------
-     ng21rcp |     11026     .081988    .3852005          0          4
-     ng22rcp |     11026    .1525485    .4267064          0          4
-     ng23rcp |     11026    .0150553     .160357          0          4
-     ng24rcp |     11026    .3153455    .6857502          0          4
-     ng25rcp |     11026    .0730093    .3407645          0          4
--------------+--------------------------------------------------------
-     ng26rcp |     11026    .0597678    .2818168          0          4
-     ng27rcp |     11026    .1140033    .3997389          0          4
-     ng28rcp |     11026    .0945946    .3362239          0          4
-     ng29rcp |     11026    .1202612    .4544099          0          4
-       ng14r |      8418    .1520551    .3784264          0          2
--------------+--------------------------------------------------------
-     ng16rev |      5166    .0497484    .2859114          0          3
-     ng17rev |      5166    .0195509    .1543342          0          2
-     ng18rev |      5166    .0555556    .2974742          0          3
-     ng19rev |      5166    .0305846    .1993055          0          2
-     ng20rev |      5166    .0365854    .2182769          0          2
--------------+--------------------------------------------------------
-     ng21rev |      5166    .0079365    .0950616          0          2
-     ng22rev |      5166    .0323268    .1768835          0          1
-     ng23rev |      5166     .004065    .0636341          0          1
-     ng24rev |      5166    .0423926     .233545          0          2
-     ng25rev |      5166    .0216802    .1456513          0          1
--------------+--------------------------------------------------------
-     ng26rev |      5166    .0065815    .0808668          0          1
-     ng27rev |      5166    .0278746    .1646293          0          1
-     ng28rev |      5166    .0261324    .1853659          0          2
-     ng29rev |      5166     .039489    .2588022          0          3
-       ng15r |     14278    .8875193    .8966077          0          4
--------------+--------------------------------------------------------
-     ng15rsd |     14277    .4292919    .4949924          0          1
-     ng16rfr |     11025    .8773696    1.254173          0          4
-   ng16rfrsd |     11025    .3733333    .4837115          0          1
-     ng17rfr |     11025    .5393197    1.039374          0          4
-   ng17rfrsd |     11025    .2273923     .419167          0          1
--------------+--------------------------------------------------------
-     ng18rfr |     11025    .9580952    1.228688          0          4
-   ng18rfrsd |     11025    .4054422    .4909997          0          1
-     ng19rfr |     11025    .5586395    1.063664          0          4
-   ng19rfrsd |     11025    .2712018    .4446002          0          1
-     ng20rfr |     11025     .477551    1.048302          0          4
--------------+--------------------------------------------------------
-   ng20rfrsd |     11025    .1805896    .3846952          0          1
-     ng21rfr |     11025    .5640816    1.165348          0          4
-   ng21rfrsd |     11025    .2012698    .4009674          0          1
-     ng22rfr |     11025    .6664853    1.096102          0          4
-   ng22rfrsd |     11025    .3512018    .4773675          0          1
--------------+--------------------------------------------------------
-     ng23rfr |     11025    .2819955    .9065695          0          4
-   ng23rfrsd |     11025     .107483    .3097404          0          1
-     ng24rfr |     11025    .9689796    1.223981          0          4
-   ng24rfrsd |     11025    .4010884    .4901411          0          1
-     ng25rfr |     11025    .5430385    1.107839          0          4
--------------+--------------------------------------------------------
-   ng25rfrsd |     11025    .2428118    .4288017          0          1
-     ng26rfr |     11025    .4869841    1.060078          0          4
-   ng26rfrsd |     11025     .186576    .3895884          0          1
-     ng27rfr |     11025    .4973243    1.050182          0          4
-   ng27rfrsd |     11025    .2316553    .4219091          0          1
--------------+--------------------------------------------------------
-     ng28rfr |     11025    .5095692    .9930473          0          4
-   ng28rfrsd |     11025    .2654875    .4416125          0          1
-     ng29rfr |     11025    .7239002    1.269319          0          4
-   ng29rfrsd |     11025    .2788209    .4484395          0          1
-        pe1r |     14278    .8872391    .3163114          0          1
--------------+--------------------------------------------------------
-        pe2r |     14278    1.154924    .8331116          0          2
-        pe3r |      4933    .3606325    .5561415          0          2
-        pe4r |      4867    .3032669      .51055          0          2
-        pe5r |      4478    .2067887    .4558981          0          2
-        pe6r |     14278    1.307956     .910159          0          2
--------------+--------------------------------------------------------
-        pe7r |     14278    .9679227    .9620999          0          2
-        pe8r |      4478    .4294328     .806939          0          2
-        pe9r |     14278    .1460989    .4730784          0          2
-       pe10r |     14278    .1936546    .4461273          0          2
-       pe11r |     14278    .3522202    .6694111          0          2
--------------+--------------------------------------------------------
-       pe12r |     14278    .4801093     .657277          0          2
-       pe13r |     14278    .6624877    .8972782          0          2
-       pe14r |     14278    .3340104    .7098554          0          2
-       pe15r |     14278    .1339123    .4806226          0          2
-       pe16r |     14278    .3775039    .5065415          0          2
--------------+--------------------------------------------------------
-       pe17r |      5860    .0005119    .0226223          0          1
-        pa1r |     14278    1.788696     .591048          0          2
-        pa2r |     14278    1.061423    .8552575          0          2
-        pa3r |     11026     .152095     .491371          0          2
-       pa3br |       631    .9096672    .2868854          0          1
--------------+--------------------------------------------------------
-       pa3cr |       300    .9566667    .2039466          0          1
-        pa4r |     14278    .6393753    .6895361          0          2
-        pa5r |     14278    .4242891     .746013          0          2
-        pa6r |     14278    .2279731    .5812163          0          2
-        pa7r |     14278    .4891441    .7768367          0          2
--------------+--------------------------------------------------------
-        pa8r |      4933    .5603081     .800105          0          2
-        pa9r |      3814     .286838    .6033822          0          2
-       pa10r |      5860    .1967577    .5252034          0          2
-        st1r |     14278    .2712565    .5585696          0          2
-        st2r |     14278    .3754728    .6514025          0          2
--------------+--------------------------------------------------------
-        st3r |     14278    .5875473    .8509444          0          2
-        cp1r |     14278     .794439    .8622128          0          2
-        cp2r |     14278    .5899286     .791318          0          2
-        cp3r |     14278    .6542933    .8779075          0          2
-        cp4r |      5860    .6035836    .7801651          0          2
--------------+--------------------------------------------------------
-        cp5r |      5860    .3250853    .6500374          0          2
-        mp1r |     14278    .4398375    .8119295          0          2
-        mp2r |     14282    .3250945    .5694893          0          2
-        mp3r |     14278    .3432554    .6932117          0          2
-         e1r |     14278    1.647219    .7346784          0          2
--------------+--------------------------------------------------------
-         e2r |     14278    1.614722    .7566374          0          2
-         e3r |     14278    1.072559    .9476317          0          2
-     e4r_new |     14279    .4307024    .7719873          0          4
-         e5r |     14278      .68525    .6603423          0          2
-         e6r |     14278    .8805155      .86345          0          2
--------------+--------------------------------------------------------
-         e7r |     14278     .059182    .2607889          0          2
-         e8r |     14278    .7341364    .9015712          0          2
-        e12r |     14278    .0282252    .2342803          0          2
-         r1r |      7720    .0419689    .2812079          0          2
-         r2r |      7720    .1915803    .5316334          0          2
--------------+--------------------------------------------------------
-         r3r |      7720    .0143782    .1654917          0          2
-         r4r |      7720    .4001295    .7870075          0          2
-         r5r |      7720    1.073834    .9879383          0          2
-         r6r |      7720    .0524611    .3178323          0          2
-         r7r |      7720    .1002591    .4283634          0          2
--------------+--------------------------------------------------------
-         r8r |      7720    .0977979    .4171419          0          2
-         r9r |      7720    1.084326    .9834822          0          2
-        r10r |      7717    .1082027    .4453915          0          2
-        r11r |      7717    .3681482    .7433035          0          2
-        r12r |      7720    .1761658    .5216413          0          2
--------------+--------------------------------------------------------
-        r13r |      7720    .1367876    .4863138          0          2
-        r14r |      7720    .1426166    .5020981          0          2
-        r15r |      7720    .0527202    .3027582          0          2
-        r16r |      7720    .3106218    .6801775          0          2
-      region |     15327     2.55001    1.032154          1          4
--------------+--------------------------------------------------------
- locale_4grp |     15306    2.414347    .9780408          1          4
-free_redl~66 |     14775    .1843655    .3877951          0          1
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+          id |     15,327    4.98e+08    2.89e+08     630550   9.99e+08
+  gradelevel |          0
+        year |     15,327    4.727735    2.295631          1          8
+gradelevel~c |     15,327           2    .8165232          1          3
+         yr1 |     15,327    .3051478     .460485          0          1
+-------------+---------------------------------------------------------
+         yr2 |     15,327    .3266784    .4690138          0          1
+         yr3 |     15,327    .3047563    .4603192          0          1
+         yr4 |     15,327    .2759836    .4470231          0          1
+         yr5 |     15,327    .3133686    .4638779          0          1
+         yr6 |     15,327    .3924447    .4883108          0          1
+-------------+---------------------------------------------------------
+         yr7 |     15,327    .3945978    .4887801          0          1
+         yr8 |     15,327    .3358779    .4723118          0          1
+          es |     15,327    .3333333    .4714199          0          1
+          ms |     15,327    .3333333    .4714199          0          1
+          hs |     15,327    .3333333    .4714199          0          1
+-------------+---------------------------------------------------------
+      dist_3 |     15,327    .9530241    .2115942          0          1
+      dist_8 |     15,327     .939127     .239105          0          1
+     dist_10 |     15,327    .8623997    .3444912          0          1
+     dist_12 |     15,327    .8537874    .3533307          0          1
+ distnrwgt_d |     15,327    20.30723    25.10149   .1221354   656.4536
+-------------+---------------------------------------------------------
+     stratum |     15,321     113.999    104.0961          1        335
+    psu_deid |     15,321    4.95e+08    2.83e+08    1991682   9.99e+08
+       d_fpc |     15,321    .0501748    .1262546          0          1
+        ne1r |     14,277    1.838061    .5230467          0          2
+        ne2r |     14,277    1.159417    .7612593          0          2
+-------------+---------------------------------------------------------
+        ne3r |     11,025    .1345125     .362612          0          2
+        ne4r |     14,277    .4774112    .6628245          0          2
+        ne5r |     14,277    .8136163    .8809427          0          2
+        ne6r |     14,277    1.307137     .824983          0          2
+        ne7r |     14,277    .0617777    .2752406          0          2
+-------------+---------------------------------------------------------
+        us1r |     14,277    1.734608    .6664849          0          2
+        us2r |     14,277    1.193598     .891057          0          2
+        us3r |     14,277    .9841003     .848886          0          2
+        us4r |     14,277    .2955103    .5696294          0          2
+        us5r |     14,277    .6661063    .7249762          0          2
+-------------+---------------------------------------------------------
+       us5ar |     11,025    .0572336    .2817124          0          2
+        us6r |      3,814     .260881    .4915823          0          2
+        us7r |     14,278    .7135453    .6629299          0          2
+        us8r |     14,278    .4364057    .6428336          0          2
+        us9r |     14,278    .3471074    .6895154          0          2
+-------------+---------------------------------------------------------
+       us10r |     14,278     .086987    .3202185          0          2
+       us11r |      9,422    .9073445    .9605371          0          2
+       us12r |      9,422    .8364466     .977779          0          2
+       us13r |      9,422     .175865    .5536297          0          2
+       us14r |      5,860    .2665529    .6658526          0          2
+-------------+---------------------------------------------------------
+       us15r |      4,006     .040689    .2810573          0          2
+        ng1r |     14,278    1.506373    .6529506          0          2
+        ng2r |     14,278    .0718588     .294503          0          2
+      ng2rsd |     14,278    .0342485    .1818732          0          1
+        ng3r |     14,278    .4421488    .7911269          0          2
+-------------+---------------------------------------------------------
+      ng3rsd |     14,278     .042513    .2017634          0          1
+        ng4r |     11,026     .004172    .0672141          0          2
+      ng4rsd |     11,026    .0001814    .0134675          0          1
+        ng5r |     11,026    .0102485    .1173563          0          2
+      ng5rsd |     11,026    .0003628    .0190442          0          1
+-------------+---------------------------------------------------------
+        ng6r |     14,278    .6474996    .6172139          0          2
+        ng7r |     14,278    .4681328    .6760391          0          2
+        ng8r |     14,278    .1430172    .4796013          0          2
+        ng9r |     14,278    .2373582    .6294467          0          2
+       ng10r |     14,278     1.20339    .9379187          0          4
+-------------+---------------------------------------------------------
+     ng10rsd |     14,278    .5040622     .500001          0          1
+     ng16rvm |     11,026    1.280972    1.365847          0          4
+   ng16rvmsd |     11,026     .432251    .4954113          0          1
+     ng17rvm |     11,026    .7749864    1.216692          0          4
+   ng17rvmsd |     11,026    .2799746    .4490068          0          1
+-------------+---------------------------------------------------------
+     ng18rvm |     11,026    1.459278    1.290756          0          4
+   ng18rvmsd |     11,026    .4853981    .4998094          0          1
+     ng19rvm |     11,026    .9207328    1.330975          0          4
+   ng19rvmsd |     11,026    .3235988    .4678701          0          1
+     ng20rvm |     11,026    .7891348    1.230627          0          4
+-------------+---------------------------------------------------------
+   ng20rvmsd |     11,026    .2238346    .4168314          0          1
+     ng21rvm |     11,026    .8746599    1.385142          0          4
+   ng21rvmsd |     11,026    .2479594    .4318477          0          1
+     ng22rvm |     11,026    .9970978    1.214945          0          4
+   ng22rvmsd |     11,026    .4424995    .4967052          0          1
+-------------+---------------------------------------------------------
+     ng23rvm |     11,026      .46998    1.078698          0          4
+   ng23rvmsd |     11,026    .1750408    .3800192          0          1
+     ng24rvm |     11,026    1.413296    1.263247          0          4
+   ng24rvmsd |     11,026    .5094323    .4999337          0          1
+     ng25rvm |     11,026    .8011065    1.277498          0          4
+-------------+---------------------------------------------------------
+   ng25rvmsd |     11,026    .3012879    .4588383          0          1
+     ng26rvm |     11,026    .6653365    1.192763          0          4
+   ng26rvmsd |     11,026    .2301832    .4209691          0          1
+     ng27rvm |     11,026    .7836931    1.238941          0          4
+   ng27rvmsd |     11,026    .2923091    .4548442          0          1
+-------------+---------------------------------------------------------
+     ng28rvm |     11,026    .7601125    1.121729          0          4
+   ng28rvmsd |     11,026    .3329403    .4712868          0          1
+     ng29rvm |     11,026    .9995465    1.406851          0          4
+     ng30rvm |      5,860    .9967577    1.205533          0          4
+   ng30rvmsd |      5,860    .4554608    .4980548          0          1
+-------------+---------------------------------------------------------
+   ng29rvmsd |     11,026    .3255034    .4685839          0          1
+       ng11r |     14,278    1.024373    .9135619          0          4
+     ng11rsd |     14,278     .470444    .4991432          0          1
+     ng16rss |     11,026    1.085616    1.272531          0          4
+   ng16rsssd |     11,026    .4177399    .4932092          0          1
+-------------+---------------------------------------------------------
+     ng17rss |     11,026    .5998549    1.035889          0          4
+   ng17rsssd |     11,026    .2593869    .4383181          0          1
+     ng18rss |     11,026    1.253673    1.220961          0          4
+   ng18rsssd |     11,026    .4755124    .4994226          0          1
+     ng19rss |     11,026    .7380736    1.183697          0          4
+-------------+---------------------------------------------------------
+   ng19rsssd |     11,026    .3086341    .4619507          0          1
+     ng20rss |     11,026    .6159985     1.06019          0          4
+   ng20rsssd |     11,026    .2105931    .4077484          0          1
+     ng21rss |     11,026    .6753129    1.238301          0          4
+   ng21rsssd |     11,026    .2206603    .4147106          0          1
+-------------+---------------------------------------------------------
+     ng22rss |     11,026    .8205151       1.105          0          4
+   ng22rsssd |     11,026     .424542    .4942957          0          1
+     ng23rss |     11,026    .3633231    .9277055          0          4
+   ng23rsssd |     11,026    .1642481    .3705174          0          1
+     ng24rss |     11,026    1.188464     1.22374          0          4
+-------------+---------------------------------------------------------
+   ng24rsssd |     11,026    .4658988    .4988584          0          1
+     ng25rss |     11,026      .63577    1.140842          0          4
+   ng25rsssd |     11,026    .2794304    .4487397          0          1
+     ng26rss |     11,026    .5427172    1.067873          0          4
+   ng26rsssd |     11,026    .2154907    .4111809          0          1
+-------------+---------------------------------------------------------
+     ng27rss |     11,026    .6372211    1.121421          0          4
+   ng27rsssd |     11,026     .273626    .4458395          0          1
+     ng28rss |     11,026    .6208961    .9961079          0          4
+   ng28rsssd |     11,023    .3163386    .4650678          0          1
+     ng29rss |     11,026    .8328496    1.299885          0          4
+-------------+---------------------------------------------------------
+   ng29rsssd |     11,026    .3091783    .4621758          0          1
+     ng30rss |      5,860    .8109215    1.092614          0          4
+   ng30rsssd |      5,860    .4414676    .4966045          0          1
+       ng12r |     14,278    1.119975    .7647356          0          4
+     ng16ral |     11,025    1.056961    1.185461          0          4
+-------------+---------------------------------------------------------
+     ng17ral |     11,026    .7827861    .8938577          0          4
+     ng18ral |     11,026     1.28723    1.136863          0          4
+     ng19ral |     11,026    .7410666    1.097337          0          4
+     ng20ral |     11,026     .568021    .9385416          0          4
+     ng21ral |     11,026    .6169962    1.143237          0          4
+-------------+---------------------------------------------------------
+     ng22ral |     11,026    .8241429    1.016954          0          4
+     ng23ral |     11,026    .2901324    .7561009          0          4
+     ng24ral |     11,026      1.4922    1.094775          0          4
+     ng25ral |     11,026    .6329585    1.059567          0          4
+     ng26ral |     11,026    .5409033    .9809086          0          4
+-------------+---------------------------------------------------------
+     ng27ral |     11,026    .6261564    1.055512          0          4
+     ng28ral |     11,026    .6010339    .8761878          0          4
+     ng29ral |     11,026    .9149284     1.30202          0          4
+     ng30ral |      5,860    .8179181    1.013707          0          4
+       ng13r |     14,279    .6520064    .5142472          0          4
+-------------+---------------------------------------------------------
+     ng16rcp |     11,026    .2231997    .5495581          0          4
+     ng17rcp |     11,026    .1507346    .4163854          0          4
+     ng18rcp |     11,026    .3196082     .583033          0          4
+     ng19rcp |     11,026    .1353165    .4459043          0          4
+     ng20rcp |     11,026    .2500453    .4941036          0          4
+-------------+---------------------------------------------------------
+     ng21rcp |     11,026     .081988    .3852005          0          4
+     ng22rcp |     11,026    .1525485    .4267064          0          4
+     ng23rcp |     11,026    .0150553     .160357          0          4
+     ng24rcp |     11,026    .3153455    .6857502          0          4
+     ng25rcp |     11,026    .0730093    .3407645          0          4
+-------------+---------------------------------------------------------
+     ng26rcp |     11,026    .0597678    .2818168          0          4
+     ng27rcp |     11,026    .1140033    .3997389          0          4
+     ng28rcp |     11,026    .0945946    .3362239          0          4
+     ng29rcp |     11,026    .1202612    .4544099          0          4
+       ng14r |      8,418    .1520551    .3784264          0          2
+-------------+---------------------------------------------------------
+     ng16rev |      5,166    .0497484    .2859114          0          3
+     ng17rev |      5,166    .0195509    .1543342          0          2
+     ng18rev |      5,166    .0555556    .2974742          0          3
+     ng19rev |      5,166    .0305846    .1993055          0          2
+     ng20rev |      5,166    .0365854    .2182769          0          2
+-------------+---------------------------------------------------------
+     ng21rev |      5,166    .0079365    .0950616          0          2
+     ng22rev |      5,166    .0323268    .1768835          0          1
+     ng23rev |      5,166     .004065    .0636341          0          1
+     ng24rev |      5,166    .0423926     .233545          0          2
+     ng25rev |      5,166    .0216802    .1456513          0          1
+-------------+---------------------------------------------------------
+     ng26rev |      5,166    .0065815    .0808668          0          1
+     ng27rev |      5,166    .0278746    .1646293          0          1
+     ng28rev |      5,166    .0261324    .1853659          0          2
+     ng29rev |      5,166     .039489    .2588022          0          3
+       ng15r |     14,278    .8875193    .8966077          0          4
+-------------+---------------------------------------------------------
+     ng15rsd |     14,277    .4292919    .4949924          0          1
+     ng16rfr |     11,025    .8773696    1.254173          0          4
+   ng16rfrsd |     11,025    .3733333    .4837115          0          1
+     ng17rfr |     11,025    .5393197    1.039374          0          4
+   ng17rfrsd |     11,025    .2273923     .419167          0          1
+-------------+---------------------------------------------------------
+     ng18rfr |     11,025    .9580952    1.228688          0          4
+   ng18rfrsd |     11,025    .4054422    .4909997          0          1
+     ng19rfr |     11,025    .5586395    1.063664          0          4
+   ng19rfrsd |     11,025    .2712018    .4446002          0          1
+     ng20rfr |     11,025     .477551    1.048302          0          4
+-------------+---------------------------------------------------------
+   ng20rfrsd |     11,025    .1805896    .3846952          0          1
+     ng21rfr |     11,025    .5640816    1.165348          0          4
+   ng21rfrsd |     11,025    .2012698    .4009674          0          1
+     ng22rfr |     11,025    .6664853    1.096102          0          4
+   ng22rfrsd |     11,025    .3512018    .4773675          0          1
+-------------+---------------------------------------------------------
+     ng23rfr |     11,025    .2819955    .9065695          0          4
+   ng23rfrsd |     11,025     .107483    .3097404          0          1
+     ng24rfr |     11,025    .9689796    1.223981          0          4
+   ng24rfrsd |     11,025    .4010884    .4901411          0          1
+     ng25rfr |     11,025    .5430385    1.107839          0          4
+-------------+---------------------------------------------------------
+   ng25rfrsd |     11,025    .2428118    .4288017          0          1
+     ng26rfr |     11,025    .4869841    1.060078          0          4
+   ng26rfrsd |     11,025     .186576    .3895884          0          1
+     ng27rfr |     11,025    .4973243    1.050182          0          4
+   ng27rfrsd |     11,025    .2316553    .4219091          0          1
+-------------+---------------------------------------------------------
+     ng28rfr |     11,025    .5095692    .9930473          0          4
+   ng28rfrsd |     11,025    .2654875    .4416125          0          1
+     ng29rfr |     11,025    .7239002    1.269319          0          4
+   ng29rfrsd |     11,025    .2788209    .4484395          0          1
+        pe1r |     14,278    .8872391    .3163114          0          1
+-------------+---------------------------------------------------------
+        pe2r |     14,278    1.154924    .8331116          0          2
+        pe3r |      4,933    .3606325    .5561415          0          2
+        pe4r |      4,867    .3032669      .51055          0          2
+        pe5r |      4,478    .2067887    .4558981          0          2
+        pe6r |     14,278    1.307956     .910159          0          2
+-------------+---------------------------------------------------------
+        pe7r |     14,278    .9679227    .9620999          0          2
+        pe8r |      4,478    .4294328     .806939          0          2
+        pe9r |     14,278    .1460989    .4730784          0          2
+       pe10r |     14,278    .1936546    .4461273          0          2
+       pe11r |     14,278    .3522202    .6694111          0          2
+-------------+---------------------------------------------------------
+       pe12r |     14,278    .4801093     .657277          0          2
+       pe13r |     14,278    .6624877    .8972782          0          2
+       pe14r |     14,278    .3340104    .7098554          0          2
+       pe15r |     14,278    .1339123    .4806226          0          2
+       pe16r |     14,278    .3775039    .5065415          0          2
+-------------+---------------------------------------------------------
+       pe17r |      5,860    .0005119    .0226223          0          1
+        pa1r |     14,278    1.788696     .591048          0          2
+        pa2r |     14,278    1.061423    .8552575          0          2
+        pa3r |     11,026     .152095     .491371          0          2
+       pa3br |        631    .9096672    .2868854          0          1
+-------------+---------------------------------------------------------
+       pa3cr |        300    .9566667    .2039466          0          1
+        pa4r |     14,278    .6393753    .6895361          0          2
+        pa5r |     14,278    .4242891     .746013          0          2
+        pa6r |     14,278    .2279731    .5812163          0          2
+        pa7r |     14,278    .4891441    .7768367          0          2
+-------------+---------------------------------------------------------
+        pa8r |      4,933    .5603081     .800105          0          2
+        pa9r |      3,814     .286838    .6033822          0          2
+       pa10r |      5,860    .1967577    .5252034          0          2
+        st1r |     14,278    .2712565    .5585696          0          2
+        st2r |     14,278    .3754728    .6514025          0          2
+-------------+---------------------------------------------------------
+        st3r |     14,278    .5875473    .8509444          0          2
+        cp1r |     14,278     .794439    .8622128          0          2
+        cp2r |     14,278    .5899286     .791318          0          2
+        cp3r |     14,278    .6542933    .8779075          0          2
+        cp4r |      5,860    .6035836    .7801651          0          2
+-------------+---------------------------------------------------------
+        cp5r |      5,860    .3250853    .6500374          0          2
+        mp1r |     14,278    .4398375    .8119295          0          2
+        mp2r |     14,282    .3250945    .5694893          0          2
+        mp3r |     14,278    .3432554    .6932117          0          2
+         e1r |     14,278    1.647219    .7346784          0          2
+-------------+---------------------------------------------------------
+         e2r |     14,278    1.614722    .7566374          0          2
+         e3r |     14,278    1.072559    .9476317          0          2
+     e4r_new |     14,279    .4307024    .7719873          0          4
+         e5r |     14,278      .68525    .6603423          0          2
+         e6r |     14,278    .8805155      .86345          0          2
+-------------+---------------------------------------------------------
+         e7r |     14,278     .059182    .2607889          0          2
+         e8r |     14,278    .7341364    .9015712          0          2
+        e12r |     14,278    .0282252    .2342803          0          2
+         r1r |      7,720    .0419689    .2812079          0          2
+         r2r |      7,720    .1915803    .5316334          0          2
+-------------+---------------------------------------------------------
+         r3r |      7,720    .0143782    .1654917          0          2
+         r4r |      7,720    .4001295    .7870075          0          2
+         r5r |      7,720    1.073834    .9879383          0          2
+         r6r |      7,720    .0524611    .3178323          0          2
+         r7r |      7,720    .1002591    .4283634          0          2
+-------------+---------------------------------------------------------
+         r8r |      7,720    .0977979    .4171419          0          2
+         r9r |      7,720    1.084326    .9834822          0          2
+        r10r |      7,717    .1082027    .4453915          0          2
+        r11r |      7,717    .3681482    .7433035          0          2
+        r12r |      7,720    .1761658    .5216413          0          2
+-------------+---------------------------------------------------------
+        r13r |      7,720    .1367876    .4863138          0          2
+        r14r |      7,720    .1426166    .5020981          0          2
+        r15r |      7,720    .0527202    .3027582          0          2
+        r16r |      7,720    .3106218    .6801775          0          2
+      region |     15,327     2.55001    1.032154          1          4
+-------------+---------------------------------------------------------
+ locale_4grp |     15,306    2.414347    .9780408          1          4
+free_redl~66 |     14,775    .1843655    .3877951          0          1
 
 
 
 
-file C:\Users\Samuele/Google Drive/research projects/obesity/derived/bridging_the_gap/school_district/btg_school_district.dta saved
+file C:\Users\sgiambra/Google Drive/research projects/obesity/derived/bridging_the_gap/school_district/btg_school_district.dta saved
 
 . 
 end of do-file
 
- make.py ended: 2017-11-26 22:38:45
+ make.py ended: 2017-11-27 12:19:25

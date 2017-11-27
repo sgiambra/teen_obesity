@@ -10,6 +10,11 @@ from gslab_make.make_links import *
 from gslab_make.make_link_logs import *
 from gslab_make.run_program import *
 
+sys.path.append('../../../lib/python/obesity')
+from modify_input_params import *
+
+modify_input_params()
+
 stata_exe = os.environ.get('STATAEXE')
 if stata_exe:
     import copy
