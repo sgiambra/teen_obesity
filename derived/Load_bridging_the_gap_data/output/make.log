@@ -1,5 +1,5 @@
 
- make.py started: 2017-11-10 10:55:45 C:\Users\Samuele\Documents\GitHub\teen_obesity\derived\Load_bridging_the_gap_data\code 
+ make.py started: 2017-11-26 22:38:31 C:\Users\Samuele\Documents\GitHub\teen_obesity\derived\Load_bridging_the_gap_data\code 
 
 
 
@@ -2345,7 +2345,7 @@ mountain was int now byte
 pacific was int now byte
 division was int now byte
 ==================================================================================================
-File: C:/Users/Samuele/Google Drive/research projects/obesity/derived/bridging_the_gap/state/btg_state.dta
+File: C:\Users\Samuele/Google Drive/research projects/obesity/derived/bridging_the_gap/state/btg_state.dta
 Key: fipstnum gradelevel year
 ==================================================================================================
   1224:275(55219):1427932164:1202683710
@@ -2685,7 +2685,7 @@ gradelevel~c |      1224           2    .8168303          1          3
 
 
 
-file C:/Users/Samuele/Google Drive/research projects/obesity/derived/bridging_the_gap/state/btg_state.dta saved
+file C:\Users\Samuele/Google Drive/research projects/obesity/derived/bridging_the_gap/state/btg_state.dta saved
 
 . 
 end of do-file
@@ -6337,7 +6337,7 @@ delimiter now cr
 . save_data "`derived_dir'/btg_school_district.dta", key(id gradelevel year) replace nopreserve
 (data now sorted by id gradelevel year)
 ==================================================================================================
-File: C:/Users/Samuele/Google Drive/research projects/obesity/derived/bridging_the_gap/school_district/btg_school_district.dta
+File: C:\Users\Samuele/Google Drive/research projects/obesity/derived/bridging_the_gap/school_district/btg_school_district.dta
 Key: id gradelevel year
 ==================================================================================================
   15327:267(40703):904881352:3510707951
@@ -6668,9 +6668,9 @@ free_redl~66 |     14775    .1843655    .3877951          0          1
 
 
 
-file C:/Users/Samuele/Google Drive/research projects/obesity/derived/bridging_the_gap/school_district/btg_school_district.dta saved
+file C:\Users\Samuele/Google Drive/research projects/obesity/derived/bridging_the_gap/school_district/btg_school_district.dta saved
 
 . 
 end of do-file
 
- make.py ended: 2017-11-10 10:55:54
+ make.py ended: 2017-11-26 22:38:45
