@@ -1,5 +1,5 @@
 
- make.py started: 2017-11-27 12:19:15 C:\Users\sgiambra\Documents\GitHub\teen_obesity\derived\Load_bridging_the_gap_data\code 
+ make.py started: 2017-11-27 12:38:55 C:\Users\sgiambra\Documents\GitHub\teen_obesity\derived\Load_bridging_the_gap_data\code 
 
 
 
@@ -54,7 +54,7 @@ Notes:
 . 
 . local raw_data_dir = "${GoogleDrive}/raw_data/bridging_the_gap/state/data"
 
-. local derived_dir  = "${GoogleDrive}/derived/bridging_the_gap/state"
+. local base_dir     = "${GoogleDrive}/base/bridging_the_gap/state"
 
 . 
 . /*
@@ -2069,7 +2069,7 @@ delimiter now ;
 . #delimit cr
 delimiter now cr
 . 
-. save_data "`derived_dir'/btg_state.dta", key(fipstnum gradelevel year) replace nopreserve
+. save_data "`base_dir'/btg_state.dta", key(fipstnum gradelevel year) replace nopreserve
 (data now sorted by fipstnum gradelevel year)
   variable fipstnum was int now byte
   variable year was int now byte
@@ -2344,7 +2344,7 @@ delimiter now cr
   variable division was int now byte
   (331,704 bytes saved)
 ==================================================================================================
-File: C:\Users\sgiambra/Google Drive/research projects/obesity/derived/bridging_the_gap/state/btg_state.dta
+File: C:\Users\sgiambra/Google Drive/research projects/obesity/base/bridging_the_gap/state/btg_state.dta
 Key: fipstnum gradelevel year
 ==================================================================================================
   1224:275(55219):1427932164:1202683710
@@ -2684,7 +2684,7 @@ gradelevel~c |      1,224           2    .8168303          1          3
 
 
 
-file C:\Users\sgiambra/Google Drive/research projects/obesity/derived/bridging_the_gap/state/btg_state.dta saved
+file C:\Users\sgiambra/Google Drive/research projects/obesity/base/bridging_the_gap/state/btg_state.dta saved
 
 . 
 end of do-file
@@ -2740,7 +2740,7 @@ Notes:
 . 
 . local raw_data_dir = "${GoogleDrive}/raw_data/bridging_the_gap/school_district/data"
 
-. local derived_dir  = "${GoogleDrive}/derived/bridging_the_gap/school_district"
+. local base_dir     = "${GoogleDrive}/base/bridging_the_gap/school_district"
 
 . 
 . /*
@@ -6331,11 +6331,11 @@ delimiter now ;
 . #delimit cr
 delimiter now cr
 . 
-. save_data "`derived_dir'/btg_school_district.dta", key(id gradelevel year) replace nopreserve
+. save_data "`base_dir'/btg_school_district.dta", key(id gradelevel year) replace nopreserve
 (data now sorted by id gradelevel year)
   (0 bytes saved)
 ==================================================================================================
-File: C:\Users\sgiambra/Google Drive/research projects/obesity/derived/bridging_the_gap/school_district/btg_school_district.dta
+File: C:\Users\sgiambra/Google Drive/research projects/obesity/base/bridging_the_gap/school_district/btg_school_district.dta
 Key: id gradelevel year
 ==================================================================================================
   15327:267(40703):904881352:3510707951
@@ -6666,9 +6666,9 @@ free_redl~66 |     14,775    .1843655    .3877951          0          1
 
 
 
-file C:\Users\sgiambra/Google Drive/research projects/obesity/derived/bridging_the_gap/school_district/btg_school_district.dta saved
+file C:\Users\sgiambra/Google Drive/research projects/obesity/base/bridging_the_gap/school_district/btg_school_district.dta saved
 
 . 
 end of do-file
 
- make.py ended: 2017-11-27 12:19:25
+ make.py ended: 2017-11-27 12:39:04

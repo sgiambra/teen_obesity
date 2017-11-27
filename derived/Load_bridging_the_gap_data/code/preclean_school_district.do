@@ -4,7 +4,7 @@ adopath + ../../../lib/third_party/stata_tools
 preliminaries, loadglob("../../../lib/python/obesity/input_params.txt")
 
 local raw_data_dir = "${GoogleDrive}/raw_data/bridging_the_gap/school_district/data"
-local derived_dir  = "${GoogleDrive}/derived/bridging_the_gap/school_district"
+local base_dir     = "${GoogleDrive}/base/bridging_the_gap/school_district"
 
 /*
                      Stata Setup (Do File) for ICPSR 36528
@@ -2809,4 +2809,4 @@ infile using "`raw_data_dir'/36528-0001-Setup.dct", using("`raw_data_dir'/36528-
 
 #delimit cr
 
-save_data "`derived_dir'/btg_school_district.dta", key(id gradelevel year) replace nopreserve
+save_data "`base_dir'/btg_school_district.dta", key(id gradelevel year) replace nopreserve

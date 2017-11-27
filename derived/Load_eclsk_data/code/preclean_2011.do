@@ -5,7 +5,7 @@ preliminaries, loadglob("../../../lib/python/obesity/input_params.txt")
 
 * The path raw_data_dir MUST be changed in dictionary_2011.dct
 local raw_data_dir = "${GoogleDrive}/raw_data/eclsk/ChildK2p"
-local derived_dir  = "${GoogleDrive}/derived/eclsk/2011"
+local base_dir     = "${GoogleDrive}/base/eclsk/2011"
 
 set maxvar 30000
 clear
@@ -27722,4 +27722,4 @@ keep if  (X1PUBPRI == 1 |
    label values Z2WTCHTV Z2WTCHTV;
    label values Z2WTCHVD Z2WTCHVD;
 
-save "`derived_dir'/eclsk_2011_master.dta", replace;
+save "`base_dir'/eclsk_2011_master.dta", replace;

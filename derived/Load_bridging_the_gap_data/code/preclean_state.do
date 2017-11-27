@@ -4,7 +4,7 @@ adopath + ../../../lib/third_party/stata_tools
 preliminaries, loadglob("../../../lib/python/obesity/input_params.txt")
 
 local raw_data_dir = "${GoogleDrive}/raw_data/bridging_the_gap/state/data"
-local derived_dir  = "${GoogleDrive}/derived/bridging_the_gap/state"
+local base_dir     = "${GoogleDrive}/base/bridging_the_gap/state"
 
 /*
                      Stata Setup (Do File) for ICPSR 36527
@@ -1202,4 +1202,4 @@ label define division  1 "New England (1)" 2 "Middle Atlantic (2)"
 
 #delimit cr
 
-save_data "`derived_dir'/btg_state.dta", key(fipstnum gradelevel year) replace nopreserve
+save_data "`base_dir'/btg_state.dta", key(fipstnum gradelevel year) replace nopreserve
