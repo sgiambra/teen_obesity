@@ -1,4 +1,3 @@
-set scheme s2mono
 set more off
 adopath + ../../../lib/stata/gslab_misc/ado
 adopath + ../../../lib/third_party/stata_tools

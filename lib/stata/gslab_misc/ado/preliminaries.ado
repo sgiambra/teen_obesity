@@ -19,7 +19,7 @@ program define preliminaries
  
  quietly{
 	
-	syntax , [matsize(string) maxvar(string) sortseed(string) linesize(string) loadglob(string) seed(string)]  
+	syntax , [matsize(string) maxvar(string) sortseed(string) linesize(string) loadglob(string) seed(string) scheme(string)]  
 
 	if "`sortseed'"==""{
 		local sortseed 47
@@ -36,6 +36,9 @@ program define preliminaries
 	if "`seed'"==""{
 		local seed 147
 	}
+	if "`scheme'"==""{
+		local scheme s1mono
+	}
 	
 	clear all
 	
@@ -44,6 +47,7 @@ program define preliminaries
 	set maxvar `maxvar'
 	set sortseed `sortseed'
 	set seed `seed'
+	set scheme `scheme'
 	adopath ++ "../external/lib/third_party/stata_tools"
 	cap adopath - PLUS
 	cap adopath - PERSONAL
