@@ -4,7 +4,7 @@ adopath + ../../../lib/third_party/stata_tools
 preliminaries, loadglob("../../../lib/python/obesity/input_params.txt")
 
 local raw_data_dir = "${GoogleDrive}/raw_data/nhis/ipums"
-local derived_dir  = "${GoogleDrive}/derived/nhis/ipums"
+local base_dir     = "${GoogleDrive}/base/nhis/ipums"
 
 clear
 quietly infix                  ///
@@ -449,4 +449,4 @@ label define sldayr_lbl 998 `"Unknown-not ascertained"', add
 label define sldayr_lbl 999 `"Unknown-unknown"', add
 label values sldayr sldayr_lbl
 
-save_data "`derived_dir'/ipums_nhis.dta", key(nhispid year) replace nopreserve
+save_data "`base_dir'/ipums_nhis.dta", key(nhispid year) replace nopreserve

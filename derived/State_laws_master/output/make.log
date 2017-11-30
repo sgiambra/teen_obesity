@@ -1,0 +1,293 @@
+
+ make.py started: 2017-11-30 11:22:03 C:\Users\sgiambra\Documents\GitHub\teen_obesity\derived\State_laws_master\code 
+
+
+
+
+Execute:  "C:\Program Files (x86)\Stata14\StataSE-64.exe" /e do "./analysis.do"
+
+  ___  ____  ____  ____  ____ (R)
+ /__    /   ____/   /   ____/
+___/   /   /___/   /   /___/   14.2   Copyright 1985-2015 StataCorp LLC
+  Statistics/Data Analysis            StataCorp
+                                      4905 Lakeway Drive
+     Special Edition                  College Station, Texas 77845 USA
+                                      800-STATA-PC        http://www.stata.com
+                                      979-696-4600        stata@stata.com
+                                      979-696-4601 (fax)
+
+110-user Stata network perpetual license:
+       Serial number:  401406206058
+         Licensed to:  CIS Department
+                       Brown University
+
+Notes:
+      1.  Stata is running in batch mode.
+      2.  Unicode is supported; see help unicode_advice.
+      3.  Maximum number of variables is set to 5000; see help set_maxvar.
+
+. do ./analysis.do 
+
+. set more off
+
+. adopath + ../../../lib/stata/gslab_misc/ado
+  [1]  (BASE)      "C:\Program Files (x86)\Stata14\ado\base/"
+  [2]  (SITE)      "C:\Program Files (x86)\Stata14\ado\site/"
+  [3]              "."
+  [4]  (PERSONAL)  "c:\ado\personal/"
+  [5]  (PLUS)      "c:\ado\plus/"
+  [6]  (OLDPLACE)  "c:\ado/"
+  [7]              "../../../lib/stata/gslab_misc/ado"
+
+. adopath + ../../../lib/third_party/stata_tools
+  [1]  (BASE)      "C:\Program Files (x86)\Stata14\ado\base/"
+  [2]  (SITE)      "C:\Program Files (x86)\Stata14\ado\site/"
+  [3]              "."
+  [4]  (PERSONAL)  "c:\ado\personal/"
+  [5]  (PLUS)      "c:\ado\plus/"
+  [6]  (OLDPLACE)  "c:\ado/"
+  [7]              "../../../lib/stata/gslab_misc/ado"
+  [8]              "../../../lib/third_party/stata_tools"
+
+. preliminaries, loadglob("../../../lib/python/obesity/input_params.txt")
+
+. 
+. program main
+  1.     local base_dir    = "${GoogleDrive}/base"
+  2.     local derived_dir = "${GoogleDrive}/derived"
+  3.     
+.     use "`base_dir'/class/class.dta", clear
+  4.     
+.     foreach var of var * {
+  5.         if inrange(substr("`var'", 1, .), "a", "z") drop `var' 
+  6.     }
+  7.     drop *MS *HS
+  8.     rename_class_vars
+  9.     egen tot_score_class = rowtotal(alacarte_snacks - fundraisers_beverages)
+ 10.     label var tot_score_class "Total score CLASS"
+ 11.     
+.     save_data "../temp/class_elementary.dta", key(state year) nopreserve replace
+ 12.     
+.     use "`base_dir'/bridging_the_gap/state/btg_state.dta", clear
+ 13.     
+.     rename_btg_vars
+ 14.     keep stfips gradelevel year alacarte school_stores vending_machines ///
+>         fundraisers class_parties school_breakfast region
+ 15.     keep if gradelevel == "ES"
+ 16.     
+.     sort stfips year
+ 17.     replace year = 2006 if year == 1
+ 18.     by stfips: replace year = year[_n-1] + 1 if year[_n] != 2006
+ 19.     egen tot_score_btg = rowtotal(school_breakfast - fundraisers)
+ 20.     label var tot_score_btg "Total score Bridging the Gap"
+ 21.     
+.     save_data "`derived_dir'/state_laws/btg_elementary.dta", key(stfips year) nopreserve replace
+ 22.     
+.     validation_class_btg
+ 23.     keep stfips region
+ 24.     drop if region == .
+ 25.     duplicates drop stfips region, force
+ 26.     merge 1:m stfips using "../temp/class_elementary.dta", ///
+>         assert(3) keep(3) nogen
+ 27.     sort stfips year
+ 28.     
+.     save_data "`derived_dir'/state_laws/class_elementary.dta", key(stfips year) nopreserve replace
+ 29. end
+
+. 
+. program rename_class_vars
+  1.     rename *, lower
+  2.     
+.     rename alasnaes alacarte_snacks
+  3.     rename alabeves alacarte_beverages
+  4.     rename entreees alacarte_entree
+  5.     rename vend_es  vending_machines_snacks
+  6.     rename bevendes vending_machines_beverages
+  7.     rename venue_es school_stores_snacks
+  8.     rename bevenues school_stores_beverages
+  9.     rename fund_es  fundraisers_snacks
+ 10.     rename bevfundes fundraisers_beverages
+ 11.     rename meals_es school_lunches
+ 12.     rename enviro2 school_meal_env
+ 13.     rename educ_es nutrition_educ
+ 14.     rename frmsches farm_to_school
+ 15.     rename potwtres potable_water
+ 16. end
+
+. 
+. program rename_btg_vars
+  1.     rename fipstnum stfips
+  2.     rename ng12s alacarte
+  3.     rename ng11s school_stores
+  4.     rename ng10s vending_machines
+  5.     rename ng15s fundraisers
+  6.     rename ng13s class_parties
+  7.     rename us2s school_breakfast
+  8. end
+
+. 
+. program validation_class_btg
+  1.     merge 1:1 stfips year using "../temp/class_elementary.dta", ///
+>         assert(1 2 3) keep(1 2 3) keepusing(tot_score_class)
+  2.     
+.     binscatter tot_score_btg tot_score_class, xtitle(`: var label tot_score_class') ///
+>         ytitle(`: var label tot_score_btg')
+  3.     graph export ../output/validation_class_btg.png, replace
+  4. end
+
+. 
+. * Execute
+. main
+(data already sorted by state year)
+  variable tot_score_class was float now byte
+  (1,683 bytes saved)
+==================================================================================================
+File: ../temp/class_elementary.dta
+Key: state year
+==================================================================================================
+  561:25(31562):2259037079:2627194604
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+       state |          0
+        year |        561    2008.818    4.022138       2003       2015
+      stfips |        561    28.96078    15.69083          1         56
+alacarte_s~s |        561    1.841355    1.878868          0          6
+alacarte_b~s |        561    2.026738    2.089343          0          6
+-------------+---------------------------------------------------------
+alacarte_e~e |        561    1.502674    1.759792          0          5
+vending_m~ks |        561    1.991087    2.113289          0          6
+vending_m~es |        561    2.101604     2.19464          0          6
+school_st~ks |        561    1.768271    1.956617          0          6
+school_st~es |        561    1.953654    2.143426          0          6
+-------------+---------------------------------------------------------
+fundraise~ks |        561    1.062389    1.874079          0          6
+fundraise~es |        561    1.199643    2.045745          0          6
+school_lun~s |        561    363.5597    480.7774          0        999
+school_mea~v |        561    .2442068    .6860129          0          3
+     servic2 |        561    .5828877    1.166799          0          4
+-------------+---------------------------------------------------------
+    advisory |        561    .6737968    1.107849          0          3
+nutrition_~c |        561    1.705882    1.298674          0          4
+    markting |        561    .2156863    .7960864          0          5
+    prf_pric |        561    .0463458    .2563306          0          2
+         bmi |        561    .1693405    .5556731          0          3
+-------------+---------------------------------------------------------
+farm_to_sc~l |        561     .684492    1.250111          0          4
+potable_wa~r |        561    .1354724    .5820286          0          3
+smartsnackes |        561    817.6364    385.0745          0        999
+bevsmartsn~s |        561    817.6435    385.0594          0        999
+tot_score_~s |        561    15.44742    16.52653          0         53
+
+
+
+
+(note: file ../temp/class_elementary.dta not found)
+file ../temp/class_elementary.dta saved
+(816 observations deleted)
+variable year was byte now int
+(51 real changes made)
+(357 real changes made)
+(data now sorted by stfips year)
+  variable tot_score_btg was float now byte
+  (1,224 bytes saved)
+==================================================================================================
+File: C:\Users\sgiambra/Google Drive/research projects/obesity/derived/state_laws/btg_elementary.dta
+Key: stfips year
+==================================================================================================
+  408:11(55735):2717645823:1032083486
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+      stfips |        408    28.96078    15.69608          1         56
+        year |        408      2009.5    2.294101       2006       2013
+  gradelevel |          0
+school_bre~t |        408    1.134804    .8916564          0          2
+vending_ma~s |        408    1.088235    1.154867          0          4
+-------------+---------------------------------------------------------
+school_sto~s |        408    .9583333    1.102033          0          4
+    alacarte |        408    1.068627    1.013518          0          4
+class_part~s |        408    .2132353    .4608734          0          2
+ fundraisers |        306    .6405229    1.031404          0          4
+      region |        408    2.431373    1.053925          1          4
+-------------+---------------------------------------------------------
+tot_score_~g |        408    4.943627    4.327985          0         18
+
+
+
+
+file C:\Users\sgiambra/Google Drive/research projects/obesity/derived/state_laws/btg_elementary.dta saved
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                           357
+        from master                       102  (_merge==1)
+        from using                        255  (_merge==2)
+
+    matched                               306  (_merge==3)
+    -----------------------------------------
+warning: nquantiles(20) was specified, but only 13 were generated. see help file under nquantiles() for explanation.
+(note: file ../output/validation_class_btg.png not found)
+(file ../output/validation_class_btg.png written in PNG format)
+(255 observations deleted)
+
+Duplicates in terms of stfips region
+
+(357 observations deleted)
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                             0
+    matched                               561  
+    -----------------------------------------
+(data already sorted by stfips year)
+  (0 bytes saved)
+==================================================================================================
+File: C:\Users\sgiambra/Google Drive/research projects/obesity/derived/state_laws/class_elementary.dta
+Key: stfips year
+==================================================================================================
+  561:26(36524):1456168648:2428035344
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+      stfips |        561    28.96078    15.69083          1         56
+        year |        561    2008.818    4.022138       2003       2015
+      region |        561    2.431373    1.053572          1          4
+       state |          0
+alacarte_s~s |        561    1.841355    1.878868          0          6
+-------------+---------------------------------------------------------
+alacarte_b~s |        561    2.026738    2.089343          0          6
+alacarte_e~e |        561    1.502674    1.759792          0          5
+vending_m~ks |        561    1.991087    2.113289          0          6
+vending_m~es |        561    2.101604     2.19464          0          6
+school_st~ks |        561    1.768271    1.956617          0          6
+-------------+---------------------------------------------------------
+school_st~es |        561    1.953654    2.143426          0          6
+fundraise~ks |        561    1.062389    1.874079          0          6
+fundraise~es |        561    1.199643    2.045745          0          6
+school_lun~s |        561    363.5597    480.7774          0        999
+school_mea~v |        561    .2442068    .6860129          0          3
+-------------+---------------------------------------------------------
+     servic2 |        561    .5828877    1.166799          0          4
+    advisory |        561    .6737968    1.107849          0          3
+nutrition_~c |        561    1.705882    1.298674          0          4
+    markting |        561    .2156863    .7960864          0          5
+    prf_pric |        561    .0463458    .2563306          0          2
+-------------+---------------------------------------------------------
+         bmi |        561    .1693405    .5556731          0          3
+farm_to_sc~l |        561     .684492    1.250111          0          4
+potable_wa~r |        561    .1354724    .5820286          0          3
+smartsnackes |        561    817.6364    385.0745          0        999
+bevsmartsn~s |        561    817.6435    385.0594          0        999
+-------------+---------------------------------------------------------
+tot_score_~s |        561    15.44742    16.52653          0         53
+
+
+
+
+file C:\Users\sgiambra/Google Drive/research projects/obesity/derived/state_laws/class_elementary.dta saved
+
+. 
+end of do-file
+
+ make.py ended: 2017-11-30 11:22:05

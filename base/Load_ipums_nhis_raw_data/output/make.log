@@ -1,14 +1,14 @@
 
- make.py started: 2017-11-06 11:16:31 C:\Users\Samuele\Documents\GitHub\teen_obesity\derived\Load_ipums_nhis_raw_data\code 
+ make.py started: 2017-11-29 16:41:52 C:\Users\sgiambra\Documents\GitHub\teen_obesity\base\Load_ipums_nhis_raw_data\code 
 
 
 
 
-Execute:  C:\Stata12_WinX86_x64\StataSE-64.exe /e do "./preclean.do"
+Execute:  "C:\Program Files (x86)\Stata14\StataSE-64.exe" /e do "./preclean.do"
 
   ___  ____  ____  ____  ____ (R)
  /__    /   ____/   /   ____/
-___/   /   /___/   /   /___/   12.0   Copyright 1985-2011 StataCorp LP
+___/   /   /___/   /   /___/   14.2   Copyright 1985-2015 StataCorp LLC
   Statistics/Data Analysis            StataCorp
                                       4905 Lakeway Drive
      Special Edition                  College Station, Texas 77845 USA
@@ -16,47 +16,45 @@ ___/   /   /___/   /   /___/   12.0   Copyright 1985-2011 StataCorp LP
                                       979-696-4600        stata@stata.com
                                       979-696-4601 (fax)
 
-Single-user Stata network perpetual license:
-       Serial number:  93611859953
-         Licensed to:  STATAforAll
-                       STATA
+110-user Stata network perpetual license:
+       Serial number:  401406206058
+         Licensed to:  CIS Department
+                       Brown University
 
 Notes:
-      1.  (/v# option or -set maxvar-) 5000 maximum variables
-      2.  Stata running in batch mode
+      1.  Stata is running in batch mode.
+      2.  Unicode is supported; see help unicode_advice.
+      3.  Maximum number of variables is set to 5000; see help set_maxvar.
 
 . do ./preclean.do 
 
 . set more off
 
 . adopath + ../../../lib/stata/gslab_misc/ado
-  [1]  (UPDATES)   "C:\Stata12_WinX86_x64\ado\updates/"
-  [2]  (BASE)      "C:\Stata12_WinX86_x64\ado\base/"
-  [3]  (SITE)      "C:\Stata12_WinX86_x64\ado\site/"
-  [4]              "."
-  [5]  (PERSONAL)  "c:\ado\personal/"
-  [6]  (PLUS)      "c:\ado\plus/"
-  [7]  (OLDPLACE)  "c:\ado/"
-  [8]              "../../../lib/stata/gslab_misc/ado"
+  [1]  (BASE)      "C:\Program Files (x86)\Stata14\ado\base/"
+  [2]  (SITE)      "C:\Program Files (x86)\Stata14\ado\site/"
+  [3]              "."
+  [4]  (PERSONAL)  "c:\ado\personal/"
+  [5]  (PLUS)      "c:\ado\plus/"
+  [6]  (OLDPLACE)  "c:\ado/"
+  [7]              "../../../lib/stata/gslab_misc/ado"
 
 . adopath + ../../../lib/third_party/stata_tools
-  [1]  (UPDATES)   "C:\Stata12_WinX86_x64\ado\updates/"
-  [2]  (BASE)      "C:\Stata12_WinX86_x64\ado\base/"
-  [3]  (SITE)      "C:\Stata12_WinX86_x64\ado\site/"
-  [4]              "."
-  [5]  (PERSONAL)  "c:\ado\personal/"
-  [6]  (PLUS)      "c:\ado\plus/"
-  [7]  (OLDPLACE)  "c:\ado/"
-  [8]              "../../../lib/stata/gslab_misc/ado"
-  [9]              "../../../lib/third_party/stata_tools"
+  [1]  (BASE)      "C:\Program Files (x86)\Stata14\ado\base/"
+  [2]  (SITE)      "C:\Program Files (x86)\Stata14\ado\site/"
+  [3]              "."
+  [4]  (PERSONAL)  "c:\ado\personal/"
+  [5]  (PLUS)      "c:\ado\plus/"
+  [6]  (OLDPLACE)  "c:\ado/"
+  [7]              "../../../lib/stata/gslab_misc/ado"
+  [8]              "../../../lib/third_party/stata_tools"
 
-. preliminaries, loadglob("../../../lib/python/obesity/inpu
-> t_params.txt")
+. preliminaries, loadglob("../../../lib/python/obesity/input_params.txt")
 
 . 
 . local raw_data_dir = "${GoogleDrive}/raw_data/nhis/ipums"
 
-. local derived_dir  = "${GoogleDrive}/derived/nhis/ipums"
+. local base_dir     = "${GoogleDrive}/base/nhis/ipums"
 
 . 
 . clear
@@ -96,10 +94,10 @@ Notes:
 
 . 
 . replace bmicalc    = bmicalc    / 10
-(2174125 real changes made)
+(2,174,125 real changes made)
 
 . replace bmi        = bmi        / 100
-(725654 real changes made)
+(725,654 real changes made)
 
 . 
 . format perweight  %12.0f
@@ -903,62 +901,63 @@ Notes:
 . label values sldayr sldayr_lbl
 
 . 
-. save_data "`derived_dir'/ipums_nhis.dta", key(nhispid year) replace nopreserve
+. save_data "`base_dir'/ipums_nhis.dta", key(nhispid year) replace nopreserve
 (data now sorted by nhispid year)
-metro was int now byte
-perweight was double now long
-sampweight was double now long
-supp2wt was double now long
+  variable metro was int now byte
+  variable perweight was double now long
+  variable sampweight was double now long
+  variable supp2wt was double now long
+  (75,909,483 bytes saved)
 ==================================================================================================
-File: C:/Users/Samuele/Google Drive/research projects/obesity/derived/nhis/ipums/ipums_nhis.dta
+File: C:\Users\sgiambra/Google Drive/research projects/obesity/base/nhis/ipums/ipums_nhis.dta
 Key: nhispid year
 ==================================================================================================
   5839191:30(50295):427911282:1159994557
 
-    Variable |       Obs        Mean    Std. Dev.       Min        Max
--------------+--------------------------------------------------------
-     nhispid |         0
-        year |   5839191    1987.756    15.80609       1963       2016
-      serial |   5839191    22035.24    13230.98          1      60347
-      strata |   5839191    3170.762    2048.565          1       7151
-         psu |   5839191    69.46493    96.90872          1        298
--------------+--------------------------------------------------------
-     nhishid |         0
-    hhweight |   5024864    2094.249    1070.335         48      35775
-      region |   5839191      2.5516    1.043039          1          9
-       metro |   3928174    18.83806    8.820687         10         99
-     msasize |   1776174    20.02701    12.04193          0         33
--------------+--------------------------------------------------------
-         hhx |         0
-         fmx |         0
-          px |         0
-   perweight |   5839191    2294.952    1281.151          0      46830
-  sampweight |   3830974    2371.041    4200.315          0     236830
--------------+--------------------------------------------------------
-     fweight |   1911017    2899.214    1594.665         50      46830
-    astatflg |   1911017    1.477059    1.219721          0          6
-    cstatflg |   1911017     .541969    1.029357          0          5
-      pernum |   5839191    2.340916    1.505871          1         29
-     supp2wt |   1673698     2017.09    3494.253          0     109368
--------------+--------------------------------------------------------
-     sub77wt |    111279    5030.825    10160.93          0      99133
-         age |   5839191    33.68913    22.30019          0         99
-         sex |   5839191    1.519606    .4996155          1          2
-     birthmo |   3407847    11.22658    20.71273          0         99
-     birthyr |   1911017    2708.163    2319.171       1913       9999
--------------+--------------------------------------------------------
-       racea |   5839191    133.5286     97.7182        100        990
-     bmicalc |   4156361    35.79458    148.4549          0        996
-         bmi |   2371599    9.088573     15.9625          0      99.99
-      bmikid |    880195    118.6782    688.2325          0       9999
-      sldayr |   2140807    908.1556    281.9024          0        999
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+     nhispid |          0
+        year |  5,839,191    1987.756    15.80609       1963       2016
+      serial |  5,839,191    22035.24    13230.98          1      60347
+      strata |  5,839,191    3170.762    2048.565          1       7151
+         psu |  5,839,191    69.46493    96.90872          1        298
+-------------+---------------------------------------------------------
+     nhishid |          0
+    hhweight |  5,024,864    2094.249    1070.335         48      35775
+      region |  5,839,191      2.5516    1.043039          1          9
+       metro |  3,928,174    18.83806    8.820687         10         99
+     msasize |  1,776,174    20.02701    12.04193          0         33
+-------------+---------------------------------------------------------
+         hhx |          0
+         fmx |          0
+          px |          0
+   perweight |  5,839,191    2294.952    1281.151          0      46830
+  sampweight |  3,830,974    2371.041    4200.315          0     236830
+-------------+---------------------------------------------------------
+     fweight |  1,911,017    2899.214    1594.665         50      46830
+    astatflg |  1,911,017    1.477059    1.219721          0          6
+    cstatflg |  1,911,017     .541969    1.029357          0          5
+      pernum |  5,839,191    2.340916    1.505871          1         29
+     supp2wt |  1,673,698     2017.09    3494.253          0     109368
+-------------+---------------------------------------------------------
+     sub77wt |    111,279    5030.825    10160.93          0      99133
+         age |  5,839,191    33.68913    22.30019          0         99
+         sex |  5,839,191    1.519606    .4996155          1          2
+     birthmo |  3,407,847    11.22658    20.71273          0         99
+     birthyr |  1,911,017    2708.163    2319.171       1913       9999
+-------------+---------------------------------------------------------
+       racea |  5,839,191    133.5286     97.7182        100        990
+     bmicalc |  4,156,361    35.79458    148.4549          0        996
+         bmi |  2,371,599    9.088573     15.9625          0      99.99
+      bmikid |    880,195    118.6782    688.2325          0       9999
+      sldayr |  2,140,807    908.1556    281.9024          0        999
 
 
 
 
-file C:/Users/Samuele/Google Drive/research projects/obesity/derived/nhis/ipums/ipums_nhis.dta saved
+file C:\Users\sgiambra/Google Drive/research projects/obesity/base/nhis/ipums/ipums_nhis.dta saved
 
 . 
 end of do-file
 
- make.py ended: 2017-11-06 11:18:03
+ make.py ended: 2017-11-29 16:43:39
