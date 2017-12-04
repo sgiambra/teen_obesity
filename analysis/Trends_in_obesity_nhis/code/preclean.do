@@ -4,9 +4,9 @@ adopath + ../../../lib/third_party/stata_tools
 preliminaries, loadglob("../../../lib/python/obesity/input_params.txt")
 
 program main
-    local derived_dir  = "${GoogleDrive}/derived/nhis/ipums"
+    local base_dir  = "${GoogleDrive}/base/nhis/ipums"
 
-    use "`derived_dir'/ipums_nhis.dta", clear
+    use "`base_dir'/ipums_nhis.dta", clear
     label var year "Year"
     gen south = region == 3
 

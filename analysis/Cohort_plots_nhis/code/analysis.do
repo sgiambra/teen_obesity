@@ -1,8 +1,8 @@
-set scheme s2mono
 set more off
 adopath + ../../../lib/stata/gslab_misc/ado
 adopath + ../../../lib/third_party/stata_tools
 preliminaries
+set scheme s2mono
 
 program main
     local plot_opts = "graphregion(fcolor(white)) ylab(, nogrid)"

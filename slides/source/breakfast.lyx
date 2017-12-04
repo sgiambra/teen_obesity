@@ -1,0 +1,1079 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass beamer
+\begin_preamble
+\usetheme{metropolis} 
+\usepackage{graphicx} 
+\usepackage{hyperref} 
+\usepackage{multirow} 
+\usepackage{hyperref}
+\usepackage{enumitem}
+\newtheorem{proposition}{Proposition} 
+\setbeamerfont{child}{size=\small} 
+\setbeamertemplate{footline}[default]
+
+\setlist[itemize,1]{label=$\bullet$}
+\setlist[itemize,2]{label=$\diamond$}
+\setlist[itemize,3]{label=$\rightarrow$}
+
+
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Corr}{Corr}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\E}{E}
+\DeclareMathOperator{\logit}{logit}
+\DeclareMathOperator{\I}{I}
+
+\DeclareMathOperator*{\argmax}{arg\,max} 
+\end_preamble
+\options t
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 11
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 0
+\use_package mhchem 1
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1in
+\topmargin 1in
+\rightmargin 1in
+\bottommargin 1in
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Geographic Variation in Childhood Obesity
+\end_layout
+
+\begin_layout Subtitle
+The effect of a healthier school environment
+\end_layout
+
+\begin_layout Author
+Samuele Giambra
+\end_layout
+
+\begin_layout Institute
+Brown University
+\end_layout
+
+\begin_layout Date
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+today
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+The goal of this project is to estimate the effect of
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+US Obesity Epidemics
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Obesity in the US has increased dramatically in the last decades
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\size small
+In late 1970s, 12.7% of men and 17% of women were obese
+\end_layout
+
+\begin_layout Itemize
+
+\size small
+During 2011-2014, 34.3% of mean and 38.3% percent of women were obese
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Important health implications
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\size small
+Obesity increases inpatient and outpatient spending by 36% (Sturm, 2002)
+\end_layout
+
+\begin_layout Itemize
+
+\size small
+Estimated annual medical cost of obesity is $147 billion in 2008 US dollars
+ (CDC)
+\end_layout
+
+\begin_layout Itemize
+
+\size small
+Negative health outcomes related to obesity include heart disease, stroke,
+ type 2 diabetes and certain type of cancer
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Childhood obesity is also a pervasive phenomenon
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\size small
+Obesity rates are 8.9% among 2- to 5-year-olds, 17.5% for 6- to 11-year-olds
+ and 20.5% of 12- to 19-year-olds
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Definition of Obesity
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Based on Body Mass Index (BMI)
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Normal weight is a BMI between 18.5 and 24.9
+\end_layout
+
+\begin_layout Itemize
+Overweight is a BMI between 25.0 and 29.9
+\end_layout
+
+\begin_layout Itemize
+Obesity is a BMI over 30
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+BMI measured as body mass (
+\begin_inset Formula $kg$
+\end_inset
+
+) divided by square of body height (
+\begin_inset Formula $m^{2}$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Itemize
+Different use of BMI for children aged 2 to 20
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Comparison against percentile for children of same sex and age
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Percentiles computed from NHANES surveys conducted between 1963 to 1994
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+BMI above the 95th percentile is considered obese
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+School Nutrition Policies
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+National School Lunch Act of 1946
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Created the National School Lunch Program (NSLP)
+\end_layout
+
+\begin_layout Itemize
+Grown from 3,368 million lunches served in 1969 to 5,052 million in 2016
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Over 50% of children in US get breakfast or lunch from a school meal program
+ (Anderson et al, 2003)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Child Nutrition and WIC Reauthorization Act of 2004
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Requires that school districts design and implement wellness policies from
+ the 2006/2007 school year
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Healthy Hunger-Free Kids Act of 2010
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Gives USDA the authority to set new standards for food sold in lunches (e.g.
+ reduced portion sizes, minimum on fruit and vegetables per serving)
+\end_layout
+
+\begin_layout Itemize
+Increases access to NSLP
+\end_layout
+
+\begin_layout Itemize
+School districts audited every 3 years to see if they meet nutrition standards
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Literature
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Eid, Overman, Puga and Turner (2008)
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\size small
+Relationship between urban sprawl and obesity
+\end_layout
+
+\begin_layout Itemize
+
+\size small
+Use NLSY79 data to track change in BMI for young adults moving into more
+ sprawling neighborhoods
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Cutler, Glaeser and Shapiro (2003)
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\size small
+Increase in obesity since 1980 mostly driven by increase in calories consumed
+ instead of decrease in calories expended
+\end_layout
+
+\begin_layout Itemize
+
+\size small
+Propose a theory based on technical change in food preparation
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Large descriptive literature on adult and childhood obesity
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\size small
+Li et al.
+ (2015), Ng et al.
+ (2014), Ogden et al.
+ (2016)
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Impact of school nutrition environment
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\size small
+Anderson et al.
+ (2017), Bauhoff (2014), Campbell et al.
+ (2011), Schanzenbach (2009)
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+BMI Over Lifetime
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+It is crucial to control for age
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename ../../analysis/Cohort_plots_nhis/output/cohort_trend_bmi.png
+	scale 29
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\size small
+Source: National Health Interview Survey (NHIS)
+\end_layout
+
+\begin_layout Itemize
+
+\size small
+Data on adults age 18+ from 1976 through 2016, young adults age 12-17 from
+ 2008
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Secular Trend in BMI
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename ../../analysis/Trends_in_obesity_nhis/output/trend_bmicalc_by_sex_youngs.png
+	scale 29
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+BMI in NHIS based on interviews:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\size small
+Tendency to underreport weight and overreport height
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Research Questions
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+
+\size larger
+\begin_inset Flex Emphasize
+status open
+
+\begin_layout Plain Layout
+\align left
+
+\size larger
+How effective are school wellness policies in addressing childhood obesity?
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align left
+
+\size larger
+\begin_inset Flex Emphasize
+status open
+
+\begin_layout Plain Layout
+\align left
+
+\size larger
+Are students affected by the health status of their peers?
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Section
+Potential Identification Strategies
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+School Eating Environment
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\size small
+Large time and geographic variation in school eating environment
+\end_layout
+
+\begin_layout Itemize
+
+\size small
+Example: strength of policies regulating standard for a la carte beverages
+ in 2003, elementary school
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename C:/Users/sgiambra/Google Drive/research projects/obesity/maps/alacarte_beverages_2003.PNG
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align left
+
+\size scriptsize
+Source: CLASS, 2003
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+School Eating Environment
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\size small
+Policies regulating standard for a la carte beverages in 2015, elementary
+ school
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename C:/Users/sgiambra/Google Drive/research projects/obesity/maps/alacarte_beverages_2015.PNG
+	scale 55
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align left
+
+\size scriptsize
+Source: CLASS, 2015
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+
+\size small
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+School Eating Environment: Data
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Classification of Laws Associated with School Students (CLASS)
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\size small
+Scoring system used to evaluate state-level school physical education and
+ nutrition policies from 2003 through 2015
+\end_layout
+
+\begin_layout Itemize
+
+\size small
+Developed by the National Cancer Institute
+\end_layout
+
+\begin_layout Itemize
+
+\size small
+High correlation with other state law evaluation data (e.g.
+ Bridging the Gap)
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+National Health and Nutrition Examination Survey (NHANES)
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\size small
+Cross sectional surveys conducted biennially from 1999
+\end_layout
+
+\begin_layout Itemize
+
+\size small
+24-hour dietary recalls and physical examinations
+\end_layout
+
+\begin_layout Itemize
+
+\size small
+Geocode variables are restricted use and require on-site access
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+National Survey of Children's Health (NSCH) 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\size small
+State-level BMI data for kids 10-17 years
+\end_layout
+
+\begin_layout Itemize
+
+\size small
+Interviews conducted in 2004, 2007, 2011 and 2016
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Movers
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\size small
+Non-trivial fraction of students change school
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\size footnotesize
+Bradbury et al.
+ (2013) measure that 10.6% of non-high-school Boston Public School students
+ have 
+\begin_inset Quotes eld
+\end_inset
+
+nonstructural
+\begin_inset Quotes erd
+\end_inset
+
+ school changes 
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\size small
+Different childhood obesity rates at the school district level (likely at
+ the school level as well)
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename C:/Users/sgiambra/Google Drive/research projects/obesity/maps/childhood_obesity_ny.PNG
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Movers: Data
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Early Childhood Longitudinal Study
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\size small
+ECLS-K follows kindergarten class of 1988-99 through 8th grade
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\size footnotesize
+22,700 children sampled from 1,300 schools
+\end_layout
+
+\begin_layout Itemize
+
+\size footnotesize
+2,542 movers from spring of 1st grade and spring of 3rd grade
+\end_layout
+
+\begin_layout Itemize
+
+\size footnotesize
+Geolocation of the students' school and home in restricted use data
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\size small
+ECLS-K:2011 tracks cohort of 2010-2011 through 5th grade (Spring 3rd grade
+ will be released in Jan 2018)
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Alternative: Massachusetts requires BMI screening for students in grades
+ 1, 4, 7, and 10 since the 2010-2011 school year 
+\end_layout
+
+\begin_layout Itemize
+New York has similar requirement for grades K, 2, 4, 7, and 10
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\size small
+Administrative data on students moving within one of these states would
+ probably give more power to the analysis
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Section*
+References
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_layout Frame
+
+\size footnotesize
+Jean, Eid, Henry G.
+ Overman, Diego Puga and Matthew A.
+ Turner.
+ 2008.
+ Fat city: Questioning the relationship between urban sprawl and obesity.
+ 
+\shape italic
+Journal of Urban Economics 
+\shape default
+63: 385-404.
+\end_layout
+
+\begin_layout Frame
+
+\size footnotesize
+David, M.
+ Cutler, Edward L.
+ Glaeser and Jesse M.
+ Shapiro.
+ 2003.
+ Why have Americans become more obese? 
+\shape italic
+Journal of Economic Perspectives 
+\shape default
+17(3): 93-118.
+\end_layout
+
+\begin_layout Frame
+
+\size footnotesize
+Sturm, Roland.
+ 2002.
+ The effects of obesity, smoking, and drinking on medical problems and costs.
+ 
+\shape italic
+Health affairs 
+\shape default
+21(2): 245-253.
+\end_layout
+
+\begin_layout Frame
+
+\size footnotesize
+Bradbury, Katharine, Mary A.
+ Burke and Robert K.
+ Triest.
+ 2013.
+ The effect of foreclosure on Boston Public School student academic performance.
+
+\shape italic
+ 
+\shape default
+Working Papers, Federal Reserve Bank of Boston, No.13-12.
+\end_layout
+
+\end_body
+\end_document

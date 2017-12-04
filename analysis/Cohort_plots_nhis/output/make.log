@@ -1,14 +1,14 @@
 
- make.py started: 2017-11-09 18:11:38 C:\Users\Samuele\Documents\GitHub\teen_obesity\analysis\Cohort_plots_nhis\code 
+ make.py started: 2017-12-02 13:28:40 C:\Users\sgiambra\Documents\GitHub\teen_obesity\analysis\Cohort_plots_nhis\code 
 
 
 
 
-Execute:  C:\Stata12_WinX86_x64\StataSE-64.exe /e do "./preclean.do"
+Execute:  "C:\Program Files (x86)\Stata14\StataSE-64.exe" /e do "./preclean.do"
 
   ___  ____  ____  ____  ____ (R)
  /__    /   ____/   /   ____/
-___/   /   /___/   /   /___/   12.0   Copyright 1985-2011 StataCorp LP
+___/   /   /___/   /   /___/   14.2   Copyright 1985-2015 StataCorp LLC
   Statistics/Data Analysis            StataCorp
                                       4905 Lakeway Drive
      Special Edition                  College Station, Texas 77845 USA
@@ -16,48 +16,46 @@ ___/   /   /___/   /   /___/   12.0   Copyright 1985-2011 StataCorp LP
                                       979-696-4600        stata@stata.com
                                       979-696-4601 (fax)
 
-Single-user Stata network perpetual license:
-       Serial number:  93611859953
-         Licensed to:  STATAforAll
-                       STATA
+110-user Stata network perpetual license:
+       Serial number:  401406206058
+         Licensed to:  CIS Department
+                       Brown University
 
 Notes:
-      1.  (/v# option or -set maxvar-) 5000 maximum variables
-      2.  Stata running in batch mode
+      1.  Stata is running in batch mode.
+      2.  Unicode is supported; see help unicode_advice.
+      3.  Maximum number of variables is set to 5000; see help set_maxvar.
 
 . do ./preclean.do 
 
 . set more off
 
 . adopath + ../../../lib/stata/gslab_misc/ado
-  [1]  (UPDATES)   "C:\Stata12_WinX86_x64\ado\updates/"
-  [2]  (BASE)      "C:\Stata12_WinX86_x64\ado\base/"
-  [3]  (SITE)      "C:\Stata12_WinX86_x64\ado\site/"
-  [4]              "."
-  [5]  (PERSONAL)  "c:\ado\personal/"
-  [6]  (PLUS)      "c:\ado\plus/"
-  [7]  (OLDPLACE)  "c:\ado/"
-  [8]              "../../../lib/stata/gslab_misc/ado"
+  [1]  (BASE)      "C:\Program Files (x86)\Stata14\ado\base/"
+  [2]  (SITE)      "C:\Program Files (x86)\Stata14\ado\site/"
+  [3]              "."
+  [4]  (PERSONAL)  "c:\ado\personal/"
+  [5]  (PLUS)      "c:\ado\plus/"
+  [6]  (OLDPLACE)  "c:\ado/"
+  [7]              "../../../lib/stata/gslab_misc/ado"
 
 . adopath + ../../../lib/third_party/stata_tools
-  [1]  (UPDATES)   "C:\Stata12_WinX86_x64\ado\updates/"
-  [2]  (BASE)      "C:\Stata12_WinX86_x64\ado\base/"
-  [3]  (SITE)      "C:\Stata12_WinX86_x64\ado\site/"
-  [4]              "."
-  [5]  (PERSONAL)  "c:\ado\personal/"
-  [6]  (PLUS)      "c:\ado\plus/"
-  [7]  (OLDPLACE)  "c:\ado/"
-  [8]              "../../../lib/stata/gslab_misc/ado"
-  [9]              "../../../lib/third_party/stata_tools"
+  [1]  (BASE)      "C:\Program Files (x86)\Stata14\ado\base/"
+  [2]  (SITE)      "C:\Program Files (x86)\Stata14\ado\site/"
+  [3]              "."
+  [4]  (PERSONAL)  "c:\ado\personal/"
+  [5]  (PLUS)      "c:\ado\plus/"
+  [6]  (OLDPLACE)  "c:\ado/"
+  [7]              "../../../lib/stata/gslab_misc/ado"
+  [8]              "../../../lib/third_party/stata_tools"
 
-. preliminaries, loadglob("../../../lib/python/obesity/inpu
-> t_params.txt")
+. preliminaries, loadglob("../../../lib/python/obesity/input_params.txt")
 
 . 
 . program main
-  1.     local derived_dir  = "${GoogleDrive}/derived/nhis/ipums"
+  1.     local base_dir  = "${GoogleDrive}/base/nhis/ipums"
   2.     local cohorts_list "1970 1980 1990 2000 2003"
-  3.     use "`derived_dir'/ipums_nhis.dta", clear
+  3.     use "`base_dir'/ipums_nhis.dta", clear
   4.     
 .     preserve
   5.     build_obesity_panel_children
@@ -107,121 +105,123 @@ Notes:
 . 
 . * Execute
 . main
-(4428873 observations deleted)
-(964282 observations deleted)
-(35774 real changes made)
-(387389 observations deleted)
+(4,428,873 observations deleted)
+(964,282 observations deleted)
+(35,774 real changes made)
+(387,389 observations deleted)
 (data already sorted by nhispid year)
-sub77wt was long now byte
-overweight was float now byte
-obese was float now byte
-dist_survey_act was float now byte
+  variable sub77wt was long now byte
+  variable overweight was float now byte
+  variable obese was float now byte
+  variable dist_survey_act was float now byte
+  (703,764 bytes saved)
 ==================================================================================================
 File: ../temp/obesity_panel_children
 Key: nhispid year
 ==================================================================================================
   58647:33(49110):1632058513:2471401842
 
-    Variable |       Obs        Mean    Std. Dev.       Min        Max
--------------+--------------------------------------------------------
-     nhispid |         0
-        year |     58647    2010.937    3.716867       2002       2016
-      serial |     58647    24508.11    15111.47          1      60331
-      strata |     58647    6135.461    452.5964       5001       7151
-         psu |     58647    4.601634      14.269          1        164
--------------+--------------------------------------------------------
-     nhishid |         0
-    hhweight |     58647    2597.511     1563.32         51      35497
-      region |     58647    2.741334    1.021476          1          4
-       metro |         0
-     msasize |         0
--------------+--------------------------------------------------------
-         hhx |         0
-         fmx |         0
-          px |         0
-   perweight |     58647    3213.077    1968.211         53      46830
-  sampweight |     58647    7605.307    7096.022         63     236830
--------------+--------------------------------------------------------
-     fweight |     58647    3003.179    1848.095         53      46830
-    astatflg |     58647    .3900114    .4877567          0          1
-    cstatflg |     58647    .6099886    .4877567          0          1
-      pernum |     58647    2.835132    1.216025          1         18
-     supp2wt |     34975    2981.711    3943.903          0      58163
--------------+--------------------------------------------------------
-     sub77wt |         0
-         age |     58647     16.5756    2.850139         12         21
-         sex |     58647    1.497246    .4999967          1          2
-     birthmo |     47659    11.93898    21.67629          1         99
-     birthyr |     58647     2385.11    1725.834       1980       9999
--------------+--------------------------------------------------------
-       racea |     58647    145.4598     97.0142        100        600
-     bmicalc |     58647    36.88249     163.238          0        996
-         bmi |     58647    23.46737    5.336656        .81      96.66
-      bmikid |     49413    1630.995    1094.714          0       6945
-      sldayr |     58647    396.8826    485.4661          0        999
--------------+--------------------------------------------------------
-  overweight |     58647     .189933    .3922513          0          1
-       obese |     58647    .1103893     .313377          0          1
-dist_surve~t |     58647   -.0630041    3.716867         -9          5
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+     nhispid |          0
+        year |     58,647    2010.937    3.716867       2002       2016
+      serial |     58,647    24508.11    15111.47          1      60331
+      strata |     58,647    6135.461    452.5964       5001       7151
+         psu |     58,647    4.601634      14.269          1        164
+-------------+---------------------------------------------------------
+     nhishid |          0
+    hhweight |     58,647    2597.511     1563.32         51      35497
+      region |     58,647    2.741334    1.021476          1          4
+       metro |          0
+     msasize |          0
+-------------+---------------------------------------------------------
+         hhx |          0
+         fmx |          0
+          px |          0
+   perweight |     58,647    3213.077    1968.211         53      46830
+  sampweight |     58,647    7605.307    7096.022         63     236830
+-------------+---------------------------------------------------------
+     fweight |     58,647    3003.179    1848.095         53      46830
+    astatflg |     58,647    .3900114    .4877567          0          1
+    cstatflg |     58,647    .6099886    .4877567          0          1
+      pernum |     58,647    2.835132    1.216025          1         18
+     supp2wt |     34,975    2981.711    3943.903          0      58163
+-------------+---------------------------------------------------------
+     sub77wt |          0
+         age |     58,647     16.5756    2.850139         12         21
+         sex |     58,647    1.497246    .4999967          1          2
+     birthmo |     47,659    11.93898    21.67629          1         99
+     birthyr |     58,647     2385.11    1725.834       1980       9999
+-------------+---------------------------------------------------------
+       racea |     58,647    145.4598     97.0142        100        600
+     bmicalc |     58,647    36.88249     163.238          0        996
+         bmi |     58,647    23.46737    5.336656        .81      96.66
+      bmikid |     49,413    1630.995    1094.714          0       6945
+      sldayr |     58,647    396.8826    485.4661          0        999
+-------------+---------------------------------------------------------
+  overweight |     58,647     .189933    .3922513          0          1
+       obese |     58,647    .1103893     .313377          0          1
+dist_surve~t |     58,647   -.0630041    3.716867         -9          5
 
 
 
 
 (note: file ../temp/obesity_panel_children.dta not found)
 file ../temp/obesity_panel_children.dta saved
-(5726065 observations deleted)
-(3906 real changes made)
-(85553 observations deleted)
+(5,726,065 observations deleted)
+(3,906 real changes made)
+(85,553 observations deleted)
 (data already sorted by nhispid year)
-sub77wt was long now byte
-overweight was float now byte
-obese was float now byte
+  variable sub77wt was long now byte
+  variable overweight was float now byte
+  variable obese was float now byte
+  (248,157 bytes saved)
 ==================================================================================================
 File: ../temp/obesity_panel_cohorts
 Key: nhispid year
 ==================================================================================================
   27573:32(104915):399765407:1331067536
 
-    Variable |       Obs        Mean    Std. Dev.       Min        Max
--------------+--------------------------------------------------------
-     nhispid |         0
-        year |     27573     2008.68     5.81952       1997       2016
-      serial |     27573    24122.88    14965.51          3      60310
-      strata |     27573    5930.444    604.1742       5001       7151
-         psu |     27573    4.677293    14.32036          1        155
--------------+--------------------------------------------------------
-     nhishid |         0
-    hhweight |     27573    2566.914    1513.333         57      35775
-      region |     27573    2.727523     1.01125          1          4
-       metro |         0
-     msasize |      4642     21.5489    12.22991          0         33
--------------+--------------------------------------------------------
-         hhx |         0
-         fmx |         0
-          px |         0
-   perweight |     27573    3223.401    1891.082         66      39936
-  sampweight |     27573    7554.971    6114.365         70     121989
--------------+--------------------------------------------------------
-     fweight |     27573    3016.848    1793.958         66      36744
-    astatflg |     27573    .8583397    .3487077          0          1
-    cstatflg |     27573    .1416603    .3487077          0          1
-      pernum |     27573    1.801618     1.08407          1         18
-     supp2wt |     13369    3048.771    4038.606          0      44592
--------------+--------------------------------------------------------
-     sub77wt |         0
-         age |     27573    27.98578    8.982002         12         46
-         sex |     27573    1.533711    .4988714          1          2
-     birthmo |     22451    7.640773    10.61768          1         99
-     birthyr |     27573    1980.215    10.53029       1970       2003
--------------+--------------------------------------------------------
-       racea |     27573    146.0668    102.1805        100        990
-     bmicalc |     27573     76.7984    223.5047          0        996
-         bmi |     27573    26.25187    6.301043        .81      87.84
-      bmikid |     17083    505.5289    958.7005          0       4993
-      sldayr |     27573    856.6714     344.837          0        999
--------------+--------------------------------------------------------
-  overweight |     27573    .2914083    .4544194          0          1
-       obese |     27573    .2194901    .4139087          0          1
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+     nhispid |          0
+        year |     27,573     2008.68     5.81952       1997       2016
+      serial |     27,573    24122.88    14965.51          3      60310
+      strata |     27,573    5930.444    604.1742       5001       7151
+         psu |     27,573    4.677293    14.32036          1        155
+-------------+---------------------------------------------------------
+     nhishid |          0
+    hhweight |     27,573    2566.914    1513.333         57      35775
+      region |     27,573    2.727523     1.01125          1          4
+       metro |          0
+     msasize |      4,642     21.5489    12.22991          0         33
+-------------+---------------------------------------------------------
+         hhx |          0
+         fmx |          0
+          px |          0
+   perweight |     27,573    3223.401    1891.082         66      39936
+  sampweight |     27,573    7554.971    6114.365         70     121989
+-------------+---------------------------------------------------------
+     fweight |     27,573    3016.848    1793.958         66      36744
+    astatflg |     27,573    .8583397    .3487077          0          1
+    cstatflg |     27,573    .1416603    .3487077          0          1
+      pernum |     27,573    1.801618     1.08407          1         18
+     supp2wt |     13,369    3048.771    4038.606          0      44592
+-------------+---------------------------------------------------------
+     sub77wt |          0
+         age |     27,573    27.98578    8.982002         12         46
+         sex |     27,573    1.533711    .4988714          1          2
+     birthmo |     22,451    7.640773    10.61768          1         99
+     birthyr |     27,573    1980.215    10.53029       1970       2003
+-------------+---------------------------------------------------------
+       racea |     27,573    146.0668    102.1805        100        990
+     bmicalc |     27,573     76.7984    223.5047          0        996
+         bmi |     27,573    26.25187    6.301043        .81      87.84
+      bmikid |     17,083    505.5289    958.7005          0       4993
+      sldayr |     27,573    856.6714     344.837          0        999
+-------------+---------------------------------------------------------
+  overweight |     27,573    .2914083    .4544194          0          1
+       obese |     27,573    .2194901    .4139087          0          1
 
 
 
@@ -233,11 +233,11 @@ file ../temp/obesity_panel_cohorts.dta saved
 end of do-file
 
 
-Execute:  C:\Stata12_WinX86_x64\StataSE-64.exe /e do "./analysis.do"
+Execute:  "C:\Program Files (x86)\Stata14\StataSE-64.exe" /e do "./analysis.do"
 
   ___  ____  ____  ____  ____ (R)
  /__    /   ____/   /   ____/
-___/   /   /___/   /   /___/   12.0   Copyright 1985-2011 StataCorp LP
+___/   /   /___/   /   /___/   14.2   Copyright 1985-2015 StataCorp LLC
   Statistics/Data Analysis            StataCorp
                                       4905 Lakeway Drive
      Special Edition                  College Station, Texas 77845 USA
@@ -245,43 +245,42 @@ ___/   /   /___/   /   /___/   12.0   Copyright 1985-2011 StataCorp LP
                                       979-696-4600        stata@stata.com
                                       979-696-4601 (fax)
 
-Single-user Stata network perpetual license:
-       Serial number:  93611859953
-         Licensed to:  STATAforAll
-                       STATA
+110-user Stata network perpetual license:
+       Serial number:  401406206058
+         Licensed to:  CIS Department
+                       Brown University
 
 Notes:
-      1.  (/v# option or -set maxvar-) 5000 maximum variables
-      2.  Stata running in batch mode
+      1.  Stata is running in batch mode.
+      2.  Unicode is supported; see help unicode_advice.
+      3.  Maximum number of variables is set to 5000; see help set_maxvar.
 
 . do ./analysis.do 
-
-. set scheme s2mono
 
 . set more off
 
 . adopath + ../../../lib/stata/gslab_misc/ado
-  [1]  (UPDATES)   "C:\Stata12_WinX86_x64\ado\updates/"
-  [2]  (BASE)      "C:\Stata12_WinX86_x64\ado\base/"
-  [3]  (SITE)      "C:\Stata12_WinX86_x64\ado\site/"
-  [4]              "."
-  [5]  (PERSONAL)  "c:\ado\personal/"
-  [6]  (PLUS)      "c:\ado\plus/"
-  [7]  (OLDPLACE)  "c:\ado/"
-  [8]              "../../../lib/stata/gslab_misc/ado"
+  [1]  (BASE)      "C:\Program Files (x86)\Stata14\ado\base/"
+  [2]  (SITE)      "C:\Program Files (x86)\Stata14\ado\site/"
+  [3]              "."
+  [4]  (PERSONAL)  "c:\ado\personal/"
+  [5]  (PLUS)      "c:\ado\plus/"
+  [6]  (OLDPLACE)  "c:\ado/"
+  [7]              "../../../lib/stata/gslab_misc/ado"
 
 . adopath + ../../../lib/third_party/stata_tools
-  [1]  (UPDATES)   "C:\Stata12_WinX86_x64\ado\updates/"
-  [2]  (BASE)      "C:\Stata12_WinX86_x64\ado\base/"
-  [3]  (SITE)      "C:\Stata12_WinX86_x64\ado\site/"
-  [4]              "."
-  [5]  (PERSONAL)  "c:\ado\personal/"
-  [6]  (PLUS)      "c:\ado\plus/"
-  [7]  (OLDPLACE)  "c:\ado/"
-  [8]              "../../../lib/stata/gslab_misc/ado"
-  [9]              "../../../lib/third_party/stata_tools"
+  [1]  (BASE)      "C:\Program Files (x86)\Stata14\ado\base/"
+  [2]  (SITE)      "C:\Program Files (x86)\Stata14\ado\site/"
+  [3]              "."
+  [4]  (PERSONAL)  "c:\ado\personal/"
+  [5]  (PLUS)      "c:\ado\plus/"
+  [6]  (OLDPLACE)  "c:\ado/"
+  [7]              "../../../lib/stata/gslab_misc/ado"
+  [8]              "../../../lib/third_party/stata_tools"
 
 . preliminaries
+
+. set scheme s2mono
 
 . 
 . program main
@@ -341,4 +340,4 @@ Notes:
 . 
 end of do-file
 
- make.py ended: 2017-11-09 18:11:52
+ make.py ended: 2017-12-02 13:29:01

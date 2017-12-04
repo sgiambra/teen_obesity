@@ -1,5 +1,5 @@
 
- make.py started: 2017-11-28 18:17:46 C:\Users\sgiambra\Documents\GitHub\teen_obesity\analysis\Trends_in_obesity_nhis\code 
+ make.py started: 2017-12-02 16:35:46 C:\Users\sgiambra\Documents\GitHub\teen_obesity\analysis\Trends_in_obesity_nhis\code 
 
 
 
@@ -53,9 +53,9 @@ Notes:
 
 . 
 . program main
-  1.     local derived_dir  = "${GoogleDrive}/derived/nhis/ipums"
+  1.     local base_dir  = "${GoogleDrive}/base/nhis/ipums"
   2. 
-.     use "`derived_dir'/ipums_nhis.dta", clear
+.     use "`base_dir'/ipums_nhis.dta", clear
   3.     label var year "Year"
   4.     gen south = region == 3
   5. 
@@ -278,6 +278,8 @@ Notes:
 
 . preliminaries
 
+. set scheme s2mono
+
 . 
 . program main
   1.     local plot_opts = "graphregion(fcolor(white)) ylab(, nogrid)"
@@ -394,4 +396,4 @@ Notes:
 . 
 end of do-file
 
- make.py ended: 2017-11-28 18:18:10
+ make.py ended: 2017-12-02 16:36:26

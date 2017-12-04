@@ -1,0 +1,23 @@
+
+ make.py started: 2017-12-02 12:08:04 C:\Users\sgiambra\Documents\GitHub\teen_obesity\slides 
+
+
+
+
+Execute:  lyx -e pdf2 "./source\breakfast.lyx"
+'lyx' is not recognized as an internal or external command,
+operable program or batch file.
+ERROR! Command lyx -e pdf2 "./source\breakfast.lyx" executed with errors 
+Command 'lyx -e pdf2 "./source\breakfast.lyx"' returned non-zero exit status 1
+
+
+Traceback (most recent call last):
+  File "C:\Users\sgiambra\AppData\Local\Continuum\anaconda2\lib\site-packages\gslab_make\run_program.py", line 384, in run_lyx
+    shutil.copy2(pdfname, pdfout)
+  File "C:\Users\sgiambra\AppData\Local\Continuum\anaconda2\lib\shutil.py", line 144, in copy2
+    copyfile(src, dst)
+  File "C:\Users\sgiambra\AppData\Local\Continuum\anaconda2\lib\shutil.py", line 96, in copyfile
+    with open(src, 'rb') as fsrc:
+IOError: [Errno 2] No such file or directory: './source\\breakfast.pdf'
+
+ make.py ended: 2017-12-02 12:08:04
