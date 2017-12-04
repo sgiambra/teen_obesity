@@ -187,7 +187,7 @@ In late 1970s, 12.7% of men and 17% of women were obese
 \begin_layout Itemize
 
 \size small
-During 2011-2014, 34.3% of mean and 38.3% percent of women were obese
+During 2011-2014, 34.3% of men and 38.3% percent of women were obese
 \end_layout
 
 \end_deeper
@@ -689,13 +689,13 @@ Large time and geographic variation in school eating environment
 
 \size small
 Example: strength of policies regulating standard for a la carte beverages
- in 2003, elementary school
+ in elementary schools as of 2003
 \end_layout
 
 \begin_layout Standard
 \align center
 \begin_inset Graphics
-	filename C:/Users/sgiambra/Google Drive/research projects/obesity/maps/alacarte_beverages_2003.PNG
+	filename C:/Users/Samuele/Google Drive/research projects/obesity/maps/alacarte_beverages_2003.PNG
 	scale 50
 
 \end_inset
@@ -739,14 +739,14 @@ School Eating Environment
 \begin_layout Itemize
 
 \size small
-Policies regulating standard for a la carte beverages in 2015, elementary
- school
+Policies regulating standard for a la carte beverages in elementary schools
+ as of 2015
 \end_layout
 
 \begin_layout Standard
 \align center
 \begin_inset Graphics
-	filename C:/Users/sgiambra/Google Drive/research projects/obesity/maps/alacarte_beverages_2015.PNG
+	filename C:/Users/Samuele/Google Drive/research projects/obesity/maps/alacarte_beverages_2015.PNG
 	scale 55
 
 \end_inset
@@ -917,7 +917,7 @@ Different childhood obesity rates at the school district level (likely at
 \begin_layout Standard
 \align center
 \begin_inset Graphics
-	filename C:/Users/sgiambra/Google Drive/research projects/obesity/maps/childhood_obesity_ny.PNG
+	filename C:/Users/Samuele/Google Drive/research projects/obesity/maps/childhood_obesity_ny.PNG
 	scale 50
 
 \end_inset
@@ -1020,44 +1020,28 @@ References
 \begin_layout Frame
 
 \size footnotesize
-Jean, Eid, Henry G.
- Overman, Diego Puga and Matthew A.
- Turner.
- 2008.
- Fat city: Questioning the relationship between urban sprawl and obesity.
- 
+Anderson, Michael L., Justin Gallagher and Elizabeth Ramirez Ritchie.
+ 2017.School lunch quality and academic performance.
+
 \shape italic
-Journal of Urban Economics 
+ 
 \shape default
-63: 385-404.
+National Bureau of Economic Research No.
+ w23218.
 \end_layout
 
 \begin_layout Frame
 
 \size footnotesize
-David, M.
- Cutler, Edward L.
- Glaeser and Jesse M.
- Shapiro.
- 2003.
- Why have Americans become more obese? 
-\shape italic
-Journal of Economic Perspectives 
-\shape default
-17(3): 93-118.
-\end_layout
+Bauhoff, Sebastian.
+ 2014.
+ The effect of school district nutrition policies on dietary intake and
+ overweight: a synthetic control approach.
 
-\begin_layout Frame
-
-\size footnotesize
-Sturm, Roland.
- 2002.
- The effects of obesity, smoking, and drinking on medical problems and costs.
- 
 \shape italic
-Health affairs 
+ Economics & Human Biology
 \shape default
-21(2): 245-253.
+ 12: 45-55.
 \end_layout
 
 \begin_layout Frame
@@ -1073,6 +1057,133 @@ Bradbury, Katharine, Mary A.
  
 \shape default
 Working Papers, Federal Reserve Bank of Boston, No.13-12.
+\end_layout
+
+\begin_layout Frame
+
+\size footnotesize
+Campbell, Benjamin L., Nayga Rodolfo M., Park John L.
+ Jr.
+ and Silva Andres.
+ 2011.
+ Does the National School Lunch Program improve children’s dietary outcomes?.
+
+\shape italic
+ American Journal of Agricultural Economics
+\shape default
+ 93(4): 1099-1130.
+\end_layout
+
+\begin_layout Frame
+
+\size footnotesize
+Cutler, David, M., Edward L.
+ Glaeser and Jesse M.
+ Shapiro.
+ 2003.
+ Why have Americans become more obese?.
+ 
+\shape italic
+Journal of Economic Perspectives 
+\shape default
+17(3): 93-118.
+\end_layout
+
+\begin_layout Standard
+
+\size footnotesize
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+
+\end_layout
+
+\begin_layout Frame
+
+\size footnotesize
+Eid, Jean, Henry G.
+ Overman, Diego Puga and Matthew A.
+ Turner.
+ 2008.
+ Fat city: Questioning the relationship between urban sprawl and obesity.
+ 
+\shape italic
+Journal of Urban Economics 
+\shape default
+63: 385-404.
+\end_layout
+
+\begin_layout Frame
+
+\size footnotesize
+Li, Wenjun, et al.
+ 2015.
+ Declining trends and widening disparities in overweight and obesity prevalence
+ among Massachusetts Public School Districts, 2009–2014.
+
+\shape italic
+ American Journal of Public Health
+\shape default
+ 105(10): e76-e82.
+\end_layout
+
+\begin_layout Frame
+
+\size footnotesize
+Ng, Marie, et al.
+ 2014.
+ Global, regional, and national prevalence of overweight and obesity in
+ children and adults during 1980–2013: a systematic analysis for the Global
+ Burden of Disease Study 2013.
+
+\shape italic
+ The Lancet
+\shape default
+ 384(9945): 766-781.
+\end_layout
+
+\begin_layout Frame
+
+\size footnotesize
+Ogden, Cynthia L., et al.
+ 2016.
+ Trends in obesity prevalence among children and adolescents in the United
+ States, 1988-1994 through 2013-2014.
+
+\shape italic
+ Jama
+\shape default
+ 315(21): 2292-2299.
+\end_layout
+
+\begin_layout Frame
+
+\size footnotesize
+Schanzenbach, Diane Whitmore.
+ 2009.
+ Do school lunches contribute to childhood obesity?.
+
+\shape italic
+ Journal of Human Resources
+\shape default
+ 44(3): 684-709.
+\end_layout
+
+\begin_layout Frame
+
+\size footnotesize
+Sturm, Roland.
+ 2002.
+ The effects of obesity, smoking, and drinking on medical problems and costs.
+ 
+\shape italic
+Health affairs 
+\shape default
+21(2): 245-253.
 \end_layout
 
 \end_body
