@@ -1,0 +1,558 @@
+
+ make.py started: 2017-12-06 21:12:47 C:\Users\sgiambra\Documents\GitHub\teen_obesity\base\Load_nhanes_data\code 
+
+
+
+
+Execute:  "C:\Program Files (x86)\Stata14\StataSE-64.exe" /e do "./preclean.do"
+
+  ___  ____  ____  ____  ____ (R)
+ /__    /   ____/   /   ____/
+___/   /   /___/   /   /___/   14.2   Copyright 1985-2015 StataCorp LLC
+  Statistics/Data Analysis            StataCorp
+                                      4905 Lakeway Drive
+     Special Edition                  College Station, Texas 77845 USA
+                                      800-STATA-PC        http://www.stata.com
+                                      979-696-4600        stata@stata.com
+                                      979-696-4601 (fax)
+
+110-user Stata network perpetual license:
+       Serial number:  401406206058
+         Licensed to:  CIS Department
+                       Brown University
+
+Notes:
+      1.  Stata is running in batch mode.
+      2.  Unicode is supported; see help unicode_advice.
+      3.  Maximum number of variables is set to 5000; see help set_maxvar.
+
+. do ./preclean.do 
+
+. set more off
+
+. adopath + ../../../lib/stata/gslab_misc/ado
+  [1]  (BASE)      "C:\Program Files (x86)\Stata14\ado\base/"
+  [2]  (SITE)      "C:\Program Files (x86)\Stata14\ado\site/"
+  [3]              "."
+  [4]  (PERSONAL)  "c:\ado\personal/"
+  [5]  (PLUS)      "c:\ado\plus/"
+  [6]  (OLDPLACE)  "c:\ado/"
+  [7]              "../../../lib/stata/gslab_misc/ado"
+
+. adopath + ../../../lib/third_party/stata_tools
+  [1]  (BASE)      "C:\Program Files (x86)\Stata14\ado\base/"
+  [2]  (SITE)      "C:\Program Files (x86)\Stata14\ado\site/"
+  [3]              "."
+  [4]  (PERSONAL)  "c:\ado\personal/"
+  [5]  (PLUS)      "c:\ado\plus/"
+  [6]  (OLDPLACE)  "c:\ado/"
+  [7]              "../../../lib/stata/gslab_misc/ado"
+  [8]              "../../../lib/third_party/stata_tools"
+
+. preliminaries, loadglob("../../../lib/python/obesity/input_params.txt")
+
+. 
+. program main
+  1.     local raw_data_dir = "${GoogleDrive}/raw_data/nhanes"
+  2.     local base_dir     = "${GoogleDrive}/base/nhanes"
+  3. 
+.     local years_list = "1999-2000 2001-2002 2003-2004 2005-2006 2007-2008 " + ///
+>                        "2009-2010 2011-2012 2013-2014 2015-2016"
+  4.     local stub_list  = `""" "_B" "_C" "_D" "_E" "_F" "_G" "_H" "_I""'
+  5.     local idx: word count `years_list'
+  6. 
+.     forval col_index = 1/`idx' {
+  7.         local years: word `col_index' of `years_list'
+  8.         local stub: word `col_index' of `stub_list'
+  9. 
+.         import sasxport "`raw_data_dir'/`years'/BMX`stub'.xpt", clear
+ 10.         save "../temp/`years'_BMX.dta", replace
+ 11.         
+.         import sasxport "`raw_data_dir'/`years'/DEMO`stub'.xpt", clear      
+ 12.         merge 1:1 seqn using "../temp/`years'_BMX.dta", ///
+>             assert(1 3) keep(3) nogen
+ 13. 
+.         save "../temp/`years'_DEMO_BMX.dta", replace
+ 14.     }
+ 15. 
+.     local idx_no_last = `idx' - 1
+ 16.     forval col_index = 1/`idx_no_last' {
+ 17.         local years: word `col_index' of `years_list'
+ 18.         append using "../temp/`years'_DEMO_BMX.dta"
+ 19.     }
+ 20. 
+.     save_data "`base_dir'/nhanes_1999-2016.dta", key(seqn) nopreserve replace
+ 21. end
+
+. 
+. * Execute
+. main
+(note: file ../temp/1999-2000_BMX.dta not found)
+file ../temp/1999-2000_BMX.dta saved
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                             0
+    matched                             9,282  
+    -----------------------------------------
+(note: file ../temp/1999-2000_DEMO_BMX.dta not found)
+file ../temp/1999-2000_DEMO_BMX.dta saved
+(note: file ../temp/2001-2002_BMX.dta not found)
+file ../temp/2001-2002_BMX.dta saved
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                             0
+    matched                            10,477  
+    -----------------------------------------
+(note: file ../temp/2001-2002_DEMO_BMX.dta not found)
+file ../temp/2001-2002_DEMO_BMX.dta saved
+(note: file ../temp/2003-2004_BMX.dta not found)
+file ../temp/2003-2004_BMX.dta saved
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                             0
+    matched                             9,643  
+    -----------------------------------------
+(note: file ../temp/2003-2004_DEMO_BMX.dta not found)
+file ../temp/2003-2004_DEMO_BMX.dta saved
+(note: file ../temp/2005-2006_BMX.dta not found)
+file ../temp/2005-2006_BMX.dta saved
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                             0
+    matched                             9,950  
+    -----------------------------------------
+(note: file ../temp/2005-2006_DEMO_BMX.dta not found)
+file ../temp/2005-2006_DEMO_BMX.dta saved
+(note: file ../temp/2007-2008_BMX.dta not found)
+file ../temp/2007-2008_BMX.dta saved
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                             0
+    matched                             9,762  
+    -----------------------------------------
+(note: file ../temp/2007-2008_DEMO_BMX.dta not found)
+file ../temp/2007-2008_DEMO_BMX.dta saved
+(note: file ../temp/2009-2010_BMX.dta not found)
+file ../temp/2009-2010_BMX.dta saved
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                             0
+    matched                            10,253  
+    -----------------------------------------
+(note: file ../temp/2009-2010_DEMO_BMX.dta not found)
+file ../temp/2009-2010_DEMO_BMX.dta saved
+(note: file ../temp/2011-2012_BMX.dta not found)
+file ../temp/2011-2012_BMX.dta saved
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                             0
+    matched                             9,338  
+    -----------------------------------------
+(note: file ../temp/2011-2012_DEMO_BMX.dta not found)
+file ../temp/2011-2012_DEMO_BMX.dta saved
+(note: file ../temp/2013-2014_BMX.dta not found)
+file ../temp/2013-2014_BMX.dta saved
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                             0
+    matched                             9,813  
+    -----------------------------------------
+(note: file ../temp/2013-2014_DEMO_BMX.dta not found)
+file ../temp/2013-2014_DEMO_BMX.dta saved
+(note: file ../temp/2015-2016_BMX.dta not found)
+file ../temp/2015-2016_BMX.dta saved
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                             0
+    matched                             9,544  
+    -----------------------------------------
+(note: file ../temp/2015-2016_DEMO_BMX.dta not found)
+file ../temp/2015-2016_DEMO_BMX.dta saved
+(data now sorted by seqn)
+  variable seqn was double now long
+  variable sddsrvyr was double now byte
+  variable ridstatr was double now byte
+  variable riagendr was double now byte
+  variable ridageyr was double now byte
+  variable ridagemn was double now int
+  variable ridreth1 was double now byte
+  variable ridreth3 was double now byte
+  variable ridexmon was double now byte
+  variable ridexagm was double now int
+  variable dmqmiliz was double now byte
+  variable dmqadfc was double now byte
+  variable dmdborn4 was double now byte
+  variable dmdcitzn was double now byte
+  variable dmdyrsus was double now byte
+  variable dmdeduc3 was double now byte
+  variable dmdeduc2 was double now byte
+  variable dmdmartl was double now byte
+  variable ridexprg was double now byte
+  variable sialang was double now byte
+  variable siaproxy was double now byte
+  variable siaintrp was double now byte
+  variable fialang was double now byte
+  variable fiaproxy was double now byte
+  variable fiaintrp was double now byte
+  variable mialang was double now byte
+  variable miaproxy was double now byte
+  variable miaintrp was double now byte
+  variable aialanga was double now byte
+  variable dmdhhsiz was double now byte
+  variable dmdfmsiz was double now byte
+  variable dmdhhsza was double now byte
+  variable dmdhhszb was double now byte
+  variable dmdhhsze was double now byte
+  variable dmdhrgnd was double now byte
+  variable dmdhrage was double now byte
+  variable dmdhrbr4 was double now byte
+  variable dmdhredu was double now byte
+  variable dmdhrmar was double now byte
+  variable dmdhsedu was double now byte
+  variable sdmvpsu was double now byte
+  variable sdmvstra was double now int
+  variable indhhin2 was double now byte
+  variable indfmin2 was double now byte
+  variable bmdstats was double now byte
+  variable bmiwt was double now byte
+  variable bmirecum was double now byte
+  variable bmihead was double now byte
+  variable bmiht was double now byte
+  variable bmdbmic was double now byte
+  variable bmileg was double now byte
+  variable bmiarml was double now byte
+  variable bmiarmc was double now byte
+  variable bmiwaist was double now byte
+  variable bmdsadcm was double now byte
+  variable ridageex was double now int
+  variable ridreth2 was double now byte
+  variable dmqmilit was double now byte
+  variable dmdborn was double now byte
+  variable dmdeduc was double now byte
+  variable dmdschol was double now byte
+  variable indhhinc was double now byte
+  variable indfminc was double now byte
+  variable ridpreg was double now byte
+  variable dmdhrbrn was double now byte
+  variable sdj1repn was double now byte
+  variable dmaethn was double now byte
+  variable dmarace was double now byte
+  variable bmaexlen was double now int
+  variable bmaexsts was double now byte
+  variable bmaexcmt was double now byte
+  variable bmicalf was double now byte
+  variable bmithicr was double now byte
+  variable bmitri was double now byte
+  variable bmisub was double now byte
+  variable bmaamp was double now byte
+  variable bmaurext was double now byte
+  variable bmauprel was double now byte
+  variable bmaulext was double now byte
+  variable bmauplel was double now byte
+  variable bmalorex was double now byte
+  variable bmalorkn was double now byte
+  variable bmallext was double now byte
+  variable bmallkne was double now byte
+  variable aialang was double now byte
+  variable bmdrecuf was double now byte
+  variable bmdsubf was double now byte
+  variable bmdthicf was double now byte
+  variable bmdlegf was double now byte
+  variable bmdarmlf was double now byte
+  variable bmdcalff was double now byte
+  variable dmdborn2 was double now byte
+  variable dmdhrbr2 was double now byte
+  variable ridexagy was double now byte
+  (57,240,300 bytes saved)
+==================================================================================================
+File: C:\Users\sgiambra/Google Drive/research projects/obesity/base/nhanes/nhanes_1999-2016.dta
+Key: seqn
+==================================================================================================
+  88062:221(58395):841048211:933067005
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+        seqn |     88,062    46595.11    26980.63          1      93702
+    sddsrvyr |     88,062    4.985794    2.566244          1          9
+    ridstatr |     88,062           2           0          2          2
+    riagendr |     88,062    1.506723    .4999576          1          2
+    ridageyr |     88,062    30.56251    24.64574          0         85
+-------------+---------------------------------------------------------
+    ridagemn |     59,874     340.192    285.0849          0       1019
+    ridreth1 |     88,062    2.860189     1.24448          1          5
+    ridreth3 |     28,695    3.308869    1.632589          1          7
+    ridexmon |     88,062    1.524006    .4994262          1          2
+    ridexagm |     12,282    105.4331    69.35451          0        239
+-------------+---------------------------------------------------------
+    dmqmiliz |     17,706    1.912346     .285779          1          7
+     dmqadfc |      1,557    1.504817    .6005641          1          9
+    dmdborn4 |     28,695    1.241087    1.741063          1         99
+    dmdcitzn |     88,038     1.11553    .4023222          1          9
+    dmdyrsus |     15,663    7.278746    15.04867          1         99
+-------------+---------------------------------------------------------
+    dmdeduc3 |     26,251    7.033713    7.466311          0         99
+    dmdeduc2 |     47,132     3.29795    1.316877          1          9
+    dmdmartl |     53,435    2.813886    2.640951          1         99
+    ridexprg |     17,757    1.966154    .3797548          1          3
+     sialang |     68,300    1.135154    .3418902          1          2
+-------------+---------------------------------------------------------
+    siaproxy |     68,289    1.625621    .4839658          1          2
+    siaintrp |     68,300    1.974407    .1579188          1          2
+     fialang |     67,495    1.096022    .2946235          1          2
+    fiaproxy |     67,495    1.998667    .0364921          1          2
+    fiaintrp |     67,495    1.977258    .1490823          1          2
+-------------+---------------------------------------------------------
+     mialang |     49,075    1.081386    .2734292          1          2
+    miaproxy |     49,077    1.993887    .0779461          1          2
+    miaintrp |     49,077    1.980582    .1379919          1          2
+    aialanga |     18,033    1.118394    .3671146          1          3
+    dmdhhsiz |     88,062    3.861439    1.734941          1          7
+-------------+---------------------------------------------------------
+    dmdfmsiz |     58,660    3.691016    1.784293          1          7
+    dmdhhsza |     28,695     .542429    .8141191          0          3
+    dmdhhszb |     28,695    1.007214    1.191784          0          4
+    dmdhhsze |     28,695     .398153    .7021882          0          3
+    dmdhrgnd |     88,048    1.477955    .4995166          1          2
+-------------+---------------------------------------------------------
+    dmdhrage |     88,048    45.04067    16.06959         15         85
+    dmdhrbr4 |     27,765    1.416207    2.860679          1         99
+    dmdhredu |     85,427    3.272712    1.344764          1          9
+    dmdhrmar |     84,525    2.670807    5.776808          1         99
+    dmdhsedu |     44,635    3.389605     1.38329          1          9
+-------------+---------------------------------------------------------
+    wtint2yr |     88,062    28962.28    28244.78   974.6653   236864.1
+    wtmec2yr |     88,062    30243.75    29406.75   980.3374   261361.3
+     sdmvpsu |     88,062    1.523427    .5308653          1          3
+    sdmvstra |     88,062    65.81728    38.69336          1        133
+    indhhin2 |     48,121    11.07398    15.24876          1         99
+-------------+---------------------------------------------------------
+    indfmin2 |     48,173     10.7908    15.22941          1         99
+    indfmpir |     80,864    2.253444    1.597825          0          5
+    bmdstats |     68,303    1.264351    .6750951          1          4
+       bmxwt |     86,602     61.4533    31.57042        2.4        371
+       bmiwt |      3,465    2.929004    .5363612          1          4
+-------------+---------------------------------------------------------
+    bmxrecum |     10,636    81.24035    13.95483       44.3      116.7
+    bmirecum |        308    1.032468    .2531581          1          3
+     bmxhead |      2,302    41.43367    2.647751       15.5       50.2
+     bmihead |          5           1           0          1          1
+       bmxht |     80,223    156.0424    23.33739         79      204.5
+-------------+---------------------------------------------------------
+       bmiht |      2,041    2.529642     .848429          1          3
+      bmxbmi |     79,794    25.38561    7.549209       7.99     130.21
+     bmdbmic |     10,218    2.493345    .8271387          1          4
+      bmxleg |     66,130    38.82605    4.264674       20.4       55.5
+      bmileg |      2,937           1           0          1          1
+-------------+---------------------------------------------------------
+     bmxarml |     83,634    32.95754    7.559043          9       48.6
+     bmiarml |      2,986           1           0          1          1
+     bmxarmc |     83,617    28.22004    7.827329        9.6       62.4
+     bmiarmc |      3,017           1           0          1          1
+    bmxwaist |     77,098    86.33519    21.85046         32        179
+-------------+---------------------------------------------------------
+    bmiwaist |      3,573           1           0          1          1
+     bmxsad1 |     20,996    21.14409    4.946008        9.5       40.7
+     bmxsad2 |     20,996    21.12914    4.957498        9.7       40.9
+     bmxsad3 |      1,109    22.38124    5.073749       10.9       39.5
+     bmxsad4 |      1,109     22.3771    5.069743         11       39.8
+-------------+---------------------------------------------------------
+    bmdavsad |     20,996    21.15237    4.948841        9.6       40.8
+    bmdsadcm |      1,415    1.177385    .6926959          1          5
+    ridageex |     57,874    351.7031    283.1834          0       1019
+    ridreth2 |     29,402    2.093293    1.093641          1          5
+    dmqmilit |     35,064    1.878679    .3472465          1          9
+-------------+---------------------------------------------------------
+     dmdborn |     39,345    1.218605    .5464585          1          9
+     dmdeduc |     24,447    1.704176    .9017106          1          9
+    dmdschol |     17,152    1.366313    .6475356          1          9
+    indhhinc |     36,435    7.687087    9.093896          1         99
+    indfminc |     38,863    8.595322    13.47237          1         99
+-------------+---------------------------------------------------------
+     ridpreg |      4,912    1.974349    .9442587          1          9
+    dmdhrbrn |     38,135    1.365701    .6615629          1          9
+    wtint4yr |     19,759    13210.61     13414.5   620.6824   100652.3
+    wtmec4yr |     19,759    14102.55     14346.8   632.5432   103831.2
+    sdj1repn |      9,282    26.55613    14.89246          1         52
+-------------+---------------------------------------------------------
+     dmaethn |          0
+     dmarace |          0
+    wtmrep01 |      9,282    29320.93    33323.91          0   258536.5
+    wtmrep02 |      9,282    29320.93    33305.63          0   260734.5
+    wtmrep03 |      9,282    29320.93    32850.67          0   261389.7
+-------------+---------------------------------------------------------
+    wtmrep04 |      9,282    29320.93     32979.2          0   261672.1
+    wtmrep05 |      9,282    29320.93    33286.51          0   261039.3
+    wtmrep06 |      9,282    29320.93    33396.54          0   262491.5
+    wtmrep07 |      9,282    29320.93    33234.53          0   258631.6
+    wtmrep08 |      9,282    29320.93    33291.95          0   261427.9
+-------------+---------------------------------------------------------
+    wtmrep09 |      9,282    29320.93    33293.94          0   263135.1
+    wtmrep10 |      9,282    29320.93    33539.42          0   264325.8
+    wtmrep11 |      9,282    29320.93    33842.59          0   265082.9
+    wtmrep12 |      9,282    29320.93    33448.81          0   261045.3
+    wtmrep13 |      9,282    29320.93     33195.3          0   259966.3
+-------------+---------------------------------------------------------
+    wtmrep14 |      9,282    29320.93    33758.47          0   267824.1
+    wtmrep15 |      9,282    29320.93    34539.13          0   264048.8
+    wtmrep16 |      9,282    29320.93    34029.66          0   265140.6
+    wtmrep17 |      9,282    29320.93    33436.63          0   260425.8
+    wtmrep18 |      9,282    29320.93     33100.9          0   261367.5
+-------------+---------------------------------------------------------
+    wtmrep19 |      9,282    29320.93    33318.21          0     265394
+    wtmrep20 |      9,282    29320.93     32897.9          0   261809.7
+    wtmrep21 |      9,282    29320.93    33381.82          0   261040.6
+    wtmrep22 |      9,282    29320.93    32828.86          0     261411
+    wtmrep23 |      9,282    29320.93    33193.97          0   261818.8
+-------------+---------------------------------------------------------
+    wtmrep24 |      9,282    29320.93    33357.48          0   262433.3
+    wtmrep25 |      9,282    29320.93    32856.33          0   261361.8
+    wtmrep26 |      9,282    29320.93    33263.11          0     259974
+    wtmrep27 |      9,282    29320.93    34200.19          0   260115.7
+    wtmrep28 |      9,282    29320.93    33724.23          0   265884.1
+-------------+---------------------------------------------------------
+    wtmrep29 |      9,282    29320.93    33072.08          0   263108.3
+    wtmrep30 |      9,282    29320.93    33715.05          0   261761.8
+    wtmrep31 |      9,282    29320.93    32962.48          0   262963.6
+    wtmrep32 |      9,282    29320.93    33808.71          0   254090.9
+    wtmrep33 |      9,282    29320.93    33490.78          0   259603.3
+-------------+---------------------------------------------------------
+    wtmrep34 |      9,282    29320.93    33042.02          0   261548.4
+    wtmrep35 |      9,282    29320.93    33264.77          0   253436.6
+    wtmrep36 |      9,282    29320.93    33643.53          0   261427.1
+    wtmrep37 |      9,282    29320.93    32918.14          0   262556.5
+    wtmrep38 |      9,282    29320.93    33392.92          0   265965.1
+-------------+---------------------------------------------------------
+    wtmrep39 |      9,282    29320.93    33332.55          0   263382.4
+    wtmrep40 |      9,282    29320.93    32941.77          0   262655.3
+    wtmrep41 |      9,282    29320.93    33733.43          0   263442.4
+    wtmrep42 |      9,282    29320.93    33965.42          0   263487.7
+    wtmrep43 |      9,282    29320.93    33472.57          0   263992.1
+-------------+---------------------------------------------------------
+    wtmrep44 |      9,282    29320.93    33409.35          0   262043.8
+    wtmrep45 |      9,282    29320.93    33891.38          0     257749
+    wtmrep46 |      9,282    29320.93    33722.56          0   266060.3
+    wtmrep47 |      9,282    29320.93    33502.18          0   252840.4
+    wtmrep48 |      9,282    29320.93    32966.81          0   261674.6
+-------------+---------------------------------------------------------
+    wtmrep49 |      9,282    29320.93    33181.29          0   261134.2
+    wtmrep50 |      9,282    29320.93    33232.78          0   261980.5
+    wtmrep51 |      9,282    29320.93    33693.97          0   259613.2
+    wtmrep52 |      9,282    29320.93    33325.78          0     260463
+    wtirep01 |      9,282    26994.93    30493.08          0   238420.9
+-------------+---------------------------------------------------------
+    wtirep02 |      9,282    26950.75    30408.63          0     237014
+    wtirep03 |      9,282    26961.39    30004.56          0     236865
+    wtirep04 |      9,282    26961.04    30129.04          0   237416.5
+    wtirep05 |      9,282    26983.43    30430.46          0   237747.8
+    wtirep06 |      9,282    26950.84    30485.63          0   238188.5
+-------------+---------------------------------------------------------
+    wtirep07 |      9,282    26963.67    30368.85          0   235374.9
+    wtirep08 |      9,282    26969.04    30417.04          0   237535.9
+    wtirep09 |      9,282    26958.33    30390.01          0   238836.2
+    wtirep10 |      9,282    26961.61    30645.28          0   240731.8
+    wtirep11 |      9,282    26981.17    30947.75          0   240439.9
+-------------+---------------------------------------------------------
+    wtirep12 |      9,282    26936.79    30503.08          0   237833.5
+    wtirep13 |      9,282    26960.77    30325.93          0   236237.3
+    wtirep14 |      9,282    26988.63    30815.42          0     242715
+    wtirep15 |      9,282    26937.68    31507.36          0   241151.1
+    wtirep16 |      9,282    26927.21    31028.93          0     241052
+-------------+---------------------------------------------------------
+    wtirep17 |      9,282    26943.19    30510.66          0   237292.1
+    wtirep18 |      9,282    26948.32    30212.27          0   237121.7
+    wtirep19 |      9,282    26997.29    30487.55          0   240662.7
+    wtirep20 |      9,282    26971.74     30053.9          0   237367.4
+    wtirep21 |      9,282    27009.28     30563.2          0   238551.1
+-------------+---------------------------------------------------------
+    wtirep22 |      9,282    26959.32    29980.25          0   236978.5
+    wtirep23 |      9,282    26969.24    30297.49          0   237791.3
+    wtirep24 |      9,282    26944.04    30449.78          0   238519.1
+    wtirep25 |      9,282    26952.24    30013.34          0   236876.3
+    wtirep26 |      9,282    27005.24    30458.68          0   237924.5
+-------------+---------------------------------------------------------
+    wtirep27 |      9,282    26910.73     31135.6          0   238878.2
+    wtirep28 |      9,282    26951.55    30781.82          0   241459.4
+    wtirep29 |      9,282    27019.99    30278.68          0   237716.2
+    wtirep30 |      9,282    26945.71    30757.96          0   238268.5
+    wtirep31 |      9,282    26972.72    30099.06          0   238064.7
+-------------+---------------------------------------------------------
+    wtirep32 |      9,282    26948.01    30838.49          0   232851.3
+    wtirep33 |      9,282    27036.36    30695.83          0   237122.6
+    wtirep34 |      9,282    26969.47    30187.02          0   237636.7
+    wtirep35 |      9,282    26950.64    30359.16          0   232641.6
+    wtirep36 |      9,282    26985.74    30793.54          0   238207.8
+-------------+---------------------------------------------------------
+    wtirep37 |      9,282     26956.4     30057.8          0     237795
+    wtirep38 |      9,282    26967.35    30526.37          0   241173.7
+    wtirep39 |      9,282    26953.77    30419.54          0   239060.1
+    wtirep40 |      9,282    26954.63    30066.32          0   237986.4
+    wtirep41 |      9,282     26921.1    30749.75          0   239760.2
+-------------+---------------------------------------------------------
+    wtirep42 |      9,282    26937.09    30989.35          0   239610.9
+    wtirep43 |      9,282    26966.45    30584.93          0   239320.7
+    wtirep44 |      9,282    26955.33     30515.8          0   237571.8
+    wtirep45 |      9,282    26939.31    30903.73          0   235750.4
+    wtirep46 |      9,282    26923.77    30738.11          0   241834.3
+-------------+---------------------------------------------------------
+    wtirep47 |      9,282    27012.39    30691.55          0     232739
+    wtirep48 |      9,282    26962.36    30101.62          0   237147.5
+    wtirep49 |      9,282    26960.54    30290.45          0   237076.1
+    wtirep50 |      9,282    26958.64    30354.89          0   238360.2
+    wtirep51 |      9,282    27000.13    30836.86          0     236649
+-------------+---------------------------------------------------------
+    wtirep52 |      9,282    26951.24    30415.95          0   236964.2
+    bmaexlen |      9,282     261.698    80.97126          0        909
+    bmaexsts |      9,282    1.021332    .1832838          1          3
+    bmaexcmt |        138     25.9058    37.10921          1         99
+     bmxcalf |     29,895    36.93835    5.017025       17.5       75.6
+-------------+---------------------------------------------------------
+     bmicalf |        872           1           0          1          1
+    bmxthicr |     29,491    51.35235    8.021488       25.1        100
+    bmithicr |      1,258           1           0          1          1
+      bmxtri |     53,785    16.31496    8.231653        1.4         45
+      bmitri |      4,567    1.302387    .4593421          1          2
+-------------+---------------------------------------------------------
+      bmxsub |     49,667    15.48389    8.751205        2.2         44
+      bmisub |      8,690    1.093211     .290744          1          2
+      bmaamp |      9,164    1.999673    .0180913          1          2
+    bmaurext |          3           2           0          2          2
+    bmauprel |          0
+-------------+---------------------------------------------------------
+    bmaulext |          3           2           0          2          2
+    bmauplel |          0
+    bmalorex |          3           1           0          1          1
+    bmalorkn |          3           2           0          2          2
+    bmallext |          3    1.666667    .5773503          1          2
+-------------+---------------------------------------------------------
+    bmallkne |          1           2           .          2          2
+     aialang |     25,256    1.103738     .304926          1          2
+    bmdrecuf |         27           1           0          1          1
+     bmdsubf |          1           1           .          1          1
+    bmdthicf |          3           1           0          1          1
+-------------+---------------------------------------------------------
+     bmdlegf |         14           1           0          1          1
+    bmdarmlf |          5           1           0          1          1
+    bmdcalff |          3           1           0          1          1
+    dmdborn2 |     20,015    1.444367    1.096289          1          9
+    dmdhrbr2 |     19,520    1.642572    1.233347          1          9
+-------------+---------------------------------------------------------
+    ridexagy |      3,418    9.641311    5.180846          2         20
+
+
+
+
+file C:\Users\sgiambra/Google Drive/research projects/obesity/base/nhanes/nhanes_1999-2016.dta saved
+
+. 
+end of do-file
+
+ make.py ended: 2017-12-06 21:12:57
