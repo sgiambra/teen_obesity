@@ -1,0 +1,210 @@
+
+ make.py started: 2017-12-07 20:51:18 C:\Users\sgiambra\Documents\GitHub\teen_obesity\analysis\Trends_in_obesity_nhanes\code 
+
+
+
+
+Execute:  "C:\Program Files (x86)\Stata14\StataSE-64.exe" /e do "./analysis.do"
+
+  ___  ____  ____  ____  ____ (R)
+ /__    /   ____/   /   ____/
+___/   /   /___/   /   /___/   14.2   Copyright 1985-2015 StataCorp LLC
+  Statistics/Data Analysis            StataCorp
+                                      4905 Lakeway Drive
+     Special Edition                  College Station, Texas 77845 USA
+                                      800-STATA-PC        http://www.stata.com
+                                      979-696-4600        stata@stata.com
+                                      979-696-4601 (fax)
+
+110-user Stata network perpetual license:
+       Serial number:  401406206058
+         Licensed to:  CIS Department
+                       Brown University
+
+Notes:
+      1.  Stata is running in batch mode.
+      2.  Unicode is supported; see help unicode_advice.
+      3.  Maximum number of variables is set to 5000; see help set_maxvar.
+
+. do ./analysis.do 
+
+. set more off
+
+. adopath + ../../../lib/stata/gslab_misc/ado
+  [1]  (BASE)      "C:\Program Files (x86)\Stata14\ado\base/"
+  [2]  (SITE)      "C:\Program Files (x86)\Stata14\ado\site/"
+  [3]              "."
+  [4]  (PERSONAL)  "c:\ado\personal/"
+  [5]  (PLUS)      "c:\ado\plus/"
+  [6]  (OLDPLACE)  "c:\ado/"
+  [7]              "../../../lib/stata/gslab_misc/ado"
+
+. adopath + ../../../lib/third_party/stata_tools
+  [1]  (BASE)      "C:\Program Files (x86)\Stata14\ado\base/"
+  [2]  (SITE)      "C:\Program Files (x86)\Stata14\ado\site/"
+  [3]              "."
+  [4]  (PERSONAL)  "c:\ado\personal/"
+  [5]  (PLUS)      "c:\ado\plus/"
+  [6]  (OLDPLACE)  "c:\ado/"
+  [7]              "../../../lib/stata/gslab_misc/ado"
+  [8]              "../../../lib/third_party/stata_tools"
+
+. preliminaries, loadglob("../../../lib/python/obesity/input_params.txt")
+
+. 
+. program main
+  1.     local base_dir = "${GoogleDrive}/base/nhanes"
+  2.     use "`base_dir'/nhanes_1999-2016.dta", clear
+  3. 
+.     build_continuous_nhanes, init_year(2) last_year(18)
+  4.     save "../temp/continuous_nhanes.dta", replace
+  5.      
+.     use "`base_dir'/nhanesiii.dta", clear
+  6.     build_nhanes_iii, init_year(2) last_year(18)
+  7.     
+.     label var b "Average BMI"
+  8.     label var survey_year "Survey year"
+  9.     
+.     append using "../temp/continuous_nhanes.dta"
+ 10.     
+.     local label_list = "1988-1991 1992-1994 1999-2000 2001-2002 2003-2004 " + ///
+>                        "2005-2006 2007-2008 2009-2010 2011-2012 2013-2014 2015-2016"
+ 11.     local idx: word count `label_list'
+ 12. 
+.     forval col_index = 1/`idx' {
+ 13.         local year_lab: word `col_index' of `label_list'
+ 14.         local define_label `define_label' `col_index' "`year_lab'"
+ 15.     }
+ 16.     
+.     scatter b survey_year, xlabel(`define_label', labsize(small) angle(45))
+ 17.     graph export "../output/bmi_2to18_nhanes.png", as(png) replace
+ 18.     */
+. end
+
+. 
+. program build_continuous_nhanes
+  1.     syntax, init_year(int) last_year(int)
+  2.     
+.     gen weight = 1/10*wtmec2yr
+  3.     replace weight = 2/10*wtmec4yr if sddsrvyr == 1 | sddsrvyr == 2
+  4.     svyset [w=weight], psu(sdmvpsu) strata(sdmvstra) vce(linearized)
+  5. 
+.     svy: mean bmxbmi, subpop(if ridageyr >= `init_year' & ///
+>         ridageyr <= `last_year') over(sddsrvyr)
+  6. 
+.     matrix EST = r(table)
+  7.     matrix EST = EST'
+  8.     clear
+  9.     svmat EST, names(col)
+ 10.     gen survey_year = _n + 2
+ 11. end
+
+. 
+. program build_nhanes_iii
+  1.     syntax, init_year(int) last_year(int)
+  2.     
+.     rename *, lower
+  3.     svyset [w=wtpfex6], psu(sdppsu6) strata(sdpstra6) vce(linearized)
+  4.     
+.     svy: mean bmpbmi, subpop(if hsageir >= `init_year' & ///
+>         hsageir <= `last_year' & bmpbmi != 8888) over(sdpphase)
+  5.         
+.     matrix EST = r(table)
+  6.     matrix EST = EST'
+  7.     clear
+  8.     svmat EST, names(col)
+  9.     gen survey_year = _n
+ 10. end
+
+. 
+. * Execute
+. main
+(19,759 real changes made)
+(sampling weights assumed)
+
+      pweight: weight
+          VCE: linearized
+  Single unit: missing
+     Strata 1: sdmvstra
+         SU 1: sdmvpsu
+        FPC 1: <zero>
+(running mean on estimation sample)
+
+Survey: Mean estimation
+
+Number of strata =     133      Number of obs   =       87,420
+Number of PSUs   =     271      Population size =  265,727,948
+                                Subpop. no. obs =       31,871
+                                Subpop. size    = 61,937,847.4
+                                Design df       =          138
+
+            1: sddsrvyr = 1
+            2: sddsrvyr = 2
+            3: sddsrvyr = 3
+            4: sddsrvyr = 4
+            5: sddsrvyr = 5
+            6: sddsrvyr = 6
+            7: sddsrvyr = 7
+            8: sddsrvyr = 8
+            9: sddsrvyr = 9
+
+--------------------------------------------------------------
+             |             Linearized
+        Over |       Mean   Std. Err.     [95% Conf. Interval]
+-------------+------------------------------------------------
+bmxbmi       |
+           1 |   19.58332   .1303433      19.32559    19.84105
+           2 |   19.96125   .1470107      19.67056    20.25193
+           3 |   20.17693   .1765271      19.82788    20.52597
+           4 |   19.94098   .1635464       19.6176    20.26436
+           5 |   20.07143    .215607      19.64511    20.49775
+           6 |   20.11421   .1066827      19.90327    20.32516
+           7 |   20.18654   .1525575      19.88489    20.48819
+           8 |   20.31322    .150277      20.01608    20.61037
+           9 |   20.38666   .2100547      19.97132      20.802
+--------------------------------------------------------------
+number of observations will be reset to 9
+Press any key to continue, or Break to abort
+number of observations (_N) was 0, now 9
+(note: file ../temp/continuous_nhanes.dta not found)
+file ../temp/continuous_nhanes.dta saved
+(Written by R.              )
+(sampling weights assumed)
+
+      pweight: wtpfex6
+          VCE: linearized
+  Single unit: missing
+     Strata 1: sdpstra6
+         SU 1: sdppsu6
+        FPC 1: <zero>
+(running mean on estimation sample)
+
+Survey: Mean estimation
+
+Number of strata =      49      Number of obs   =       29,350
+Number of PSUs   =      98      Population size =  247,729,796
+                                Subpop. no. obs =       10,505
+                                Subpop. size    =   62,629,555
+                                Design df       =           49
+
+            1: sdpphase = 1
+            2: sdpphase = 2
+
+--------------------------------------------------------------
+             |             Linearized
+        Over |       Mean   Std. Err.     [95% Conf. Interval]
+-------------+------------------------------------------------
+bmpbmi       |
+           1 |   18.81763   .1484071      18.51939    19.11586
+           2 |   19.31443   .1628539      18.98716     19.6417
+--------------------------------------------------------------
+number of observations will be reset to 2
+Press any key to continue, or Break to abort
+number of observations (_N) was 0, now 2
+(note: file ../output/bmi_2to18_nhanes.png not found)
+(file ../output/bmi_2to18_nhanes.png written in PNG format)
+
+. 
+end of do-file
+
+ make.py ended: 2017-12-07 20:51:25
