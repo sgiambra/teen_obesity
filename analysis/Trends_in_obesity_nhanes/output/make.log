@@ -1,5 +1,5 @@
 
- make.py started: 2017-12-07 20:51:18 C:\Users\sgiambra\Documents\GitHub\teen_obesity\analysis\Trends_in_obesity_nhanes\code 
+ make.py started: 2017-12-10 20:51:15 C:\Users\sgiambra\Documents\GitHub\teen_obesity\analysis\Trends_in_obesity_nhanes\code 
 
 
 
@@ -54,32 +54,48 @@ Notes:
 . 
 . program main
   1.     local base_dir = "${GoogleDrive}/base/nhanes"
-  2.     use "`base_dir'/nhanes_1999-2016.dta", clear
-  3. 
-.     build_continuous_nhanes, init_year(2) last_year(18)
-  4.     save "../temp/continuous_nhanes.dta", replace
-  5.      
-.     use "`base_dir'/nhanesiii.dta", clear
-  6.     build_nhanes_iii, init_year(2) last_year(18)
-  7.     
-.     label var b "Average BMI"
-  8.     label var survey_year "Survey year"
-  9.     
-.     append using "../temp/continuous_nhanes.dta"
- 10.     
+  2.     
+.     local group_list = `""2 18" "19 45""'
+  3.     local idx: word count `group_list'
+  4. 
+.     forval col_index = 1/`idx' {
+  5.         local group: word `col_index' of `group_list'
+  6.         local init_year: word 1 of `group'
+  7.         local last_year: word 2 of `group'
+  8.         
+.         use "`base_dir'/nhanes_1999-2016.dta", clear
+  9.         build_continuous_nhanes, init_year(`init_year') ///
+>             last_year(`last_year')
+ 10.             
+.         use "`base_dir'/nhanesiii.dta", clear
+ 11.         build_nhanes_iii, init_year(`init_year') ///
+>             last_year(`last_year')
+ 12.         
+.         append using "../temp/continuous_nhanes_`init_year'to`last_year'.dta"
+ 13.         label var bmi_`init_year'to`last_year' "Average BMI `init_year' to `last_year' years of age"
+ 14.         label var survey_year "Survey year"
+ 15.     
+.         save_data "../temp/merged_`init_year'to`last_year'.dta", ///
+>             replace key(survey_year)
+ 16.     }
+ 17.     merge 1:1 survey_year using "../temp/merged_2to18.dta", ///
+>         nogen assert(3) keep(3)
+ 18.     
 .     local label_list = "1988-1991 1992-1994 1999-2000 2001-2002 2003-2004 " + ///
 >                        "2005-2006 2007-2008 2009-2010 2011-2012 2013-2014 2015-2016"
- 11.     local idx: word count `label_list'
- 12. 
+ 19.     local idx: word count `label_list'
+ 20. 
 .     forval col_index = 1/`idx' {
- 13.         local year_lab: word `col_index' of `label_list'
- 14.         local define_label `define_label' `col_index' "`year_lab'"
- 15.     }
- 16.     
-.     scatter b survey_year, xlabel(`define_label', labsize(small) angle(45))
- 17.     graph export "../output/bmi_2to18_nhanes.png", as(png) replace
- 18.     */
-. end
+ 21.         local year_lab: word `col_index' of `label_list'
+ 22.         local define_label `define_label' `col_index' "`year_lab'"
+ 23.     }
+ 24.     
+.     foreach group in 2to18 19to45 {
+ 25.         scatter bmi_`group' survey_year, ///
+>             xlabel(`define_label', labsize(small) angle(45))
+ 26.         graph export "../output/bmi_`group'_nhanes.png", as(png) replace
+ 27.     }
+ 28. end
 
 . 
 . program build_continuous_nhanes
@@ -97,7 +113,10 @@ Notes:
   8.     clear
   9.     svmat EST, names(col)
  10.     gen survey_year = _n + 2
- 11. end
+ 11.     rename b bmi_`init_year'to`last_year'
+ 12.     save_data "../temp/continuous_nhanes_`init_year'to`last_year'.dta", ///
+>         replace key(survey_year)
+ 13. end
 
 . 
 . program build_nhanes_iii
@@ -114,7 +133,10 @@ Notes:
   7.     clear
   8.     svmat EST, names(col)
   9.     gen survey_year = _n
- 10. end
+ 10.     rename b bmi_`init_year'to`last_year'
+ 11.     save_data "../temp/nhanes_iii_`init_year'to`last_year'.dta", ///
+>         replace key(survey_year)
+ 12. end
 
 . 
 . * Execute
@@ -166,8 +188,37 @@ bmxbmi       |
 number of observations will be reset to 9
 Press any key to continue, or Break to abort
 number of observations (_N) was 0, now 9
-(note: file ../temp/continuous_nhanes.dta not found)
-file ../temp/continuous_nhanes.dta saved
+(data now sorted by survey_year)
+  variable survey_year was float now byte
+  variable pvalue was float now byte
+  variable df was float now int
+  variable eform was float now byte
+  (99 bytes saved)
+==================================================================================================
+File: ../temp/continuous_nhanes_2to18.dta
+Key: survey_year
+==================================================================================================
+  9:10(28976):769582959:3785974565
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+ survey_year |          9           7    2.738613          3         11
+   bmi_2to18 |          9    20.08162    .2373084   19.58332   20.38666
+          se |          9    .1614007    .0351898   .1066827    .215607
+           t |          9    129.8261    28.85647   93.09269   188.5424
+      pvalue |          9           0           0          0          0
+-------------+---------------------------------------------------------
+          ll |          9    19.76248    .2182594   19.32559   20.01608
+          ul |          9    20.40075    .2732703   19.84105     20.802
+          df |          9         138           0        138        138
+        crit |          9    1.977304           0   1.977304   1.977304
+       eform |          9           0           0          0          0
+
+
+
+
+(note: file ../temp/continuous_nhanes_2to18.dta not found)
+file ../temp/continuous_nhanes_2to18.dta saved
 (Written by R.              )
 (sampling weights assumed)
 
@@ -201,10 +252,253 @@ bmpbmi       |
 number of observations will be reset to 2
 Press any key to continue, or Break to abort
 number of observations (_N) was 0, now 2
+(data now sorted by survey_year)
+  variable survey_year was float now byte
+  variable pvalue was float now byte
+  variable df was float now byte
+  variable eform was float now byte
+  (24 bytes saved)
+==================================================================================================
+File: ../temp/nhanes_iii_2to18.dta
+Key: survey_year
+==================================================================================================
+  2:10(28976):359848733:2857571855
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+ survey_year |          2         1.5    .7071068          1          2
+   bmi_2to18 |          2    19.06603    .3512916   18.81763   19.31443
+          se |          2    .1556305    .0102155   .1484071   .1628539
+           t |          2    122.6985    5.796633   118.5997   126.7974
+      pvalue |          2           0           0          0          0
+-------------+---------------------------------------------------------
+          ll |          2    18.75328    .3307631   18.51939   18.98716
+          ul |          2    19.37878    .3718215   19.11586    19.6417
+          df |          2          49           0         49         49
+        crit |          2    2.009575           0   2.009575   2.009575
+       eform |          2           0           0          0          0
+
+
+
+
+(note: file ../temp/nhanes_iii_2to18.dta not found)
+file ../temp/nhanes_iii_2to18.dta saved
+(data now sorted by survey_year)
+  variable survey_year was float now byte
+  variable pvalue was float now byte
+  variable df was float now int
+  variable eform was float now byte
+  (121 bytes saved)
+==================================================================================================
+File: ../temp/merged_2to18.dta
+Key: survey_year
+==================================================================================================
+  11:10(28976):3750016447:4070975157
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+ survey_year |         11           6    3.316625          1         11
+   bmi_2to18 |         11    19.89696    .4755734   18.81763   20.38666
+          se |         11    .1603516     .031726   .1066827    .215607
+           t |         11    128.5302    26.03516   93.09269   188.5424
+      pvalue |         11           0           0          0          0
+-------------+---------------------------------------------------------
+          ll |         11    19.57899    .4644471   18.51939   20.01608
+          ul |         11    20.21494    .4944422   19.11586     20.802
+          df |         11    121.8182    36.00227         49        138
+        crit |         11    1.983171    .0130545   1.977304   2.009575
+       eform |         11           0           0          0          0
+
+
+
+
+(note: file ../temp/merged_2to18.dta not found)
+file ../temp/merged_2to18.dta saved
+(19,759 real changes made)
+(sampling weights assumed)
+
+      pweight: weight
+          VCE: linearized
+  Single unit: missing
+     Strata 1: sdmvstra
+         SU 1: sdmvpsu
+        FPC 1: <zero>
+(running mean on estimation sample)
+
+Survey: Mean estimation
+
+Number of strata =     133      Number of obs   =       87,734
+Number of PSUs   =     271      Population size =  265,524,723
+                                Subpop. no. obs =       22,847
+                                Subpop. size    =   98,204,127
+                                Design df       =          138
+
+            1: sddsrvyr = 1
+            2: sddsrvyr = 2
+            3: sddsrvyr = 3
+            4: sddsrvyr = 4
+            5: sddsrvyr = 5
+            6: sddsrvyr = 6
+            7: sddsrvyr = 7
+            8: sddsrvyr = 8
+            9: sddsrvyr = 9
+
+--------------------------------------------------------------
+             |             Linearized
+        Over |       Mean   Std. Err.     [95% Conf. Interval]
+-------------+------------------------------------------------
+bmxbmi       |
+           1 |   27.52063   .2351477      27.05567    27.98559
+           2 |   27.43567   .1738785      27.09186    27.77948
+           3 |   27.78596   .1819512      27.42618    28.14573
+           4 |   28.03662   .3226843      27.39857    28.67466
+           5 |   28.10061   .2562141      27.59399    28.60722
+           6 |   28.17878   .1780537      27.82671    28.53085
+           7 |   28.07288   .2449009      27.58864    28.55713
+           8 |   28.76217   .2781117      28.21226    29.31208
+           9 |   29.01116   .3028864      28.41226    29.61006
+--------------------------------------------------------------
+number of observations will be reset to 9
+Press any key to continue, or Break to abort
+number of observations (_N) was 0, now 9
+(data now sorted by survey_year)
+  variable survey_year was float now byte
+  variable pvalue was float now byte
+  variable df was float now int
+  variable eform was float now byte
+  (99 bytes saved)
+==================================================================================================
+File: ../temp/continuous_nhanes_19to45.dta
+Key: survey_year
+==================================================================================================
+  9:10(90938):2477104455:342666125
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+ survey_year |          9           7    2.738613          3         11
+  bmi_19to45 |          9     28.1005    .5190455   27.43567   29.01116
+          se |          9    .2415365    .0549001   .1738785   .3226843
+           t |          9    121.7985    27.46526   86.88559     158.26
+      pvalue |          9           0           0          0          0
+-------------+---------------------------------------------------------
+          ll |          9    27.62291    .4618927   27.05567   28.41226
+          ul |          9    28.57809    .5907957   27.77948   29.61006
+          df |          9         138           0        138        138
+        crit |          9    1.977304           0   1.977304   1.977304
+       eform |          9           0           0          0          0
+
+
+
+
+(note: file ../temp/continuous_nhanes_19to45.dta not found)
+file ../temp/continuous_nhanes_19to45.dta saved
+(Written by R.              )
+(sampling weights assumed)
+
+      pweight: wtpfex6
+          VCE: linearized
+  Single unit: missing
+     Strata 1: sdpstra6
+         SU 1: sdppsu6
+        FPC 1: <zero>
+(running mean on estimation sample)
+
+Survey: Mean estimation
+
+Number of strata =      49      Number of obs   =       31,311
+Number of PSUs   =      98      Population size =  251,097,002
+                                Subpop. no. obs =        8,957
+                                Subpop. size    =  107,723,383
+                                Design df       =           49
+
+            1: sdpphase = 1
+            2: sdpphase = 2
+
+--------------------------------------------------------------
+             |             Linearized
+        Over |       Mean   Std. Err.     [95% Conf. Interval]
+-------------+------------------------------------------------
+bmpbmi       |
+           1 |   25.58092   .1692889      25.24072    25.92112
+           2 |   26.18497   .1546751      25.87414     26.4958
+--------------------------------------------------------------
+number of observations will be reset to 2
+Press any key to continue, or Break to abort
+number of observations (_N) was 0, now 2
+(data now sorted by survey_year)
+  variable survey_year was float now byte
+  variable pvalue was float now byte
+  variable df was float now byte
+  variable eform was float now byte
+  (24 bytes saved)
+==================================================================================================
+File: ../temp/nhanes_iii_19to45.dta
+Key: survey_year
+==================================================================================================
+  2:10(90938):2515814522:3236666519
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+ survey_year |          2         1.5    .7071068          1          2
+  bmi_19to45 |          2    25.88295    .4271317   25.58092   26.18497
+          se |          2     .161982    .0103336   .1546751   .1692889
+           t |          2    160.1991    12.85672    151.108   169.2902
+      pvalue |          2           0           0          0          0
+-------------+---------------------------------------------------------
+          ll |          2    25.55743    .4478976   25.24072   25.87414
+          ul |          2    26.20846    .4063658   25.92112    26.4958
+          df |          2          49           0         49         49
+        crit |          2    2.009575           0   2.009575   2.009575
+       eform |          2           0           0          0          0
+
+
+
+
+(note: file ../temp/nhanes_iii_19to45.dta not found)
+file ../temp/nhanes_iii_19to45.dta saved
+(data now sorted by survey_year)
+  variable survey_year was float now byte
+  variable pvalue was float now byte
+  variable df was float now int
+  variable eform was float now byte
+  (121 bytes saved)
+==================================================================================================
+File: ../temp/merged_19to45.dta
+Key: survey_year
+==================================================================================================
+  11:10(90938):3268007152:973140900
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+ survey_year |         11           6    3.316625          1         11
+  bmi_19to45 |         11    27.69731    1.019048   25.58092   29.01116
+          se |         11     .227072    .0588008   .1546751   .3226843
+           t |         11    128.7804    29.34794   86.88559   169.2902
+      pvalue |         11           0           0          0          0
+-------------+---------------------------------------------------------
+          ll |         11    27.24736    .9427835   25.24072   28.41226
+          ul |         11    28.14725    1.102082   25.92112   29.61006
+          df |         11    121.8182    36.00227         49        138
+        crit |         11    1.983171    .0130545   1.977304   2.009575
+       eform |         11           0           0          0          0
+
+
+
+
+(note: file ../temp/merged_19to45.dta not found)
+file ../temp/merged_19to45.dta saved
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                             0
+    matched                                11  
+    -----------------------------------------
 (note: file ../output/bmi_2to18_nhanes.png not found)
 (file ../output/bmi_2to18_nhanes.png written in PNG format)
+(note: file ../output/bmi_19to45_nhanes.png not found)
+(file ../output/bmi_19to45_nhanes.png written in PNG format)
 
 . 
 end of do-file
 
- make.py ended: 2017-12-07 20:51:25
+ make.py ended: 2017-12-10 20:51:27

@@ -187,7 +187,7 @@ In late 1970s, 12.7% of men and 17% of women were obese
 \begin_layout Itemize
 
 \size small
-During 2011-2014, 34.3% of men and 38.3% percent of women were obese
+During 2015-2016, 26.9% of men and 27.6% percent of women were obese
 \end_layout
 
 \end_deeper
@@ -418,6 +418,25 @@ Literature
 
 \begin_deeper
 \begin_layout Itemize
+Cutler, Glaeser and Shapiro (2003)
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\size small
+Increase in obesity since 1980 mostly driven by increase in calories consumed
+ instead of decrease in calories expended
+\end_layout
+
+\begin_layout Itemize
+
+\size small
+Propose a theory based on technical change in food preparation
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
 Eid, Overman, Puga and Turner (2008)
 \begin_inset Separator latexpar
 \end_inset
@@ -437,25 +456,6 @@ Relationship between urban sprawl and obesity
 \size small
 Use NLSY79 data to track change in BMI for young adults moving into more
  sprawling neighborhoods
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-Cutler, Glaeser and Shapiro (2003)
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-
-\size small
-Increase in obesity since 1980 mostly driven by increase in calories consumed
- instead of decrease in calories expended
-\end_layout
-
-\begin_layout Itemize
-
-\size small
-Propose a theory based on technical change in food preparation
 \end_layout
 
 \end_deeper
@@ -539,6 +539,18 @@ It is crucial to control for age
 
 \size small
 Source: National Health Interview Survey (NHIS)
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\size small
+Interview: Tendency to underreport weight and overreport height
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -561,7 +573,7 @@ Data on adults age 18+ from 1976 through 2016, young adults age 12-17 from
 status open
 
 \begin_layout Plain Layout
-Secular Trend in BMI
+Secular Trend in Teen BMI
 \end_layout
 
 \end_inset
@@ -577,7 +589,7 @@ Secular Trend in BMI
 \begin_layout Standard
 \align center
 \begin_inset Graphics
-	filename ../../analysis/Trends_in_obesity_nhis/output/trend_bmicalc_by_sex_youngs.png
+	filename ../../analysis/Trends_in_obesity_nhanes/output/bmi_2to18_nhanes.png
 	scale 29
 
 \end_inset
@@ -586,17 +598,12 @@ Secular Trend in BMI
 \end_layout
 
 \begin_layout Itemize
-BMI in NHIS based on interviews:
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
 
 \size small
-Tendency to underreport weight and overreport height
+Source: National Health and Nutrition Examination Survey (NHANES III and
+ NHANES 1999-2016)
 \end_layout
 
-\end_deeper
 \end_deeper
 \begin_layout Standard
 \begin_inset Separator plain
@@ -666,6 +673,226 @@ Potential Identification Strategies
 status open
 
 \begin_layout Plain Layout
+Movers
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\size footnotesize
+Non-trivial fraction of students change school
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\size scriptsize
+Bradbury et al.
+ (2013) measure that 10.6% of non-high-school Boston Public School students
+ have 
+\begin_inset Quotes eld
+\end_inset
+
+nonstructural
+\begin_inset Quotes erd
+\end_inset
+
+ school changes 
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\size footnotesize
+Different childhood obesity rates at the school district level (likely at
+ the school level as well)
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename C:/Users/sgiambra/Google Drive/research projects/obesity/maps/childhood_obesity_ny.PNG
+	scale 45
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\size footnotesize
+Source: New York State Department of Health
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Movers: Data
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Early Childhood Longitudinal Study
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\size small
+ECLS-K follows kindergarten class of 1988-99 through 8th grade
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\size footnotesize
+22,700 children sampled from 1,300 schools
+\end_layout
+
+\begin_layout Itemize
+
+\size footnotesize
+2,542 movers from spring of 1st grade and spring of 3rd grade
+\end_layout
+
+\begin_layout Itemize
+
+\size footnotesize
+Geolocation of the students' school and home in restricted use data
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\size small
+ECLS-K:2011 tracks cohort of 2010-2011 through 5th grade (Spring 3rd grade
+ will be released in Jan 2018)
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+National Longitudinal Survey of Youth 1979 (NLSY79)
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\size small
+12.7k individuals age 14 to 22 in 1979 followed biennially until 2012
+\end_layout
+
+\begin_layout Itemize
+
+\size small
+Can be linked to NLSY Children and Young Adults to study 11.5k children born
+ to female NLSY respondents
+\end_layout
+
+\begin_layout Itemize
+
+\size small
+Access to Zip code and census tract from BLS data enclave in Washington
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Standard
+
+\size small
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Movers: Data
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\size small
+Alternative: various states require BMI screening in different grades
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\size footnotesize
+Administrative data on students moving within one of these states would
+ be ideal
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename C:/Users/sgiambra/Google Drive/research projects/obesity/maps/bmi_screening_states.PNG
+	scale 45
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\size footnotesize
+Source: Linchey & Madsen (2011), table 1
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
 School Eating Environment
 \end_layout
 
@@ -695,7 +922,7 @@ Example: strength of policies regulating standard for a la carte beverages
 \begin_layout Standard
 \align center
 \begin_inset Graphics
-	filename C:/Users/Samuele/Google Drive/research projects/obesity/maps/alacarte_beverages_2003.PNG
+	filename C:/Users/sgiambra/Google Drive/research projects/obesity/maps/alacarte_beverages_2003.PNG
 	scale 50
 
 \end_inset
@@ -746,7 +973,7 @@ Policies regulating standard for a la carte beverages in elementary schools
 \begin_layout Standard
 \align center
 \begin_inset Graphics
-	filename C:/Users/Samuele/Google Drive/research projects/obesity/maps/alacarte_beverages_2015.PNG
+	filename C:/Users/sgiambra/Google Drive/research projects/obesity/maps/alacarte_beverages_2015.PNG
 	scale 55
 
 \end_inset
@@ -858,157 +1085,6 @@ Interviews conducted in 2004, 2007, 2011 and 2016
 
 \end_deeper
 \end_deeper
-\begin_layout Standard
-\begin_inset Separator plain
-\end_inset
-
-
-\end_layout
-
-\begin_layout Frame
-\begin_inset Argument 4
-status open
-
-\begin_layout Plain Layout
-Movers
-\end_layout
-
-\end_inset
-
-
-\begin_inset Separator latexpar
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-
-\size small
-Non-trivial fraction of students change school
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-
-\size footnotesize
-Bradbury et al.
- (2013) measure that 10.6% of non-high-school Boston Public School students
- have 
-\begin_inset Quotes eld
-\end_inset
-
-nonstructural
-\begin_inset Quotes erd
-\end_inset
-
- school changes 
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-
-\size small
-Different childhood obesity rates at the school district level (likely at
- the school level as well)
-\end_layout
-
-\begin_layout Standard
-\align center
-\begin_inset Graphics
-	filename C:/Users/Samuele/Google Drive/research projects/obesity/maps/childhood_obesity_ny.PNG
-	scale 50
-
-\end_inset
-
-
-\end_layout
-
-\end_deeper
-\begin_layout Standard
-\begin_inset Separator plain
-\end_inset
-
-
-\end_layout
-
-\begin_layout Frame
-\begin_inset Argument 4
-status open
-
-\begin_layout Plain Layout
-Movers: Data
-\end_layout
-
-\end_inset
-
-
-\begin_inset Separator latexpar
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Early Childhood Longitudinal Study
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-
-\size small
-ECLS-K follows kindergarten class of 1988-99 through 8th grade
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-
-\size footnotesize
-22,700 children sampled from 1,300 schools
-\end_layout
-
-\begin_layout Itemize
-
-\size footnotesize
-2,542 movers from spring of 1st grade and spring of 3rd grade
-\end_layout
-
-\begin_layout Itemize
-
-\size footnotesize
-Geolocation of the students' school and home in restricted use data
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-
-\size small
-ECLS-K:2011 tracks cohort of 2010-2011 through 5th grade (Spring 3rd grade
- will be released in Jan 2018)
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-Alternative: Massachusetts requires BMI screening for students in grades
- 1, 4, 7, and 10 since the 2010-2011 school year 
-\end_layout
-
-\begin_layout Itemize
-New York has similar requirement for grades K, 2, 4, 7, and 10
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-
-\size small
-Administrative data on students moving within one of these states would
- probably give more power to the analysis
-\end_layout
-
-\end_deeper
-\end_deeper
 \begin_layout Section*
 References
 \end_layout
@@ -1089,6 +1165,21 @@ Journal of Economic Perspectives
 17(3): 93-118.
 \end_layout
 
+\begin_layout Frame
+
+\size footnotesize
+Eid, Jean, Henry G.
+ Overman, Diego Puga and Matthew A.
+ Turner.
+ 2008.
+ Fat city: Questioning the relationship between urban sprawl and obesity.
+ 
+\shape italic
+Journal of Urban Economics 
+\shape default
+63: 385-404.
+\end_layout
+
 \begin_layout Standard
 
 \size footnotesize
@@ -1105,21 +1196,6 @@ Journal of Economic Perspectives
 \begin_layout Frame
 
 \size footnotesize
-Eid, Jean, Henry G.
- Overman, Diego Puga and Matthew A.
- Turner.
- 2008.
- Fat city: Questioning the relationship between urban sprawl and obesity.
- 
-\shape italic
-Journal of Urban Economics 
-\shape default
-63: 385-404.
-\end_layout
-
-\begin_layout Frame
-
-\size footnotesize
 Li, Wenjun, et al.
  2015.
  Declining trends and widening disparities in overweight and obesity prevalence
@@ -1129,6 +1205,21 @@ Li, Wenjun, et al.
  American Journal of Public Health
 \shape default
  105(10): e76-e82.
+\end_layout
+
+\begin_layout Frame
+
+\size footnotesize
+Linchey, Jennifer, and Kristine A.
+ Madsen.
+ 2011.
+ State Requirements and Recommendations for School-Based Screenings for
+ Body Mass Index or Body Composition, 2010.
+
+\shape italic
+ Preventing chronic disease
+\shape default
+ 8(5).
 \end_layout
 
 \begin_layout Frame
