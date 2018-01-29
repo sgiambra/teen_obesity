@@ -15,14 +15,6 @@ from modify_input_params import *
 
 modify_input_params()
 
-stata_exe = os.environ.get('STATAEXE')
-if stata_exe:
-    import copy
-    default_run_stata = copy.copy(run_stata)
-    def run_stata(**kwargs):
-        kwargs['executable'] = stata_exe
-        default_run_stata(**kwargs)
-
 #****************************************************
 # MAKE.PY STARTS
 #****************************************************
@@ -30,7 +22,7 @@ set_option(link_logs_dir = '../output')
 clear_dirs('../output', '../temp')
 start_make_logging()
 
-run_stata(program = 'analysis.do')
+run_stata(program = 'analysis.do', executable = 'StataSE-64')
 
 end_make_logging()
 

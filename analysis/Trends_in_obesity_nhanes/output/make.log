@@ -1,14 +1,14 @@
 
- make.py started: 2017-12-10 20:51:15 C:\Users\sgiambra\Documents\GitHub\teen_obesity\analysis\Trends_in_obesity_nhanes\code 
+ make.py started: 2018-01-28 19:43:25 C:\Users\giamb\Documents\GitHub\teen_obesity\analysis\Trends_in_obesity_nhanes\code 
 
 
 
 
-Execute:  "C:\Program Files (x86)\Stata14\StataSE-64.exe" /e do "./analysis.do"
+Execute:  StataSE-64 /e do "./analysis.do"
 
   ___  ____  ____  ____  ____ (R)
  /__    /   ____/   /   ____/
-___/   /   /___/   /   /___/   14.2   Copyright 1985-2015 StataCorp LLC
+___/   /   /___/   /   /___/   15.0   Copyright 1985-2017 StataCorp LLC
   Statistics/Data Analysis            StataCorp
                                       4905 Lakeway Drive
      Special Edition                  College Station, Texas 77845 USA
@@ -17,8 +17,8 @@ ___/   /   /___/   /   /___/   14.2   Copyright 1985-2015 StataCorp LLC
                                       979-696-4601 (fax)
 
 110-user Stata network perpetual license:
-       Serial number:  401406206058
-         Licensed to:  CIS Department
+       Serial number:  401506201178
+         Licensed to:  Brown University
                        Brown University
 
 Notes:
@@ -31,8 +31,8 @@ Notes:
 . set more off
 
 . adopath + ../../../lib/stata/gslab_misc/ado
-  [1]  (BASE)      "C:\Program Files (x86)\Stata14\ado\base/"
-  [2]  (SITE)      "C:\Program Files (x86)\Stata14\ado\site/"
+  [1]  (BASE)      "C:\Program Files (x86)\Stata15\ado\base/"
+  [2]  (SITE)      "C:\Program Files (x86)\Stata15\ado\site/"
   [3]              "."
   [4]  (PERSONAL)  "c:\ado\personal/"
   [5]  (PLUS)      "c:\ado\plus/"
@@ -40,8 +40,8 @@ Notes:
   [7]              "../../../lib/stata/gslab_misc/ado"
 
 . adopath + ../../../lib/third_party/stata_tools
-  [1]  (BASE)      "C:\Program Files (x86)\Stata14\ado\base/"
-  [2]  (SITE)      "C:\Program Files (x86)\Stata14\ado\site/"
+  [1]  (BASE)      "C:\Program Files (x86)\Stata15\ado\base/"
+  [2]  (SITE)      "C:\Program Files (x86)\Stata15\ado\site/"
   [3]              "."
   [4]  (PERSONAL)  "c:\ado\personal/"
   [5]  (PLUS)      "c:\ado\plus/"
@@ -91,8 +91,9 @@ Notes:
  23.     }
  24.     
 .     foreach group in 2to18 19to45 {
- 25.         scatter bmi_`group' survey_year, ///
->             xlabel(`define_label', labsize(small) angle(45))
+ 25.         twoway (scatter bmi_`group' survey_year, msize(small) mcolor(gs9)   ///
+>             xlabel(`define_label', labsize(small) angle(45)))               ///
+>             (rcap bmi_`group'_ll bmi_`group'_ul survey_year), legend(off)
  26.         graph export "../output/bmi_`group'_nhanes.png", as(png) replace
  27.     }
  28. end
@@ -108,15 +109,11 @@ Notes:
 .     svy: mean bmxbmi, subpop(if ridageyr >= `init_year' & ///
 >         ridageyr <= `last_year') over(sddsrvyr)
   6. 
-.     matrix EST = r(table)
-  7.     matrix EST = EST'
-  8.     clear
-  9.     svmat EST, names(col)
- 10.     gen survey_year = _n + 2
- 11.     rename b bmi_`init_year'to`last_year'
- 12.     save_data "../temp/continuous_nhanes_`init_year'to`last_year'.dta", ///
+.     extract_estimates, init_year(`init_year') ///
+>         last_year(`last_year') pre_periods(2)
+  7.     save_data "../temp/continuous_nhanes_`init_year'to`last_year'.dta", ///
 >         replace key(survey_year)
- 13. end
+  8. end
 
 . 
 . program build_nhanes_iii
@@ -128,15 +125,26 @@ Notes:
 .     svy: mean bmpbmi, subpop(if hsageir >= `init_year' & ///
 >         hsageir <= `last_year' & bmpbmi != 8888) over(sdpphase)
   5.         
-.     matrix EST = r(table)
-  6.     matrix EST = EST'
-  7.     clear
-  8.     svmat EST, names(col)
-  9.     gen survey_year = _n
- 10.     rename b bmi_`init_year'to`last_year'
- 11.     save_data "../temp/nhanes_iii_`init_year'to`last_year'.dta", ///
+.     extract_estimates, init_year(`init_year') ///
+>         last_year(`last_year') pre_periods(0)
+  6.     save_data "../temp/nhanes_iii_`init_year'to`last_year'.dta", ///
 >         replace key(survey_year)
- 12. end
+  7. end
+
+. 
+. program extract_estimates
+  1.     syntax, init_year(int) last_year(int) pre_periods(int)
+  2.     
+.     matrix EST = r(table)
+  3.     matrix EST = EST'
+  4.     clear
+  5.     svmat EST, names(col)
+  6.     gen survey_year = _n + `pre_periods'
+  7. 
+.     rename b bmi_`init_year'to`last_year'
+  8.     rename ll bmi_`init_year'to`last_year'_ll
+  9.     rename ul bmi_`init_year'to`last_year'_ul
+ 10. end
 
 . 
 . * Execute
@@ -198,7 +206,7 @@ number of observations (_N) was 0, now 9
 File: ../temp/continuous_nhanes_2to18.dta
 Key: survey_year
 ==================================================================================================
-  9:10(28976):769582959:3785974565
+  9:10(45182):769582959:3785974565
 
     Variable |        Obs        Mean    Std. Dev.       Min        Max
 -------------+---------------------------------------------------------
@@ -208,8 +216,8 @@ Key: survey_year
            t |          9    129.8261    28.85647   93.09269   188.5424
       pvalue |          9           0           0          0          0
 -------------+---------------------------------------------------------
-          ll |          9    19.76248    .2182594   19.32559   20.01608
-          ul |          9    20.40075    .2732703   19.84105     20.802
+bmi_2to18_ll |          9    19.76248    .2182594   19.32559   20.01608
+bmi_2to18_ul |          9    20.40075    .2732703   19.84105     20.802
           df |          9         138           0        138        138
         crit |          9    1.977304           0   1.977304   1.977304
        eform |          9           0           0          0          0
@@ -262,7 +270,7 @@ number of observations (_N) was 0, now 2
 File: ../temp/nhanes_iii_2to18.dta
 Key: survey_year
 ==================================================================================================
-  2:10(28976):359848733:2857571855
+  2:10(45182):359848733:2857571855
 
     Variable |        Obs        Mean    Std. Dev.       Min        Max
 -------------+---------------------------------------------------------
@@ -272,8 +280,8 @@ Key: survey_year
            t |          2    122.6985    5.796633   118.5997   126.7974
       pvalue |          2           0           0          0          0
 -------------+---------------------------------------------------------
-          ll |          2    18.75328    .3307631   18.51939   18.98716
-          ul |          2    19.37878    .3718215   19.11586    19.6417
+bmi_2to18_ll |          2    18.75328    .3307631   18.51939   18.98716
+bmi_2to18_ul |          2    19.37878    .3718215   19.11586    19.6417
           df |          2          49           0         49         49
         crit |          2    2.009575           0   2.009575   2.009575
        eform |          2           0           0          0          0
@@ -293,7 +301,7 @@ file ../temp/nhanes_iii_2to18.dta saved
 File: ../temp/merged_2to18.dta
 Key: survey_year
 ==================================================================================================
-  11:10(28976):3750016447:4070975157
+  11:10(45182):3750016447:4070975157
 
     Variable |        Obs        Mean    Std. Dev.       Min        Max
 -------------+---------------------------------------------------------
@@ -303,8 +311,8 @@ Key: survey_year
            t |         11    128.5302    26.03516   93.09269   188.5424
       pvalue |         11           0           0          0          0
 -------------+---------------------------------------------------------
-          ll |         11    19.57899    .4644471   18.51939   20.01608
-          ul |         11    20.21494    .4944422   19.11586     20.802
+bmi_2to18_ll |         11    19.57899    .4644471   18.51939   20.01608
+bmi_2to18_ul |         11    20.21494    .4944422   19.11586     20.802
           df |         11    121.8182    36.00227         49        138
         crit |         11    1.983171    .0130545   1.977304   2.009575
        eform |         11           0           0          0          0
@@ -371,7 +379,7 @@ number of observations (_N) was 0, now 9
 File: ../temp/continuous_nhanes_19to45.dta
 Key: survey_year
 ==================================================================================================
-  9:10(90938):2477104455:342666125
+  9:10(105022):2477104455:342666125
 
     Variable |        Obs        Mean    Std. Dev.       Min        Max
 -------------+---------------------------------------------------------
@@ -381,8 +389,8 @@ Key: survey_year
            t |          9    121.7985    27.46526   86.88559     158.26
       pvalue |          9           0           0          0          0
 -------------+---------------------------------------------------------
-          ll |          9    27.62291    .4618927   27.05567   28.41226
-          ul |          9    28.57809    .5907957   27.77948   29.61006
+bmi_19to4~ll |          9    27.62291    .4618927   27.05567   28.41226
+bmi_19to4~ul |          9    28.57809    .5907957   27.77948   29.61006
           df |          9         138           0        138        138
         crit |          9    1.977304           0   1.977304   1.977304
        eform |          9           0           0          0          0
@@ -435,7 +443,7 @@ number of observations (_N) was 0, now 2
 File: ../temp/nhanes_iii_19to45.dta
 Key: survey_year
 ==================================================================================================
-  2:10(90938):2515814522:3236666519
+  2:10(105022):2515814522:3236666519
 
     Variable |        Obs        Mean    Std. Dev.       Min        Max
 -------------+---------------------------------------------------------
@@ -445,8 +453,8 @@ Key: survey_year
            t |          2    160.1991    12.85672    151.108   169.2902
       pvalue |          2           0           0          0          0
 -------------+---------------------------------------------------------
-          ll |          2    25.55743    .4478976   25.24072   25.87414
-          ul |          2    26.20846    .4063658   25.92112    26.4958
+bmi_19to4~ll |          2    25.55743    .4478976   25.24072   25.87414
+bmi_19to4~ul |          2    26.20846    .4063658   25.92112    26.4958
           df |          2          49           0         49         49
         crit |          2    2.009575           0   2.009575   2.009575
        eform |          2           0           0          0          0
@@ -466,7 +474,7 @@ file ../temp/nhanes_iii_19to45.dta saved
 File: ../temp/merged_19to45.dta
 Key: survey_year
 ==================================================================================================
-  11:10(90938):3268007152:973140900
+  11:10(105022):3268007152:973140900
 
     Variable |        Obs        Mean    Std. Dev.       Min        Max
 -------------+---------------------------------------------------------
@@ -476,8 +484,8 @@ Key: survey_year
            t |         11    128.7804    29.34794   86.88559   169.2902
       pvalue |         11           0           0          0          0
 -------------+---------------------------------------------------------
-          ll |         11    27.24736    .9427835   25.24072   28.41226
-          ul |         11    28.14725    1.102082   25.92112   29.61006
+bmi_19to4~ll |         11    27.24736    .9427835   25.24072   28.41226
+bmi_19to4~ul |         11    28.14725    1.102082   25.92112   29.61006
           df |         11    121.8182    36.00227         49        138
         crit |         11    1.983171    .0130545   1.977304   2.009575
        eform |         11           0           0          0          0
@@ -501,4 +509,4 @@ file ../temp/merged_19to45.dta saved
 . 
 end of do-file
 
- make.py ended: 2017-12-10 20:51:27
+ make.py ended: 2018-01-28 19:43:37

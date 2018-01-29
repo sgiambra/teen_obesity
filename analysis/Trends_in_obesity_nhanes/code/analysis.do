@@ -42,8 +42,9 @@ program main
     }
     
     foreach group in 2to18 19to45 {
-        scatter bmi_`group' survey_year, ///
-            xlabel(`define_label', labsize(small) angle(45))
+        twoway (scatter bmi_`group' survey_year, msize(small) mcolor(gs9)   ///
+            xlabel(`define_label', labsize(small) angle(45)))               ///
+            (rcap bmi_`group'_ll bmi_`group'_ul survey_year), legend(off)
         graph export "../output/bmi_`group'_nhanes.png", as(png) replace
     }
 end
@@ -58,12 +59,8 @@ program build_continuous_nhanes
     svy: mean bmxbmi, subpop(if ridageyr >= `init_year' & ///
         ridageyr <= `last_year') over(sddsrvyr)
 
-    matrix EST = r(table)
-    matrix EST = EST'
-    clear
-    svmat EST, names(col)
-    gen survey_year = _n + 2
-    rename b bmi_`init_year'to`last_year'
+    extract_estimates, init_year(`init_year') ///
+        last_year(`last_year') pre_periods(2)
     save_data "../temp/continuous_nhanes_`init_year'to`last_year'.dta", ///
         replace key(survey_year)
 end
@@ -77,14 +74,24 @@ program build_nhanes_iii
     svy: mean bmpbmi, subpop(if hsageir >= `init_year' & ///
         hsageir <= `last_year' & bmpbmi != 8888) over(sdpphase)
         
+    extract_estimates, init_year(`init_year') ///
+        last_year(`last_year') pre_periods(0)
+    save_data "../temp/nhanes_iii_`init_year'to`last_year'.dta", ///
+        replace key(survey_year)
+end
+
+program extract_estimates
+    syntax, init_year(int) last_year(int) pre_periods(int)
+    
     matrix EST = r(table)
     matrix EST = EST'
     clear
     svmat EST, names(col)
-    gen survey_year = _n
+    gen survey_year = _n + `pre_periods'
+
     rename b bmi_`init_year'to`last_year'
-    save_data "../temp/nhanes_iii_`init_year'to`last_year'.dta", ///
-        replace key(survey_year)
+    rename ll bmi_`init_year'to`last_year'_ll
+    rename ul bmi_`init_year'to`last_year'_ul
 end
 
 * Execute

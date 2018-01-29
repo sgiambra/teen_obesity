@@ -10,13 +10,10 @@ from gslab_make.make_links import *
 from gslab_make.make_link_logs import *
 from gslab_make.run_program import *
 
-stata_exe = os.environ.get('STATAEXE')
-if stata_exe:
-    import copy
-    default_run_stata = copy.copy(run_stata)
-    def run_stata(**kwargs):
-        kwargs['executable'] = stata_exe
-        default_run_stata(**kwargs)
+sys.path.append('../../../lib/python/obesity')
+from modify_input_params import *
+
+modify_input_params()
 
 #****************************************************
 # MAKE.PY STARTS
@@ -25,8 +22,8 @@ set_option(link_logs_dir = '../output')
 clear_dirs('../output', '../temp')
 start_make_logging()
 
-run_stata(program = 'preclean.do')
-run_stata(program = 'analysis.do')
+run_stata(program = 'preclean.do', executable = 'StataSE-64')
+run_stata(program = 'analysis.do', executable = 'StataSE-64')
 
 end_make_logging()
 
