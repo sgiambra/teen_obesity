@@ -1,0 +1,142 @@
+\ifx\undefined\bysame
+\newcommand{\bysame}{\leavevmode\hbox to\leftmargin{\hrulefill\,\,}}
+\fi
+\begin{thebibliography}{xx}
+
+\harvarditem[Anderson et al.]{Anderson, Gallagher and
+  Ritchie}{2017}{anderson2017school}
+{\bf Anderson, Michael~L, Justin Gallagher, and Elizabeth~Ramirez Ritchie},
+  ``School Lunch Quality and Academic Performance,'' Technical Report, National
+  Bureau of Economic Research 2017.
+
+\harvarditem[Anderson et al.]{Anderson, Butcher, Levine
+  et~al.}{2003}{anderson2003economic}
+{\bf Anderson, Patricia~M, Kristin~F Butcher, Phillip~B Levine et~al.},
+  ``Economic perspectives on childhood obesity,'' {\it Economic
+  Perspectives-Federal Reserve Bank of Chicago}, 2003, {\it 27} (3), 30--48.
+
+\harvarditem[Bauhoff]{Bauhoff}{2014}{bauhoff2014effect}
+{\bf Bauhoff, Sebastian}, ``The effect of school district nutrition policies on
+  dietary intake and overweight: a synthetic control approach,'' {\it Economics
+  \& Human Biology}, 2014, {\it 12}, 45--55.
+
+\harvarditem[Bhattacharya et al.]{Bhattacharya, Currie and
+  Haider}{2006}{bhattacharya2006breakfast}
+{\bf Bhattacharya, Jayanta, Janet Currie, and Steven~J Haider}, ``Breakfast of
+  champions? The School Breakfast Program and the nutrition of children and
+  families,'' {\it Journal of Human Resources}, 2006, {\it 41} (3), 445--466.
+
+\harvarditem[Bradbury et al.]{Bradbury, Burke and
+  Triest}{2013}{bradbury2013effect}
+{\bf Bradbury, Katharine, Mary~A Burke, and Robert~K Triest}, ``The effect of
+  foreclosure on Boston Public School student academic performance,'' Technical
+  Report, Working Papers, Federal Reserve Bank of Boston 2013.
+
+\harvarditem[Bronnenberg et al.]{Bronnenberg, Dub{\'e} and
+  Gentzkow}{2012}{bronnenberg2012evolution}
+{\bf Bronnenberg, Bart~J, Jean-Pierre~H Dub{\'e}, and Matthew Gentzkow}, ``The
+  evolution of brand preferences: Evidence from consumer migration,'' {\it
+  American Economic Review}, 2012, {\it 102} (6), 2472--2508.
+
+\harvarditem[Campbell et al.]{Campbell, Nayga~Jr, Park and
+  Silva}{2011}{campbell2011does}
+{\bf Campbell, Benjamin~L, Rodolfo~M~Nayga Jr, John~L Park, and Andres Silva},
+  ``Does the National School Lunch Program improve children’s dietary
+  outcomes?,'' {\it American Journal of Agricultural Economics}, 2011, {\it 93}
+  (4), 1099--1130.
+
+\harvarditem[Cawley and Meyerhoefer]{Cawley and
+  Meyerhoefer}{2012}{cawley2012medical}
+{\bf Cawley, John and Chad Meyerhoefer}, ``The medical care costs of obesity:
+  an instrumental variables approach,'' {\it Journal of health economics},
+  2012, {\it 31} (1), 219--230.
+
+\harvarditem[Christakis and Fowler]{Christakis and
+  Fowler}{2007}{christakis2007spread}
+{\bf Christakis, Nicholas~A and James~H Fowler}, ``The spread of obesity in a
+  large social network over 32 years,'' {\it New England journal of medicine},
+  2007, {\it 357} (4), 370--379.
+
+\harvarditem[Cutler et al.]{Cutler, Glaeser, Shapiro, Cutler and
+  Glaeser}{2002}{cutler2002have}
+{\bf Cutler, David~M, Edward~L Glaeser, Jesse~M Shapiro, David Cutler, and
+  Edward Glaeser}, ``Why have Americans become more obese,'' 2002.
+
+\harvarditem[Eid et al.]{Eid, Overman, Puga and Turner}{2008}{eid2008fat}
+{\bf Eid, Jean, Henry~G Overman, Diego Puga, and Matthew~A Turner}, ``Fat city:
+  Questioning the relationship between urban sprawl and obesity,'' {\it Journal
+  of Urban Economics}, 2008, {\it 63} (2), 385--404.
+
+\harvarditem[Finkelstein et al.]{Finkelstein, Gentzkow and
+  Williams}{2016}{finkelstein2016sources}
+{\bf Finkelstein, Amy, Matthew Gentzkow, and Heidi Williams}, ``Sources of
+  geographic variation in health care: Evidence from patient migration,'' {\it
+  The quarterly journal of economics}, 2016, {\it 131} (4), 1681--1726.
+
+\harvarditem[Finkelstein et al.]{Finkelstein, Trogdon, Cohen and
+  Dietz}{2009}{finkelstein2009annual}
+{\bf Finkelstein, Eric~A, Justin~G Trogdon, Joel~W Cohen, and William Dietz},
+  ``Annual medical spending attributable to obesity: payer-and service-specific
+  estimates,'' {\it Health affairs}, 2009, {\it 28} (5), w822--w831.
+
+\harvarditem[Gundersen et al.]{Gundersen, Kreider and
+  Pepper}{2012}{gundersen2012impact}
+{\bf Gundersen, Craig, Brent Kreider, and John Pepper}, ``The impact of the
+  National School Lunch Program on child health: A nonparametric bounds
+  analysis,'' {\it Journal of Econometrics}, 2012, {\it 166} (1), 79--91.
+
+\harvarditem[Iannotti and Wang]{Iannotti and Wang}{2013}{iannotti2013trends}
+{\bf Iannotti, Ronald~J and Jing Wang}, ``Trends in physical activity,
+  sedentary behavior, diet, and BMI among US adolescents, 2001--2009,'' {\it
+  Pediatrics}, 2013, pp.~peds--2013.
+
+\harvarditem[Let'sMove!]{Let'sMove!}{2011}{letsmove}
+{\bf Let'sMove!}, ``America's Move to Raise A Healthier Generation of Kids,''
+  2011.
+
+\harvarditem[Li et al.]{Li, Buszkiewicz, Leibowitz, Gapinski, Nasuti and
+  Land}{2015}{li2015declining}
+{\bf Li, Wenjun, James~H Buszkiewicz, Robert~B Leibowitz, Mary~Ann Gapinski,
+  Laura~J Nasuti, and Thomas~G Land}, ``Declining trends and widening
+  disparities in overweight and obesity prevalence among Massachusetts Public
+  School Districts, 2009--2014,'' {\it American journal of public health},
+  2015, {\it 105} (10), e76--e82.
+
+\harvarditem[Linchey and Madsen]{Linchey and Madsen}{2011}{linchey2011peer}
+{\bf Linchey, Jennifer and Kristine~A Madsen}, ``State Requirements and
+  Recommendations for School-Based Screenings for Body Mass Index or Body
+  Composition, 2010,'' {\it Preventing chronic disease}, 2011, {\it 8} (5).
+
+\harvarditem[Ng et al.]{Ng, Fleming, Robinson, Thomson, Graetz, Margono,
+  Mullany, Biryukov, Abbafati, Abera et~al.}{2014}{ng2014global}
+{\bf Ng, Marie, Tom Fleming, Margaret Robinson, Blake Thomson, Nicholas Graetz,
+  Christopher Margono, Erin~C Mullany, Stan Biryukov, Cristiana Abbafati,
+  Semaw~Ferede Abera et~al.}, ``Global, regional, and national prevalence of
+  overweight and obesity in children and adults during 1980--2013: a systematic
+  analysis for the Global Burden of Disease Study 2013,'' {\it The lancet},
+  2014, {\it 384} (9945), 766--781.
+
+\harvarditem[NHLBI]{NHLBI}{2013}{nhlbi2013}
+{\bf NHLBI}, ``Managing Overweight and Obesity in Adults: Systematic Evidence
+  Review from the Obesity Expert Panel,'' Technical Report, National Heart,
+  Lung, and Blood Institute 2013.
+
+\harvarditem[Ogden et al.]{Ogden, Carroll, Fryar and
+  Flegal}{2015}{ogden2015prevalence}
+{\bf Ogden, Cynthia~L, Margaret~D Carroll, Cheryl~D Fryar, and Katherine~M
+  Flegal}, {\it Prevalence of obesity among adults and youth: United States,
+  2011-2014}, US Department of Health and Human Services, Centers for Disease
+  Control and Prevention, National Center for Health Statistics, 2015.
+
+\harvarditem[Ogden et al.]{Ogden, Carroll, Lawman, Fryar, Kruszon-Moran, Kit
+  and Flegal}{2016}{ogden2016trends}
+{\bf \bysame{}, \bysame{}, Hannah~G Lawman, Cheryl~D Fryar, Deanna
+  Kruszon-Moran, Brian~K Kit, and Katherine~M Flegal}, ``Trends in obesity
+  prevalence among children and adolescents in the United States, 1988-1994
+  through 2013-2014,'' {\it Jama}, 2016, {\it 315} (21), 2292--2299.
+
+\harvarditem[Sturm]{Sturm}{2002}{sturm2002effects}
+{\bf Sturm, Roland}, ``The effects of obesity, smoking, and drinking on medical
+  problems and costs,'' {\it Health affairs}, 2002, {\it 21} (2), 245--253.
+
+\end{thebibliography}
